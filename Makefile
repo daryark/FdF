@@ -17,13 +17,18 @@ OBJS			=	$(SRCS:.c=.o)
 OBJS_P			=	$(addprefix $(OBJS_F), $(OBJS))
 
 
+GREEN = \033[0;32m
+MAGENTA	= \033[0;35m
+RED = \033[0;31m
+RESET_COLOR = \033[0m
+
 
 all:$(NAME)
 
 $(NAME): $(OBJS_P)
-	@$(MAKE) -C $(MLX) 
-	@cc $(CC_FLAGS) -O3 -L$(MLX) $(MLX_FLAGS) -o $(NAME) $(OBJS_P)
-	@echo "${green}OK main part${reset}"
+	@cd $(MLX); make 
+	@cc $(CC_FLAGS)  -L$(MLX) $(MLX_FLAGS) -o $(NAME) $(OBJS_P) $(LIBS)
+	@echo "$(GREEN)Main part compiled successfully ! 🎉 $(MAGENTA)FDF$(RESET_COLOR)"
 # @$(MAKE) -C $(PRINTF) 
 # @$(MAKE) -C $(GNL)
 # @$(MAKE) -C $(LFT)
@@ -31,8 +36,8 @@ $(NAME): $(OBJS_P)
 
 $(OBJS_F)%.o: $(SRCS_F)%.c Makefile fdf.h
 	@mkdir -p $(OBJS_F)
-	@echo "${magenta}Working on: ${reset} $<"
-	@cc $(CC_FLAGS) -O3 -c $< -o $@
+	@echo "$(MAGENTA)Working on: $(RESET_COLOR)$<"
+	@cc $(CC_FLAGS) -c $< -o $@
 
 
 # $(OBJS_F_B)%.o: $(SRCS_B)%.c Makefile so_long.h
@@ -67,6 +72,6 @@ re:		fclean all
 
 .PHONY:	all clean fclean re
 
-// -g flag in cc flags is helpful when you need to debug program
-// as it allows to trace execution of the program back to the original source code.
-// TRY in the process, if -g helps!?
+#  -g flag in cc flags is helpful when you need to debug program
+# as it allows to trace execution of the program back to the original source code.
+# TRY in the process, if -g helps!?

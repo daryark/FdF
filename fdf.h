@@ -6,16 +6,16 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 22:19:15 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/01/21 22:07:26 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/01/24 15:52:55 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 
-# include "get_next_line/get_next_line.h"
-# include "libft/libft.h"
-# include "ft_printf/ft_printf.h"
+# include "prev_projects/get_next_line/get_next_line.h"
+# include "prev_projects/libft/libft.h"
+# include "prev_projects/ft_printf/ft_printf.h"
 
 # include "MiniLibX/mlx.h"
 # include <unistd.h>
@@ -23,9 +23,8 @@
 # include <stdlib.h>
 # include <string.h>
 # include <errno.h>
-# include <sys/time.h>
-# include <time.h>
 # include <stdio.h>
+# include <math.h>
 
 typedef struct s_fdf
 {
