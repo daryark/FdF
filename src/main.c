@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 22:12:42 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/01/21 22:05:33 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/01/25 00:56:24 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,22 +57,24 @@
 	// mlx_loop(mlx);
 // }
 
-void	get_height(char *file, t_fdf **d)
-{
-	int	fd;
+// void	get_height(char *file, t_fdf **d)
+// {
+// 	int	fd;
 
-	fd = open(file, O_RDONLY);
-	while (get_next_line(fd))
-		(*d)->height++;
-	printf("height: %d\n", (*d)->height);
-	close(fd);
-}
+// 	fd = open(file, O_RDONLY);
+// 	ft_printf("hello\n");
+// 	while (get_next_line(fd))
+// 		(*d)->height++;
+// 	printf("height: %d\n", (*d)->height);
+// 	close(fd);
+// }
 
 void	ft_process(char	*file)
 {
-	t_fdf	*d;
+	ft_printf("hello %s\n", file);
+	// t_fdf	*d;
 
-	get_height(file, &d);
+	// get_height(file, &d);
 	// d->width = get_width(file);
 	// d->map = (int **)malloc(sizeof(int *) * d->height);
 	// fill_map(file, &d);
@@ -80,7 +82,7 @@ void	ft_process(char	*file)
 
 int	main(int argc, char **argv)
 {
-	if (argc != 2)
+	if (argc == 2)
 		ft_process(argv[1]);
 	else
 		ft_printf("Add exactly one file to read from!\n");

@@ -6,16 +6,16 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 22:19:15 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/01/24 15:52:55 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/01/24 23:18:22 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 
-# include "prev_projects/get_next_line/get_next_line.h"
 # include "prev_projects/libft/libft.h"
 # include "prev_projects/ft_printf/ft_printf.h"
+# include "prev_projects/get_next_line/get_next_line.h"
 
 # include "MiniLibX/mlx.h"
 # include <unistd.h>

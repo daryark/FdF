@@ -1,49 +1,44 @@
 NAME = fdf
 
-MLX_FLAGS	= 	-lmlx -framework OpenGL -framework AppKit
 CC_FLAGS	=	-Wall -Wextra -Werror -g
-INC			=	-Ilibft/	-Ift_printf/
-LIBS		=	-Lprev_projects/libft -lft	-Lprev_projects/ft_printf -lftprintf
+INC			=	-Ilibft/	-Ift_printf/	-Iget_next_line/
 
+PREV_F		=	prev_projects
+LIBS		=	-L$(PREV_F)/ft_printf -lftprintf	-L$(PREV_F)/libft -lft
+
+MLX_FLAGS	= 	-lmlx -framework OpenGL -framework AppKit
 MLX 		= 	MiniLibX/
 
 SRCS		=	main.c	read_file.c	draw.c	\
-				./prev_projects/get_next_line/get_next_line.c	./prev_projects/get_next_line/get_next_line_utils.c
-
-SRCS_F			= src/
-OBJS_F			= obj/
-
-OBJS			=	$(SRCS:.c=.o)
-OBJS_P			=	$(addprefix $(OBJS_F), $(OBJS))
-
-
-GREEN = \033[0;32m
-MAGENTA	= \033[0;35m
-RED = \033[0;31m
-RESET_COLOR = \033[0m
+				get_next_line.c	get_next_line_utils.c
+VPATH		=	$(SRCS_F)	$(PREV_F)/get_next_line
+SRCS_F		=	src/
+OBJS_F		=	obj/
+OBJS		=	$(SRCS:.c=.o)
+OBJS_P		=	$(addprefix $(OBJS_F), $(OBJS))
 
 
-all:$(NAME)
+RED			=	\033[0;31m
+GREEN 		=	\033[0;32m
+MAGENTA		=	\033[0;35m
+RESET_COLOR =	\033[0m
+
+
+# ! Need to combine libft, gnl, ft_printf to not duplicate the code
+# ! and use it in more convenient way in further projects.
+all: $(NAME)
 
 $(NAME): $(OBJS_P)
 	@cd $(MLX); make 
-	@cc $(CC_FLAGS)  -L$(MLX) $(MLX_FLAGS) -o $(NAME) $(OBJS_P) $(LIBS)
+	@cd $(PREV_F)/libft; make
+	@cd $(PREV_F)/ft_printf; make
+	@cc $(CC_FLAGS) -L$(MLX) $(MLX_FLAGS) -o $(NAME) $(OBJS_P) $(LIBS)  
 	@echo "$(GREEN)Main part compiled successfully ! 🎉 $(MAGENTA)FDF$(RESET_COLOR)"
-# @$(MAKE) -C $(PRINTF) 
-# @$(MAKE) -C $(GNL)
-# @$(MAKE) -C $(LFT)
-# @cc $(CC_FLAGS) -O3 -L$(MLX) $(MLX_FLAGS) $(PRINTF)/libftprintf.a $(GNL)/get_next_line.a $(LFT)/libft.a -o $(NAME) $(OBJS_P)
 
-$(OBJS_F)%.o: $(SRCS_F)%.c Makefile fdf.h
+$(OBJS_F)%.o: %.c Makefile fdf.h
 	@mkdir -p $(OBJS_F)
 	@echo "$(MAGENTA)Working on: $(RESET_COLOR)$<"
-	@cc $(CC_FLAGS) -c $< -o $@
-
-
-# $(OBJS_F_B)%.o: $(SRCS_B)%.c Makefile so_long.h
-# 	@mkdir -p $(OBJS_F_B)
-# 	@echo "${magenta}Working on: ${reset} $<"
-# 	@cc $(CC_FLAGS) -O3 -c $< -o $@
+	@cc $(CC_FLAGS) $(INC) -c $< -o $@
 
 
 # bonus: $(OBJS_BONUS)
@@ -59,11 +54,8 @@ $(OBJS_F)%.o: $(SRCS_F)%.c Makefile fdf.h
 
 clean:
 	@rm -rf $(OBJS_F)
-# @rm -rf $(OBJS_F_B)
-	@$(MAKE) clean -C $(	) 
-# @$(MAKE) fclean -C $(PRINTF) 
-# @$(MAKE) fclean -C $(GNL)
-# @$(MAKE) fclean -C $(LFT)
+	@cd $(PREV_F)/libft; make fclean
+	@cd $(PREV_F)/ft_printf; make fclean
 
 fclean:	clean
 	@rm -rf $(NAME)
