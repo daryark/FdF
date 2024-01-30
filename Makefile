@@ -9,7 +9,7 @@ LIBS		=	-L$(PREV_F)/ft_printf -lftprintf	-L$(PREV_F)/libft -lft
 MLX_FLAGS	= 	-lmlx -framework OpenGL -framework AppKit
 MLX 		= 	MiniLibX/
 
-SRCS		=	main.c	read_file.c	draw.c	\
+SRCS		=	main.c	read_file.c	draw.c	utils.c	\
 				get_next_line.c	get_next_line_utils.c
 VPATH		=	$(SRCS_F)	$(PREV_F)/get_next_line
 SRCS_F		=	src/
@@ -30,8 +30,8 @@ all: $(NAME)
 
 $(NAME): $(OBJS_P)
 	@cd $(MLX); make 
-	@cd $(PREV_F)/libft; make
 	@cd $(PREV_F)/ft_printf; make
+	@cd $(PREV_F)/libft; make
 	@cc $(CC_FLAGS) -L$(MLX) $(MLX_FLAGS) -o $(NAME) $(OBJS_P) $(LIBS)  
 	@echo "$(GREEN)Main part compiled successfully ! 🎉 $(MAGENTA)FDF$(RESET_COLOR)"
 
