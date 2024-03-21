@@ -1,0 +1,25 @@
+//overall: Makefile, header
+-objs into separate folder
+-connect libft
+-run fancy @curl fdf compilation, or echo like Erwin did
+-makefile for both ubuntu and macos
+
+
+//process
+-error handle
+-parse the map
+-open the screen
+-draw the line just to see it
+-do the calculations
+-draw the picture on the screen
+
+//features
+-add colors
+-change the bg and the main color of the map (like from white to some other)
+- compile multiple files at the same time, both with single file mod
+-animate, blur or some other motion effects
+
+//moves and interraction
+-change btw maps with arrow
+-move the image with the mouse translate and rotate
+-zoom

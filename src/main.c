@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 22:12:42 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/01/30 16:35:11 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/03/21 15:21:13 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,6 +169,8 @@ int	main (int argc, char **argv)
 {
 	if (argc == 2)
 	{
+		if (check_map_format(argv[1]))
+			ft_printf("File format is invalid. Choose \".fdf\" type file");
 		if (ft_process(argv[1]))
 			ft_printf("Error occured in the process. \n");
 	}

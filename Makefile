@@ -1,31 +1,31 @@
+RED	= \033[0;31m
+GREEN =	\033[0;32m
+MAGENTA	= \033[0;35m
+RESET_COLOR = \033[0m
+
 NAME = fdf
 
-CC_FLAGS	=	-Wall -Wextra -Werror -g
-INC			=	-Ilibft/	-Ift_printf/	-Iget_next_line/
+CC_FLAGS = -Wall -Wextra -Werror -fsanitize=address -g
 
-PREV_F		=	prev_projects
-LIBS		=	-L$(PREV_F)/ft_printf -lftprintf	-L$(PREV_F)/libft -lft
+#* different flags for linux and mac
+MLX = MiniLibX/
+MLX_FLAGS = -lmlx -framework OpenGL -framework AppKit
 
-MLX_FLAGS	= 	-lmlx -framework OpenGL -framework AppKit
-MLX 		= 	MiniLibX/
-
-SRCS		=	main.c	read_file.c	draw.c	utils.c	\
-				get_next_line.c	get_next_line_utils.c
-VPATH		=	$(SRCS_F)	$(PREV_F)/get_next_line
-SRCS_F		=	src/
-OBJS_F		=	obj/
-OBJS		=	$(SRCS:.c=.o)
-OBJS_P		=	$(addprefix $(OBJS_F), $(OBJS))
+LIBFT = libft/
+LIBFLAGS = -L$(LIBFT) -lft
 
 
-RED			=	\033[0;31m
-GREEN 		=	\033[0;32m
-MAGENTA		=	\033[0;35m
-RESET_COLOR =	\033[0m
+SRC =	main.c \
+		read_file.c utils.c \
+		draw.c 
+OBJ = $(addprefix $(OBJ_F), $(OBJS))
 
+VPATH = $(SRC_F)/draw $(SRC_F)/utils $(SRC_F)/dynamic
+SRCS_F = src/
+OBJ_F = obj/
+ 
 
-# ! Need to combine libft, gnl, ft_printf to not duplicate the code
-# ! and use it in more convenient way in further projects.
+.SILENT:
 all: $(NAME)
 
 $(NAME): $(OBJS_P)
