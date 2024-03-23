@@ -1,1 +1,1 @@
-obj/utils.o: src/utils.c
+obj/utils.o: src/utils/utils.c

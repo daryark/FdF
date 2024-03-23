@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 22:19:15 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/03/23 23:28:35 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/03/24 00:08:35 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@
 # include "libft/src/ft_printf/ft_printf.h"
 # include "libft/src/get_next_line/get_next_line_bonus.h"
 
-# ifdef	LINUX
-# include "mlx-linux/mlx.h"
-# else
-# include "mlx-osx/mlx.h"
-# endif
+// # ifdef	LINUX
+// # include "mlx-linux/mlx.h"
+// # else
+// # include "mlx-osx/mlx.h"
+// # endif
 
 # include <fcntl.h>
 # include <stdlib.h>
@@ -54,7 +54,7 @@
 // t_fdf	*define_t_fdf(void);
 
 //process
-int	check_map_format(char *file);
+// int	check_map_format(char *file);
 int		ft_process(char	*file);
 
 //format and fill the map

@@ -1,0 +1,7 @@
+/**/*.o
+/**/*.d
+/**/*.a
+.vscode
+mlx*/
+test_maps/
+fdf
