@@ -71,7 +71,7 @@ all: $(NAME)
 # # ./$(NAME) m maps/*
 	# ./$(NAME) maps/42.fdf
 
-$(NAME): $(OBJ) $(MLX_F) maps
+$(NAME): $(OBJ) $(MLX_F) $(MAPS_F)
 	@echo "\n"
 	$(MAKE) -C $(LIBFT)
 	$(CC) $(MLX_LIBS)  $(LIBFLAGS) -o $@ $<
@@ -95,11 +95,13 @@ $(MLX_F):
 	mv minilibx* $(MLX_F)
 	$(MAKE) -C $(MLX_F);
 
-maps:
+$(MAPS_F):
+	rm -rf $(MAPS_F)
 	curl -sS -o $(MAPS_ARCH) $(MAPS_URL)
 	unzip $(MAPS_ARCH)
 	rm $(MAPS_ARCH)
 	rm -r __MACOSX
+	mv test_maps $@
 
 
 clean:
@@ -109,8 +111,6 @@ clean:
 	@echo "$(YELLOW)\n CLEAN FDF		🧹✨$(RESET_COLOR)"
 
 fclean:	clean
-	rm -rf $(MLX_F)
-	rm -rf test_maps/
 	rm -f $(NAME)
 	@echo "$(YELLOW)FCLEAN FDF		🧹✨\n$(RESET_COLOR)"
 
