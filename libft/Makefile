@@ -61,11 +61,11 @@ $(OBJ_F)%.o: %.c
 
 clean:
 	@rm -rf $(OBJ_F)
-	@echo "$(YELLOW)\n☓  CLEAN LIBFT$(RESET_COLOR)"
+	@echo "$(YELLOW)\n CLEAN LIBFT		🧹✨$(RESET_COLOR)"
 
 fclean: clean
 	@rm -f $(NAME)
-	@echo "$(YELLOW)☓☓ FCLEAN LIBFT\n$(RESET_COLOR)"
+	@echo "$(YELLOW)FCLEAN LIBFT		🧹✨\n$(RESET_COLOR)"
 
 re: fclean all
 

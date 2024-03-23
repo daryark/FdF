@@ -1,29 +1,15 @@
 RED	= \033[0;31m
-GREEN =	\033[0;32m
+YELLOW = \033[0;33m
+GREEN = \033[0;32m
 MAGENTA	= \033[0;35m
 RESET_COLOR = \033[0m
 
-define ASCII_ART                            
-__/\\\\\\\\\\\\\\\__/\\\\\\\\\\\\_____/\\\\\\\\\\\\\\\_        
- _\/\\\///////////__\/\\\////////\\\__\/\\\///////////__       
-  _\/\\\_____________\/\\\______\//\\\_\/\\\_____________      
-   _\/\\\\\\\\\\\_____\/\\\_______\/\\\_\/\\\\\\\\\\\_____     
-    _\/\\\///////______\/\\\_______\/\\\_\/\\\///////______    
-     _\/\\\_____________\/\\\_______\/\\\_\/\\\_____________   
-      _\/\\\_____________\/\\\_______/\\\__\/\\\_____________  
-       _\/\\\_____________\/\\\\\\\\\\\\/___\/\\\_____________ 
-        _\///______________\////////////_____\///______________
-
-·▄▄▄·▄▄▄▄  ·▄▄▄
-▐▄▄·██▪ ██ ▐▄▄·
-██▪ ▐█· ▐█▌██▪ 
-██▌.██. ██ ██▌.
-▀▀▀ ▀▀▀▀▀• ▀▀▀ 
-
-┏┓┳┓┏┓
-┣ ┃┃┣ 
-┻ ┻┛┻ 
-      
+define ASCII_ART
+		·▄▄▄·▄▄▄▄  ·▄▄▄
+		▐▄▄·██▪ ██ ▐▄▄·
+		██▪ ▐█· ▐█▌██▪ 
+		██▌.██. ██ ██▌.
+		▀▀▀ ▀▀▀▀▀• ▀▀▀ 
 endef
 export ASCII_ART
 
@@ -31,89 +17,91 @@ NAME = fdf
 
 CC = gcc
 DEPFLAGS = -MMD -MP
-CC_FLAGS = -Wall -Wextra -Werror-g $(DEPFLAGS) 
+CC_FLAGS = -Wall -Wextra -Werror -g $(DEPFLAGS) 
 
 SRC =	main.c \
-		read_file.c utils.c \
-		draw.c 
-OBJ = $(addprefix $(OBJ_F), $(OBJS))
+		error_check.c utils.c
+OBJ = $(addprefix $(OBJ_F), $(SRC:%.c=%.o))
 
-VPATH = $(SRC_F) $(SRC_F)/draw $(SRC_F)/utils $(SRC_F)/dynamic
-SRCS_F = src/
+VPATH = $(SRC_F) $(SRC_F)draw/ $(SRC_F)utils/ $(SRC_F)dynamic/
+SRC_F = src/
 OBJ_F = obj/
  
 
 LIBFT = libft/
 LIBFLAGS = -L$(LIBFT) -lft
 
+#* maps
+MAPS_F = maps
+MAPS_URL = https://cdn.intra.42.fr/document/document/21662/maps.zip
+
 #specify the name, where the archive will be downloaded from url
 ARCH = minilibx.tgz
 
-MLX = $(addprefix $(MLX_F), $(MLX_NAME))
+# MLX = $(addprefix $(MLX_F)/, $(MLX_NAME))
 
-#OS dependent flags
+#* OS dependent flags
 UNAME = $(shell uname -s)
 ifeq ($(UNAME), Darwin)
 	#MacOS
 #preprocessor definition, define macros name, used in .h files depending on OS
 CC_FLAGS += -D OSX
-MLX_F = mlx-osx/
-MLX_NAME = mlx.dylib
+MLX_F = mlx-osx
+MLX_NAME = libmlx.dylib
 MLX_URL = https://cdn.intra.42.fr/document/document/21664/minilibx_mms_20191025_beta.tgz
 MLX_LIBS = -lmlx -framework OpenGL -framework AppKit
 else
 	#Linux
 CC_FLAGS += -D LINUX
-MLX_F = mlx-linux/
+MLX_F = mlx-linux
 MLX_NAME = libmlx.a
 MLX_URL = https://cdn.intra.42.fr/document/document/21665/minilibx-linux.tgz
 MLX_LIBS = -lmlx-Linux -Xext -lX11
 endif
 
-#maps
-MAPS_F = maps
-MAPS_URL = https://cdn.intra.42.fr/document/document/21662/maps.zip
 
 
 .SILENT:
 all: $(NAME)
 
-run: $(NAME) maps
-# ./$(NAME) m maps/*
-	./$(NAME) maps/42.fdf
+# run: $(NAME) maps
+# # ./$(NAME) m maps/*
+# 	./$(NAME) maps/42.fdf
 
-$(NAME): $(OBJ) $(MLX) $(LIBFT)
-	$(MAKE) -C $(MLX)
+$(NAME): $(OBJ) $(MLX_F)
+	@echo "\n"
 	$(MAKE) -C $(LIBFT)
-	$(CC) $(CC_FLAGS) $(MLX_FLAGS) $(LIBFLAGS) -c $< -o $@
-	@echo $(ASCII_ART)
-	@echo "$(GREEN)\n——————————————✣ FDF COMPILED ✣————————————\n$(RESET_COLOR)"
+	$(CC) $(MLX_LIBS)  $(LIBFLAGS) -o $@ $<
+	@echo "$(MAGENTA)$$ASCII_ART$(RESET_COLOR)"
+	@echo "$(GREEN)\n———————————————✣ FDF COMPILED ✣————————————\n$(RESET_COLOR)"
 
 $(OBJ_F)%.o: %.c
 	mkdir -p $(@D)
 	$(CC) $(CC_FLAGS) -c $^ -o $@
-	@printf"$(GREEN). $(RESET_COLOR)"
+	@printf "$(GREEN). $(RESET_COLOR)"
 
-#set up mlx lib
-$(MLX):
+# #* set up mlx lib
+
+$(MLX_F):
 	rm -rf $(MLX_F)
-	@printf "$(MAGENTA)Downloading $(MLX_F) ...$(RESET_COLOR)"
-#-s silent, -S show-error, -o output download into ARCH, from MLX_URL
-	curl -sS -o $(ARCH) $(MLX_URL)
-	mkdir -p $(MLX_F)
-	tar -xvf $(ARCH) -C $(MLX_F)
+	echo "$(GREEN)\n\nDownloading $(MLX_F) ...$(RESET_COLOR)"
+# -s silent, -S show-error, -o output download into ARCH, from MLX_URL
+	@curl -sS -o $(ARCH) $(MLX_URL)
+	tar -xvf $(ARCH)
 	rm $(ARCH)
-	# $(MAKE) -C $(MLX); #*доразобраться с папкой и компиляцией чего куда, и тогда именем папки и executable
-#!download my github to other folder and see the changes there, fix the differences, to be able to push to remote into master
+	mv minilibx* $(MLX_F)
+	$(MAKE) -C $(MLX_F);
+
 clean:
+	clear;
 	$(MAKE) -C $(LIBFT) fclean;
-	$(MAKE) -C $(MLX) fclean;
-	@rm -rf $(OBJ_F)
-	@echo "$(YELLOW)\n🧹  CLEAN FDF$(RESET_COLOR)"
+	rm -rf $(OBJ_F)
+	@echo "$(YELLOW)\n CLEAN FDF		🧹✨$(RESET_COLOR)"
 
 fclean:	clean
+# rm -rf $(MLX_F)
 	rm -f $(NAME)
-	@echo "$(YELLOW)🧹🧹 FCLEAN FDF\n$(RESET_COLOR)"
+	@echo "$(YELLOW)FCLEAN FDF		🧹✨\n$(RESET_COLOR)"
 
 re:		fclean all
 

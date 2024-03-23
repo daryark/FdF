@@ -6,12 +6,11 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 22:12:42 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/03/21 15:21:13 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/03/23 23:29:48 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fdf.h"
-
 
 // typedef struct	s_data {
 // 	void	*img;
@@ -57,111 +56,111 @@
 	// mlx_loop(mlx);
 // }
 
-int	get_height(char *file)
-{
-	int	fd;
-	int	h;
+// int	get_height(char *file)
+// {
+// 	int	fd;
+// 	int	h;
 
-	fd = open(file, O_RDONLY);
-	h = 0;
-	while (get_next_line(fd) > 0)
-		h++;
-	close(fd);
-	return (h);
-}
+// 	fd = open(file, O_RDONLY);
+// 	h = 0;
+// 	while (get_next_line(fd) > 0)
+// 		h++;
+// 	close(fd);
+// 	return (h);
+// }
 
-int	get_width(char *file)
-{
-	int		fd;
-	int		w;
-	char	**arr;
+// int	get_width(char *file)
+// {
+// 	int		fd;
+// 	int		w;
+// 	char	**arr;
 
-	fd = open(file, O_RDONLY);
-	arr = ft_split(get_next_line(fd), ' ');
-	w = 0;
-	while (arr[w] != NULL)
-		w++;
-	close(fd);
-	return (w);
-}
+// 	fd = open(file, O_RDONLY);
+// 	arr = ft_split(get_next_line(fd), ' ');
+// 	w = 0;
+// 	while (arr[w] != NULL)
+// 		w++;
+// 	close(fd);
+// 	return (w);
+// }
 
-int	hex_to_decimal(char *s)
-{
-	int	len;
-	int	base;
-	int	n;
+// int	hex_to_decimal(char *s)
+// {
+// 	int	len;
+// 	int	base;
+// 	int	n;
 
-	base = 1;
-	n = 0;
-	len = ft_strlen(s);
-	while (s[--len])
-	{
-		if (s[len] >= '0' && s[len] <= '9')
-			n += (s[len] - 48) * base;
-		else if (s[len] >= 'A' && s[len] <= 'F')
-			n += (s[len] - 55) * base;
-		else if (s[len] >= 'a' && s[len] <= 'f')
-			n += (s[len] - 55 - 32) * base;
-		base *= 16;
-	}
-	return (n);
-}
+// 	base = 1;
+// 	n = 0;
+// 	len = ft_strlen(s);
+// 	while (s[--len])
+// 	{
+// 		if (s[len] >= '0' && s[len] <= '9')
+// 			n += (s[len] - 48) * base;
+// 		else if (s[len] >= 'A' && s[len] <= 'F')
+// 			n += (s[len] - 55) * base;
+// 		else if (s[len] >= 'a' && s[len] <= 'f')
+// 			n += (s[len] - 55 - 32) * base;
+// 		base *= 16;
+// 	}
+// 	return (n);
+// }
 
-void	fill_map(char *file, t_fdf **d)
-{
-	int		fd;
-	int		ln;
-	int		p;
-	char	**row;
-	char	**point;
+// void	fill_map(char *file, t_fdf **d)
+// {
+// 	int		fd;
+// 	int		ln;
+// 	int		p;
+// 	char	**row;
+// 	char	**point;
 
-	fd = open(file, O_RDONLY);
-	(*d)->map = (t_map **)malloc(sizeof(t_map *) * (*d)->height);
-	// if (!(*d)->map)
-	// 	return ;
-	ln = -1;
-	while (++ln < (*d)->height)
-	{
-		(*d)->map[ln] = (t_map *)malloc(sizeof(t_map) * (*d)->width);
-		// if (!(*d->map[ln]))
-		// 	return ;
-		row = ft_split((char const *)get_next_line(fd), ' ');
-		ft_printf("\nrow 1: [%d] [%d] [%d] \n",  row[0], row[1], row[2]);
-		// ft_printf("\nrow 1: [z: %d, h: %d] [z: %d, h: %d] [z: %d, h: %d] \n",  (*d)->map[0][0].z, (*d)->map[0][0].hex, (*d)->map[0][1].z, (*d)->map[0][1].hex, (*d)->map[0][2].z, (*d)->map[0][2].hex);
-		p = -1;
-		while (++p < (*d)->width)
-		{
-			point = ft_split((char const *)(row[p]), ',');
-			((*d)->map[ln][p]).z = ft_atoi(point[0]);
-			((*d)->map[ln][p]).hex = 0;
-			if (point[1])
-				((*d)->map[ln][p]).hex = hex_to_decimal(point[1]);
-		}
-	}
-	close(fd);
-}
+// 	fd = open(file, O_RDONLY);
+// 	(*d)->map = (t_map **)malloc(sizeof(t_map *) * (*d)->height);
+// 	// if (!(*d)->map)
+// 	// 	return ;
+// 	ln = -1;
+// 	while (++ln < (*d)->height)
+// 	{
+// 		(*d)->map[ln] = (t_map *)malloc(sizeof(t_map) * (*d)->width);
+// 		// if (!(*d->map[ln]))
+// 		// 	return ;
+// 		row = ft_split((char const *)get_next_line(fd), ' ');
+// 		ft_printf("\nrow 1: [%d] [%d] [%d] \n",  row[0], row[1], row[2]);
+// 		// ft_printf("\nrow 1: [z: %d, h: %d] [z: %d, h: %d] [z: %d, h: %d] \n",  (*d)->map[0][0].z, (*d)->map[0][0].hex, (*d)->map[0][1].z, (*d)->map[0][1].hex, (*d)->map[0][2].z, (*d)->map[0][2].hex);
+// 		p = -1;
+// 		while (++p < (*d)->width)
+// 		{
+// 			point = ft_split((char const *)(row[p]), ',');
+// 			((*d)->map[ln][p]).z = ft_atoi(point[0]);
+// 			((*d)->map[ln][p]).hex = 0;
+// 			if (point[1])
+// 				((*d)->map[ln][p]).hex = hex_to_decimal(point[1]);
+// 		}
+// 	}
+// 	close(fd);
+// }
 
 int	ft_process(char	*file)
 {
-	t_fdf	*d;
+	// t_fdf	*d;
 
-	d = malloc(sizeof(t_fdf));
-	if (!d)
-		return (1);
-	d->height = get_height(file);
-	d->width = get_width(file);
-	fill_map(file, &d);
-	ft_printf(MAGENTA "height: %d\nwidth: %d\n" RESET_COLOR, d->height, d->width);
-	int r = -1;
-	// ft_printf("[z: %d, h: %d] [z: %d, h: %d] [z: %d, h: %d] \n", d->map[0][0].z, d->map[0][0].hex, d->map[0][1].z, d->map[0][1].hex, d->map[0][2].z, d->map[0][2].hex);
-	while (++r < d->height)
-	{
-		int p = -1;
-		ft_printf("%d->", (r + 1));
-		while (++p < d->width)
-			ft_printf("[z: %d, h: %d] ",d->map[r][p].z, d->map[r][p].hex);
-		ft_printf("\n");
-	}
+	// d = malloc(sizeof(t_fdf));
+	// if (!d)
+	// 	return (1);
+	// d->height = get_height(file);
+	// d->width = get_width(file);
+	// fill_map(file, &d);
+	// ft_printf(MAGENTA "height: %d\nwidth: %d\n" RESET_COLOR, d->height, d->width);
+	// int r = -1;
+	// // ft_printf("[z: %d, h: %d] [z: %d, h: %d] [z: %d, h: %d] \n", d->map[0][0].z, d->map[0][0].hex, d->map[0][1].z, d->map[0][1].hex, d->map[0][2].z, d->map[0][2].hex);
+	// while (++r < d->height)
+	// {
+	// 	int p = -1;
+	// 	ft_printf("%d->", (r + 1));
+	// 	while (++p < d->width)
+	// 		ft_printf("[z: %d, h: %d] ",d->map[r][p].z, d->map[r][p].hex);
+	// 	ft_printf("\n");
+	// }
 	return (0);
 }
 
@@ -170,11 +169,14 @@ int	main (int argc, char **argv)
 	if (argc == 2)
 	{
 		if (check_map_format(argv[1]))
-			ft_printf("File format is invalid. Choose \".fdf\" type file");
+		{
+			ft_putendl_fd(RED "Wrong format or/and permissions" RESET_COLOR, 2);
+			return (0);
+		}
 		if (ft_process(argv[1]))
-			ft_printf("Error occured in the process. \n");
+			ft_putendl_fd(RED "Error occured in the process" RESET_COLOR, 2);
 	}
 	else
-		ft_printf("Add exactly one file to read from!\n");
+		ft_putendl_fd(YELLOW "Add ONE file to read from!" RESET_COLOR, 2);
 	return (0);
 }

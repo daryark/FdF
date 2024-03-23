@@ -6,11 +6,11 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 01:52:44 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/01/26 01:11:06 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/03/23 14:45:18 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../fdf.h"
+// #include "../../fdf.h"
 
 
 // int	ft_error_handle(char *base)
