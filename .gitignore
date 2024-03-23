@@ -2,6 +2,7 @@
 /**/*.d
 /**/*.a
 .vscode
+.DS_store
 mlx*/
 test_maps/
 fdf
