@@ -1,13 +1,20 @@
-//overall: Makefile, header
--objs into separate folder
--connect libft
--run fancy @curl fdf compilation, or echo like Erwin did
--makefile for both ubuntu and macos
+//overall: 
+✅ Makefile, makefile for both ubuntu and macos
+- header and macros for LINUX, OSX
+✅ objs into separate folder
+✅ connect libft
+✅ run fancy @curl fdf compilation, or echo like Erwin did (done, differently, works).
 
 
 //process
--error handle
--parse the map
+✅ error handle
+-parse the map:
+    -link all in header
+    -read
+    -init empty map
+    -preformat data
+    -fill the map
+    -clean code and add valuable comments, if needed
 -open the screen
 -draw the line just to see it
 -do the calculations

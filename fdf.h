@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 22:19:15 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/03/24 13:24:08 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/03/24 19:56:02 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # define RED "\033[0;31m"
 # define GREEN "\033[0;32m"
 # define YELLOW "\033[0;33m"
-# define MAGENTA "\033[0;35m"
 # define RESET_COLOR "\033[0m"
 
 # include <fcntl.h>
@@ -35,27 +34,28 @@
 // # include <string.h>
 // # include <errno.h>
 
-// typedef struct s_map
-// {
-// 	int	hex;
-// 	int	z;
-// }	t_map;
+typedef struct s_map
+{
+	int	color;
+	int	val;
+}	t_map;
 
-// typedef struct s_fdf
-// {
-// 	int		width;
-// 	int		height;
-// 	t_map	**map;
+typedef struct s_fdf
+{
+	int		width;
+	int		height;
+	t_map	**map;
 
-// 	void	*mlx_ptr;
-// 	void	*win_ptr;
-// }	t_fdf;
+	// void	*mlx_ptr;
+	// void	*win_ptr;
+}	t_fdf;
 
 // t_fdf	*define_t_fdf(void);
 
 //process
-int	ft_process(char	*file);
-int	check_map_format(char *file);
+int		ft_process(char	*file);
+int		check_map_format(char *file);
+void	map_height(int fd, t_fdf *fdf);
 
 //format and fill the map
 // int		get_height(char *file);

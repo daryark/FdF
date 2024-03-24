@@ -1,65 +1,42 @@
-RED	= \033[0;31m
-YELLOW = \033[0;33m
-GREEN = \033[0;32m
-MAGENTA	= \033[0;35m
-RESET_COLOR = \033[0m
-
-define ASCII_ART
-		·▄▄▄·▄▄▄▄  ·▄▄▄
-		▐▄▄·██▪ ██ ▐▄▄·
-		██▪ ▐█· ▐█▌██▪ 
-		██▌.██. ██ ██▌.
-		▀▀▀ ▀▀▀▀▀• ▀▀▀ 
-endef
-export ASCII_ART
-
+include extras/ascii_art.sh
+include extras/colors.sh
 
 #*compilation
 NAME = fdf
-
-CC = gcc
-DEPFLAGS = -MMD -MP
-CC_FLAGS = -Wall -Wextra -Werror -g $(DEPFLAGS) 
-
 SRC =	main.c \
-		error_check.c
-OBJ = $(addprefix $(OBJ_F), $(SRC:%.c=%.o))
+		error_check.c utils.c
 
+OBJ = $(addprefix $(OBJ_F), $(SRC:%.c=%.o))
 VPATH = $(SRC_F) $(SRC_F)utils/
 SRC_F = src/
 OBJ_F = obj/
+CC = gcc
+CC_FLAGS = -Wall -Wextra -Werror -g
+
 
 #*libs
-LIBFT_GIT = https://github.com/daryark/libft.git
 LIBFT_F = libft
 LIBFLAGS = -L$(LIBFT_F) -lft
-
+LIBFT_GIT = https://github.com/daryark/libft.git
 #* maps
 MAPS_F = maps
 MAPS_URL = https://cdn.intra.42.fr/document/document/21662/maps.zip
 MAPS_ARCH = maps.zip
-
-#specify the name, where the archive will be downloaded from url
 MLX_ARCH = minilibx.tgz
-# MLX = $(addprefix $(MLX_F)/, $(MLX_NAME))
-
 #* OS dependent flags
 UNAME = $(shell uname -s)
 ifeq ($(UNAME), Darwin)
-	#MacOS
-#preprocessor definition, define macros name, used in .h files depending on OS
-CC_FLAGS += -D OSX
-MLX_F = mlx-osx
-# MLX_NAME = libmlx.dylib
-MLX_URL = https://cdn.intra.42.fr/document/document/21664/minilibx_mms_20191025_beta.tgz
-MLX_LIBS = -lmlx -framework OpenGL -framework AppKit
+	#*MacOS
+  CC_FLAGS += -D OSX
+  MLX_F = mlx-osx
+  MLX_URL = https://cdn.intra.42.fr/document/document/21664/minilibx_mms_20191025_beta.tgz
+  MLX_LIBS = -lmlx -framework OpenGL -framework AppKit
 else
-	#Linux
-CC_FLAGS += -D LINUX
-MLX_F = mlx-linux
-# MLX_NAME = libmlx.a
-MLX_URL = https://cdn.intra.42.fr/document/document/21665/minilibx-linux.tgz
-MLX_LIBS = -lmlx-Linux -Xext -lX11
+	#*Linux
+  CC_FLAGS += -D LINUX
+  MLX_F = mlx-linux
+  MLX_URL = https://cdn.intra.42.fr/document/document/21665/minilibx-linux.tgz
+  MLX_LIBS = -lmlx-Linux -Xext -lX11
 endif
 
 
@@ -72,10 +49,9 @@ run: $(NAME) $(MAPS_F)
 	./$(NAME) maps/42.fdf
 
 $(NAME): $(OBJ) $(MLX_F) | $(MAPS_F)
-	@echo "\n"
 	$(MAKE) -C $(LIBFT_F)
-	$(CC) $(MLX_LIBS) $(LIBFLAGS) -o $@ $<
-	@echo "$(MAGENTA)$$ASCII_ART$(RESET_COLOR)"
+	$(CC) $(MLX_LIBS) $(LIBFLAGS) -o $@ $(OBJ)
+# @echo "$(MAGENTA)$$ASCII_ART$(RESET_COLOR)"
 	@echo "$(GREEN)\n———————————————✣ FDF COMPILED ✣————————————\n$(RESET_COLOR)"
 
 $(OBJ_F)%.o: %.c $(LIBFT_F)
@@ -87,7 +63,6 @@ $(OBJ_F)%.o: %.c $(LIBFT_F)
 
 $(MLX_F):
 	echo "$(GREEN)\n\nDownloading $(MLX_F) ...$(RESET_COLOR)"
-# -s silent, -S show-error, -o output download into MLX_ARCH, from MLX_URL
 	curl -sS -o $(MLX_ARCH) $(MLX_URL)
 	tar -xvf $(MLX_ARCH)
 	rm $(MLX_ARCH)
@@ -120,15 +95,21 @@ fclean:	clean
 
 re:		fclean all
 
-uninstall: $(MAPS_F) $(MLX_F) $(LIBFT_F)
+uninstall:
 	rm -rf $(MAPS_F)
 	rm -rf $(MLX_F)
 	rm -rf $(LIBFT_F)
 
-.PHONY:	all clean fclean re maps run
+.PHONY:	all clean fclean re run uninstall
 
 #  -g flag in cc flags is helpful when you need to debug program
 # as it allows to trace execution of the program back to the original source code.
+
+#preprocessor definition, define macros name, used in .h files depending on OS
+#   CC_FLAGS += -D OSX
+
+# -s silent, -S show-error, -o output download into MLX_ARCH, from MLX_URL
+# curl -sS -o $(MLX_ARCH) $(MLX_URL)
 
 
 # bonus: $(OBJS_BONUS)
