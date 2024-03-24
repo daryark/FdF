@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 22:12:42 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/03/24 13:23:58 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/03/24 14:41:07 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,31 +139,31 @@
 // 	}
 // 	close(fd);
 // }
-// static int	check_map_format(char *file)
-// {
-// 	int		len;
-// 	int		i;
-// 	char	*format;
+static int	check_map_format(char *file)
+{
+	int		len;
+	int		i;
+	char	*format;
 
-// 	if (open(file, O_RDONLY) < 0)
-// 		return (1);
-// 	format = ".fdf";
-// 	i = ft_strlen(format);
-// 	len = ft_strlen(file);
-// 	while (format[--i])
-// 	{
-// 		len--;
-// 		if (file[len] != format[i])
-// 			return (1);
-// 	}
-	//!if this "name.smth.fdf" is valid format also ?
-	// len--;
-	// while (file[len] && file[len] != '.')
-	// 	len--;
-	// if (file[len])
-	// 	return (1);
-// 	return (0);
-// }
+	if (open(file, O_RDONLY) < 0)
+		return (1);
+	format = ".fdf";
+	i = ft_strlen(format);
+	len = ft_strlen(file);
+	while (format[--i])
+	{
+		len--;
+		if (file[len] != format[i])
+			return (1);
+	}
+	!if this "name.smth.fdf" is valid format also ?
+	len--;
+	while (file[len] && file[len] != '.')
+		len--;
+	if (file[len])
+		return (1);
+	return (0);
+}
 
 int	ft_process(char	*file)
 {
