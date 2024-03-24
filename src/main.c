@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 22:12:42 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/03/23 23:49:52 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/03/24 13:23:58 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,35 +139,35 @@
 // 	}
 // 	close(fd);
 // }
-static int	check_map_format(char *file)
-{
-	int		len;
-	int		i;
-	char	*format;
+// static int	check_map_format(char *file)
+// {
+// 	int		len;
+// 	int		i;
+// 	char	*format;
 
-	if (open(file, O_RDONLY) < 0)
-		return (1);
-	format = ".fdf";
-	i = ft_strlen(format);
-	len = ft_strlen(file);
-	while (format[--i])
-	{
-		len--;
-		if (file[len] != format[i])
-			return (1);
-	}
+// 	if (open(file, O_RDONLY) < 0)
+// 		return (1);
+// 	format = ".fdf";
+// 	i = ft_strlen(format);
+// 	len = ft_strlen(file);
+// 	while (format[--i])
+// 	{
+// 		len--;
+// 		if (file[len] != format[i])
+// 			return (1);
+// 	}
 	//!if this "name.smth.fdf" is valid format also ?
 	// len--;
 	// while (file[len] && file[len] != '.')
 	// 	len--;
 	// if (file[len])
 	// 	return (1);
-	return (0);
-}
+// 	return (0);
+// }
 
 int	ft_process(char	*file)
 {
-	ft_printf("%s\n", file);
+	ft_printf(GREEN "%s\n" RESET_COLOR, file);
 	// t_fdf	*d;
 
 	// d = malloc(sizeof(t_fdf));
@@ -190,13 +190,13 @@ int	ft_process(char	*file)
 	return (0);
 }
 
-int	main (int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	if (argc == 2)
 	{
 		if (check_map_format(argv[1]))
 		{
-			ft_putendl_fd(RED "Wrong format or/and permissions" RESET_COLOR, 2);
+			ft_putendl_fd(RED "Wrong format and/or permissions" RESET_COLOR, 2);
 			return (0);
 		}
 		if (ft_process(argv[1]))

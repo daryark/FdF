@@ -22,16 +22,17 @@ DEPFLAGS = -MMD -MP
 CC_FLAGS = -Wall -Wextra -Werror -g $(DEPFLAGS) 
 
 SRC =	main.c \
-		error_check.c utils.c
+		error_check.c
 OBJ = $(addprefix $(OBJ_F), $(SRC:%.c=%.o))
 
-VPATH = $(SRC_F) $(SRC_F)draw/ $(SRC_F)utils/ $(SRC_F)dynamic/
+VPATH = $(SRC_F) $(SRC_F)utils/
 SRC_F = src/
 OBJ_F = obj/
- 
 
-LIBFT = libft/
-LIBFLAGS = -L$(LIBFT) -lft
+#*libs
+LIBFT_GIT = https://github.com/daryark/libft.git
+LIBFT_F = libft
+LIBFLAGS = -L$(LIBFT_F) -lft
 
 #* maps
 MAPS_F = maps
@@ -39,8 +40,7 @@ MAPS_URL = https://cdn.intra.42.fr/document/document/21662/maps.zip
 MAPS_ARCH = maps.zip
 
 #specify the name, where the archive will be downloaded from url
-ARCH = minilibx.tgz
-
+MLX_ARCH = minilibx.tgz
 # MLX = $(addprefix $(MLX_F)/, $(MLX_NAME))
 
 #* OS dependent flags
@@ -67,46 +67,50 @@ endif
 .SILENT:
 all: $(NAME)
 
-# run: $(NAME) maps
-# # ./$(NAME) m maps/*
-	# ./$(NAME) maps/42.fdf
+run: $(NAME) $(MAPS_F)
+# ./$(NAME) m maps/*
+	./$(NAME) maps/42.fdf
 
-$(NAME): $(OBJ) $(MLX_F) $(MAPS_F)
+$(NAME): $(OBJ) $(MLX_F) | $(MAPS_F)
 	@echo "\n"
-	$(MAKE) -C $(LIBFT)
-	$(CC) $(MLX_LIBS)  $(LIBFLAGS) -o $@ $<
+	$(MAKE) -C $(LIBFT_F)
+	$(CC) $(MLX_LIBS) $(LIBFLAGS) -o $@ $<
 	@echo "$(MAGENTA)$$ASCII_ART$(RESET_COLOR)"
 	@echo "$(GREEN)\n———————————————✣ FDF COMPILED ✣————————————\n$(RESET_COLOR)"
 
-$(OBJ_F)%.o: %.c
+$(OBJ_F)%.o: %.c $(LIBFT_F)
 	mkdir -p $(@D)
-	$(CC) $(CC_FLAGS) -c $^ -o $@
+	$(CC) $(CC_FLAGS) -o $@ -c $<
 	@printf "$(GREEN). $(RESET_COLOR)"
 
 # #* set up mlx lib
 
 $(MLX_F):
-	rm -rf $(MLX_F)
 	echo "$(GREEN)\n\nDownloading $(MLX_F) ...$(RESET_COLOR)"
-# -s silent, -S show-error, -o output download into ARCH, from MLX_URL
-	curl -sS -o $(ARCH) $(MLX_URL)
-	tar -xvf $(ARCH)
-	rm $(ARCH)
+# -s silent, -S show-error, -o output download into MLX_ARCH, from MLX_URL
+	curl -sS -o $(MLX_ARCH) $(MLX_URL)
+	tar -xvf $(MLX_ARCH)
+	rm $(MLX_ARCH)
 	mv minilibx* $(MLX_F)
 	$(MAKE) -C $(MLX_F);
 
 $(MAPS_F):
-	rm -rf $(MAPS_F)
-	curl -sS -o $(MAPS_ARCH) $(MAPS_URL)
-	unzip $(MAPS_ARCH)
-	rm $(MAPS_ARCH)
-	rm -r __MACOSX
-	mv test_maps $@
+	if	[ ! -d "$(MAPS_F)" ]; then \
+			curl -sS -o $(MAPS_ARCH) $(MAPS_URL); \
+			unzip $(MAPS_ARCH); \
+			rm $(MAPS_ARCH); \
+			rm -r __MACOSX; \
+			mv test_maps $@; \
+		fi
+
+$(LIBFT_F):
+	echo "$(GREEN)\n\nDownloading $(LIBFT_F) ...$(RESET_COLOR)"
+	git clone $(LIBFT_GIT) $(LIBFT_F)
 
 
 clean:
 	clear;
-	$(MAKE) -C $(LIBFT) fclean;
+	$(MAKE) -C $(LIBFT_F) fclean;
 	rm -rf $(OBJ_F)
 	@echo "$(YELLOW)\n CLEAN FDF		🧹✨$(RESET_COLOR)"
 
@@ -115,6 +119,11 @@ fclean:	clean
 	@echo "$(YELLOW)FCLEAN FDF		🧹✨\n$(RESET_COLOR)"
 
 re:		fclean all
+
+uninstall: $(MAPS_F) $(MLX_F) $(LIBFT_F)
+	rm -rf $(MAPS_F)
+	rm -rf $(MLX_F)
+	rm -rf $(LIBFT_F)
 
 .PHONY:	all clean fclean re maps run
 
