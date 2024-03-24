@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 22:12:42 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/03/24 14:41:07 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/03/24 15:05:27 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,7 @@
 // 	}
 // 	close(fd);
 // }
-static int	check_map_format(char *file)
+int	check_map_format(char *file)
 {
 	int		len;
 	int		i;
@@ -156,12 +156,12 @@ static int	check_map_format(char *file)
 		if (file[len] != format[i])
 			return (1);
 	}
-	!if this "name.smth.fdf" is valid format also ?
-	len--;
-	while (file[len] && file[len] != '.')
-		len--;
-	if (file[len])
-		return (1);
+	//// !if this "name.smth.fdf" is valid format also ?
+	// len--;
+	// while (file[len] && file[len] != '.')
+	// 	len--;
+	// if (file[len])
+	// 	return (1);
 	return (0);
 }
 
