@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 22:19:15 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/03/24 19:56:02 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/03/27 02:32:35 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@
 
 typedef struct s_map
 {
-	int	color;
-	int	val;
+	unsigned int	color;
+	int				val;
 }	t_map;
 
 typedef struct s_fdf
@@ -53,9 +53,15 @@ typedef struct s_fdf
 // t_fdf	*define_t_fdf(void);
 
 //process
-int		ft_process(char	*file);
-int		check_map_format(char *file);
-void	map_height(int fd, t_fdf *fdf);
+int				ft_process(char	*file);
+int				check_map_format(char *file);
+void			map_size(char *file, t_fdf *fdf);
+//utils
+// int		arr_len(char **arr);
+unsigned int	ft_set_color(char *str);
+void			parse_file(int fd, t_fdf *fdf);
+void			init_map(t_fdf **fdf);
+void			free_map(t_map **map);
 
 //format and fill the map
 // int		get_height(char *file);

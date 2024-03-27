@@ -11,12 +11,12 @@ VPATH = $(SRC_F) $(SRC_F)utils/
 SRC_F = src/
 OBJ_F = obj/
 CC = gcc
-CC_FLAGS = -Wall -Wextra -Werror -g
-
+CC_FLAGS = -Wall -Wextra -Werror -g $(DEPFLAGS)
+DEPFLAGS = -MP -MMD
 
 #*libs
 LIBFT_F = libft
-LIBFLAGS = -L$(LIBFT_F) -lft
+LIBFLAGS = -L$(LIBFT_F) -lft -I$(LIBFT_F) -I$(LIBFT_F)/src/ft_printf/ -I$(LIBFT_F)/src/get_next_line/
 LIBFT_GIT = https://github.com/daryark/libft.git
 #* maps
 MAPS_F = maps
@@ -36,7 +36,7 @@ else
   CC_FLAGS += -D LINUX
   MLX_F = mlx-linux
   MLX_URL = https://cdn.intra.42.fr/document/document/21665/minilibx-linux.tgz
-  MLX_LIBS = -lmlx-Linux -Xext -lX11
+  MLX_LIBS = -L$(MLX_F) -lXext -lX11
 endif
 
 
@@ -46,11 +46,11 @@ all: $(NAME)
 
 run: $(NAME) $(MAPS_F)
 # ./$(NAME) m maps/*
-	./$(NAME) maps/42.fdf
+	./$(NAME) maps/elem-col.fdf
 
 $(NAME): $(OBJ) $(MLX_F) | $(MAPS_F)
 	$(MAKE) -C $(LIBFT_F)
-	$(CC) $(MLX_LIBS) $(LIBFLAGS) -o $@ $(OBJ)
+	$(CC) -o $@ $(OBJ) $(MLX_LIBS) $(LIBFLAGS)
 # @echo "$(MAGENTA)$$ASCII_ART$(RESET_COLOR)"
 	@echo "$(GREEN)\n———————————————✣ FDF COMPILED ✣————————————\n$(RESET_COLOR)"
 
@@ -110,6 +110,13 @@ uninstall:
 
 # -s silent, -S show-error, -o output download into MLX_ARCH, from MLX_URL
 # curl -sS -o $(MLX_ARCH) $(MLX_URL)
+
+# $(CC) -o $@ $(OBJ) $(MLX_LIBS) $(LIBFLAGS) - the libs included in the proj, must always be written after the final object that needs these libs,
+#  so the compiler can go and search further in the line for the path where these needed libs are located and find them
+
+#-I is used to specify where to find the .h files for the library. You need this to include the library's function declarations and definitions in your code.
+#-L is used to specify where to find the compiled library (.a, .dylib, .lib) files. You need this so that the linker knows where to find the actual code for the library functions.
+#-l is used to specify which library to link against, NAME (without lib (libft.a => -lft)). You need this so that the linker knows which library file to include in the final executable.
 
 
 # bonus: $(OBJS_BONUS)

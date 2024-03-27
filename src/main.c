@@ -6,90 +6,122 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 22:12:42 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/03/24 20:42:02 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/03/27 02:57:17 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fdf.h"
 
-t_map	**parse_map(char *file, t_fdf *fdf)
+void	free_map(t_map **map)
 {
-	int		fd;
-	int		i;
-	char	*line;
-	char	**arr;
-	char	**one_arr;
-	t_map	node;
-	t_map	**map;
+	int	i;
 
-	fd = open(file, O_RDONLY);
-	if (fd < 0)
-		return (NULL);
-	map_height(fd, fdf);
-	ft_printf ("height: %d\n", fdf->height);
 	i = -1;
-	line = NULL;
-	arr = NULL;
-	one_arr = NULL;
-	while (line != NULL && fdf->height < ++i)
-	{
-		line = get_next_line(fd);
-		arr = ft_split(line, ' ');
-		fdf->width = arr_len(arr);
-		//do the fn, where inisde will be created a static map (2 dimention arr)
-		// pass args width, hight, return initiated map with empty t_map structs
-		// definition: t_map **init_map(width, height);
-		// ! hm, if i want to use map all over the process, not being allocated
-		// ! but done static, i need to return the sizes on that step, and give
-		// ! the control back to process fn, to have this as an upper fn and
-		// ! have the ability to pass map to inner fn inside the same scope ??
-		// ! ask about these and the scope from chat????
-		//* also don't forget to write definitions into header
-		while (*arr)
-		{
-			one_arr = ft_split(*arr, ',');
-			if (one_arr[1] && !is_valid_color(one_arr[1]))
-				return (NULL);
-			else
-				ft_printf("color is valid\n");
-		node.val = ft_atoi(one_arr[0]);
-		node.color = ft_atoi_hex(one_arr[0]);
-
-		}
-	}
-	//?split allocates the **row orf *words
-	//?double split allocates the **mini_row of color and value
-
-	return (NULL);
+	while (map[++i])
+		free(map[i]);
+	free(map);
 }
 
+//init the empty map
+void	init_map(t_fdf **fdf)
+{
+	int		i;
+	int		j;
+
+	(*fdf)->map = (t_map **)malloc(sizeof(t_map *) * (*fdf)->height);
+	if (!(*fdf)->map)
+		return ;
+	i = -1;
+	while (++i < (*fdf)->height)
+	{
+		j = 0;
+		(*fdf)->map[i] = (t_map *)malloc(sizeof(t_map) * (*fdf)->width);
+		if (!(*fdf)->map[i])
+		{
+			free_map((*fdf)->map);
+			return ;
+		}
+		j = -1;
+		while (++j < (*fdf)->width)
+		{
+			(*fdf)->map[i][j].color = 0;
+			(*fdf)->map[i][j].val = 0;
+		}
+	}
+}
+
+//sub-parse color from number, if there is color
+//fills the row of nodes in map with the number and color values
+static void	fill_row(t_map *row, char **arr)
+{
+	int		j;
+	char	**point_arr;
+
+	j = -1;
+	while (arr[++j])
+	{
+		point_arr = ft_split(arr[j], ',');
+		row[j].val = ft_atoi(point_arr[0]);
+		row[j].color = ft_set_color(point_arr[1]);
+	}
+}
+
+// void	parse_line(int fd, t_fdf *fdf, int line)
+void	parse_file(int fd, t_fdf *fdf)
+{
+	int		i;
+	char	*line;
+	char	**line_arr;
+
+	init_map(&fdf);
+	if (!fdf->map)
+		return ;
+	i = -1;
+	while (fdf->height > ++i)
+	{
+		line = get_next_line(fd);
+		if (!line)
+			break ;
+		line_arr = ft_split(line, ' ');
+		fill_row(fdf->map[i], line_arr);
+	}
+}
+	//*split allocates the **row orf *words
+	//*double split allocates the **mini_row of color and value
+
+void	print_map(t_fdf *fdf)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	while (fdf->height > ++i)
+	{
+		j = -1;
+		while (fdf->width > ++j)
+			ft_printf(" %d,%d ", fdf->map[i][j].val, fdf->map[i][j].color);
+		ft_printf("\n");
+	}
+}
+
+//returns 1, if error happened. else - 0
 int	ft_process(char	*file)
 {
 	t_fdf	fdf;
+	int		fd;
 
 	fdf.height = 0;
 	fdf.width = 0;
-	fdf.map = parse_map(file, &fdf);
-	// t_fdf	*node;
-
-	// node = malloc(sizeof(t_fdf));
-	// if (!node)
-	// 	return (1);
-	// node->height = get_height(file);
-	// node->width = get_width(file);
-	// fill_map(file, &node);
-	// ft_printf(MAGENTA "height: %d\nwidth: %d\n" RESET_COLOR, node->height, node->width);
-	// int r = -1;
-	// // ft_printf("[z: %d, h: %d] [z: %d, h: %d] [z: %d, h: %d] \n", node->map[0][0].z, node->map[0][0].hex, node->map[0][1].z, d->map[0][1].hex, d->map[0][2].z, d->map[0][2].hex);
-	// while (++r < node->height)
-	// {
-	// 	int p = -1;
-	// 	ft_printf("%node->", (r + 1));
-	// 	while (++p < node->width)
-	// 		ft_printf("[z: %d, h: %d] ",node->map[r][p].z, node->map[r][p].hex);
-	// 	ft_printf("\n");
-	// }
-	ft_printf(GREEN "---------------\n%s\n" RESET_COLOR, file);
+	map_size(file, &fdf);
+	ft_printf("w: %d, h: %d\n", fdf.width, fdf.height);
+	fd = open(file, O_RDONLY);
+	if (fd < 0)
+		return (1);
+	parse_file(fd, &fdf);
+	close (fd);
+	if (!fdf.map)
+		return (1);
+	print_map(&fdf); //just printing staff, remove after
 	return (0);
 }
 
@@ -107,6 +139,8 @@ int	main(int argc, char **argv)
 	}
 	else
 		ft_putendl_fd(YELLOW "Add ONE file to read from!" RESET_COLOR, 2);
+	
+	ft_printf(GREEN "---------------\n%s\n" RESET_COLOR, argv[1]);
 	return (0);
 }
 

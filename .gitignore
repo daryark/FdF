@@ -4,6 +4,6 @@
 .vscode
 .DS_Store
 mlx*/
-*maps*/
+maps*/
 fdf
 *libft*/

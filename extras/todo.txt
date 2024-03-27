@@ -30,3 +30,6 @@
 -change btw maps with arrow
 -move the image with the mouse translate and rotate
 -zoom
+
+
+--check for leaks at the very and and during the process!

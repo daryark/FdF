@@ -6,84 +6,72 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 01:52:44 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/03/24 20:32:44 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/03/27 02:54:07 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../fdf.h"
 
-void	map_height(int fd, t_fdf *fdf)
+//width -> spaces btw nums, + (2sp = 1 gap) for the last num, after which new line goes
+// 2 spaces = 1 gap btw nums
+// no need to count after 1 line
+void	map_size(char *file, t_fdf *fdf)
 {
-	char	line[1];
+	char	c[1];
+	int		fd;
 
-	++fdf->height;
-	while (read(fd, line, 1))
+	fd = open(file, O_RDONLY);
+	if (fd < 0)
+		return ;
+	while (read(fd, c, 1) > 0)
 	{
-		if (*line == '\n')
+		if (*c == '\n')
+		{
 			fdf->height++;
+		}
+		if (*c == ' ' && fdf->height == 0)
+			fdf->width++;
 	}
+	fdf->width = (fdf->width + 2) / 2;
+	close(fd);
 }
 
-int	is_valid_color(char *str)
-{
-	int	type;
-
-	type = 0;
-	while (*str)
-	{
-		if (*str >= 'A' && *str <= 'F')
-		{
-			if (type < 0)
-				return (0);
-			type = 1;
-		}
-		else if (*str >= 'a' && *str <= 'f')
-		{
-			if (type > 0)
-				return (0);
-			type = -1;
-		}
-		str++;
-	}
-	return (1);
-}
 //pass only valid input
-//or add checker function before: is_valid_color(...) ⤴️
-//don't check for mixed case input: 85AaAa
-int	ft_atoi_hex(char *str)
+//don't check for mixed case input: 85AaAa or not hexs
+unsigned int	ft_set_color(char *str)
 {
-	int		sign;
 	int		nb;
 
-	sign = 1;
+	if (!str || !*str)
+		return (0);
 	nb = 0;
-	while ((*str >= 9 && *str <= 13) || *str == 32)
-		str++;
-	if (*str == '-' || *str == '+')
+	if (*str == '0' && *(str + 1) == 'x')
+		str += 2;
+	while ((*str >= '0' && *str <= '9')
+		|| (*str >= 'a' && *str <= 'f')
+		|| (*str >= 'A' && *str <= 'F'))
 	{
-		if (*str == '-')
-			sign = -1;
+		if (*str >= '0' && *str <= '9')
+			nb = (nb * 16) + (*str - '0');
+		else if (*str >= 'a' && *str <= 'f')
+			nb = (nb * 16) + (*str - 'a' + 10);
+		else
+			nb = (nb * 16) + (*str - 'A' + 10);
 		str++;
 	}
-	while (*str >= '0' && *str <= '9'
-		|| *str >= 'a' && *str <= 'f'
-		|| *str >= 'A' && *str <= 'F')
-	{
-		nb = (nb * 16) + (*str - '0');
-		str++;
-	}
-	return (nb * sign);
+	return (nb);
 }
 
-int	arr_len(char **arr)
-{
-	int	len;
+// int	arr_len(char **arr)
+// {
+// 	int	len;
 
-	len = 0;
-	while (*arr != NULL)
-		len++;
-	return (len);
-}
+// 	len = 0;
+// 	ft_printf("arr_len enter\n");
+// 	while (*arr != NULL)
+// 		len++;
+// 	return (len);
+// }
 
 // int	ft_error_handle(char *base)
 // {
