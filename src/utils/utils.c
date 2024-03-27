@@ -6,12 +6,16 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 01:52:44 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/03/27 02:54:07 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/03/27 03:32:29 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../fdf.h"
 
+//!fix the funciton with actually looking for end of word:
+//!(next char is space or newline)
+//*as in some maps 1 space btw nums, in some 2 spaces btw
+//*in some - there is newline at the end, in some - its just last sybmol returned
 //width -> spaces btw nums, + (2sp = 1 gap) for the last num, after which new line goes
 // 2 spaces = 1 gap btw nums
 // no need to count after 1 line

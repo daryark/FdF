@@ -85,7 +85,6 @@ $(LIBFT_F):
 
 clean:
 	clear;
-	$(MAKE) -C $(LIBFT_F) fclean;
 	rm -rf $(OBJ_F)
 	@echo "$(YELLOW)\n CLEAN FDF		🧹✨$(RESET_COLOR)"
 
