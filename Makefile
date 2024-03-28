@@ -4,7 +4,7 @@ include extras/colors.sh
 #*compilation
 NAME = fdf
 SRC =	main.c \
-		error_check.c utils.c
+		error_check.c map.c parsing.c
 
 OBJ = $(addprefix $(OBJ_F), $(SRC:%.c=%.o))
 VPATH = $(SRC_F) $(SRC_F)utils/
@@ -30,7 +30,7 @@ ifeq ($(UNAME), Darwin)
   CC_FLAGS += -D OSX
   MLX_F = mlx-osx
   MLX_URL = https://cdn.intra.42.fr/document/document/21664/minilibx_mms_20191025_beta.tgz
-  MLX_LIBS = -lmlx -framework OpenGL -framework AppKit
+  MLX_LIBS = -L$(MLX_F) -framework OpenGL -framework AppKit
 else
 	#*Linux
   CC_FLAGS += -D LINUX
@@ -44,17 +44,19 @@ endif
 .SILENT:
 all: $(NAME)
 
-run: $(NAME) $(MAPS_F)
+run: $(NAME)
 # ./$(NAME) m maps/*
 	./$(NAME) maps/elem-col.fdf
 
-$(NAME): $(OBJ) $(MLX_F) | $(MAPS_F)
+install: $(MLX_F) $(MAPS_F) $(LIBFT_F)
+
+$(NAME): $(OBJ) | install
 	$(MAKE) -C $(LIBFT_F)
 	$(CC) -o $@ $(OBJ) $(MLX_LIBS) $(LIBFLAGS)
 # @echo "$(MAGENTA)$$ASCII_ART$(RESET_COLOR)"
 	@echo "$(GREEN)\n———————————————✣ FDF COMPILED ✣————————————\n$(RESET_COLOR)"
 
-$(OBJ_F)%.o: %.c $(LIBFT_F)
+$(OBJ_F)%.o: %.c
 	mkdir -p $(@D)
 	$(CC) $(CC_FLAGS) -o $@ -c $<
 	@printf "$(GREEN). $(RESET_COLOR)"
