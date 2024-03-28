@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 22:12:42 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/03/28 16:50:14 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/03/28 23:38:34 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ int	ft_process(char	*file)
 	close (fd);
 	if (!fdf.map)
 		return (1);
-	// ft_show_in_window(fdf);
 	print_map(&fdf); //just printing staff, remove after
+	show_in_window(&fdf);
 	return (0);
 }
 

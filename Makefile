@@ -4,7 +4,7 @@ include extras/colors.sh
 #*compilation
 NAME = fdf
 SRC =	main.c \
-		error_check.c map.c parsing.c
+		error_check.c map.c parsing.c window.c
 
 OBJ = $(addprefix $(OBJ_F), $(SRC:%.c=%.o))
 VPATH = $(SRC_F) $(SRC_F)utils/
@@ -29,14 +29,14 @@ ifeq ($(UNAME), Darwin)
 	#*MacOS
   CC_FLAGS += -D OSX
   MLX_F = mlx-osx
-  MLX_URL = https://cdn.intra.42.fr/document/document/21664/minilibx_mms_20191025_beta.tgz
-  MLX_LIBS = -L$(MLX_F) -framework OpenGL -framework AppKit
+  MLX_URL = https://cdn.intra.42.fr/document/document/21666/minilibx_macos_sierra_20161017.tgz
+  MLX_LIBS = -L$(MLX_F) -lmlx -framework OpenGL -framework AppKit
 else
 	#*Linux
   CC_FLAGS += -D LINUX
   MLX_F = mlx-linux
   MLX_URL = https://cdn.intra.42.fr/document/document/21665/minilibx-linux.tgz
-  MLX_LIBS = -L$(MLX_F) -lXext -lX11
+  MLX_LIBS = -L$(MLX_F) -lmlx -lXext -lX11
 endif
 
 
@@ -50,8 +50,9 @@ run: $(NAME)
 
 install: $(MLX_F) $(MAPS_F) $(LIBFT_F)
 
-$(NAME): $(OBJ) | install
+$(NAME): $(MLX_F) $(MAPS_F) $(LIBFT_F) $(OBJ)
 	$(MAKE) -C $(LIBFT_F)
+	$(MAKE) -C $(MLX_F)
 	$(CC) -o $@ $(OBJ) $(MLX_LIBS) $(LIBFLAGS)
 # @echo "$(MAGENTA)$$ASCII_ART$(RESET_COLOR)"
 	@echo "$(GREEN)\n———————————————✣ FDF COMPILED ✣————————————\n$(RESET_COLOR)"
@@ -69,7 +70,7 @@ $(MLX_F):
 	tar -xvf $(MLX_ARCH)
 	rm $(MLX_ARCH)
 	mv minilibx* $(MLX_F)
-	$(MAKE) -C $(MLX_F);
+# mv $(MLX_F)/$(MLX_NAME) ./
 
 $(MAPS_F):
 	if	[ ! -d "$(MAPS_F)" ]; then \
@@ -88,6 +89,8 @@ $(LIBFT_F):
 clean:
 	clear;
 	rm -rf $(OBJ_F)
+	$(MAKE) -C $(LIBFT_F) fclean;
+	$(MAKE) -C $(MLX_F) clean;
 	@echo "$(YELLOW)\n CLEAN FDF		🧹✨$(RESET_COLOR)"
 
 fclean:	clean

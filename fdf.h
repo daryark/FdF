@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 22:19:15 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/03/27 02:32:35 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/03/28 23:54:42 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,12 @@
 # define YELLOW "\033[0;33m"
 # define RESET_COLOR "\033[0m"
 
+// #ifdef LINUX
+// # include "mlx-linux/mlx.h"
+// # else
+# include "mlx-osx/mlx.h"
+// #endif
+
 # include <fcntl.h>
 # include <stdlib.h>
 # include <math.h>
@@ -26,11 +32,6 @@
 # include "libft/src/ft_printf/ft_printf.h"
 # include "libft/src/get_next_line/get_next_line_bonus.h"
 
-// # ifdef	LINUX
-// # include "mlx-linux/mlx.h"
-// # else
-// # include "mlx-osx/mlx.h"
-// # endif
 // # include <string.h>
 // # include <errno.h>
 
@@ -46,8 +47,8 @@ typedef struct s_fdf
 	int		height;
 	t_map	**map;
 
-	// void	*mlx_ptr;
-	// void	*win_ptr;
+	void	*mlx;
+	void	*window;
 }	t_fdf;
 
 // t_fdf	*define_t_fdf(void);
@@ -57,11 +58,12 @@ int				ft_process(char	*file);
 int				check_map_format(char *file);
 void			map_size(char *file, t_fdf *fdf);
 //utils
-// int		arr_len(char **arr);
 unsigned int	ft_set_color(char *str);
 void			parse_file(int fd, t_fdf *fdf);
 void			init_map(t_fdf **fdf);
 void			free_map(t_map **map);
+//mlx
+void			show_in_window(t_fdf *fdf);
 
 //format and fill the map
 // int		get_height(char *file);

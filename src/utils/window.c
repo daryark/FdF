@@ -6,11 +6,19 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 03:40:35 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/03/27 03:41:06 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/03/28 23:59:57 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../../fdf.h"
 
+void	show_in_window(t_fdf *fdf)
+{
+	fdf->mlx = mlx_init();
+	fdf->window = mlx_new_window(fdf->window, 500, 500, "FdF");
+	mlx_loop(fdf->mlx);
+	ft_printf(YELLOW "%p\n" RESET_COLOR, fdf->window);
+}
 
 // typedef struct	s_data {
 // 	void	*img;
