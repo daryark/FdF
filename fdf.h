@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 22:19:15 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/03/28 23:54:42 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/03/29 13:43:41 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,15 @@ typedef struct s_map
 	int				val;
 }	t_map;
 
+typedef struct s_img
+{
+	void	*img;
+	void	*addr;
+	int		bits_per_px;
+	int		line_len;
+	int		endian;
+}	t_img;
+
 typedef struct s_fdf
 {
 	int		width;
@@ -49,6 +58,7 @@ typedef struct s_fdf
 
 	void	*mlx;
 	void	*window;
+	t_img	*img;
 }	t_fdf;
 
 // t_fdf	*define_t_fdf(void);

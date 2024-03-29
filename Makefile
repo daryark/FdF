@@ -30,13 +30,13 @@ ifeq ($(UNAME), Darwin)
   CC_FLAGS += -D OSX
   MLX_F = mlx-osx
   MLX_URL = https://cdn.intra.42.fr/document/document/21666/minilibx_macos_sierra_20161017.tgz
-  MLX_LIBS = -L$(MLX_F) -lmlx -framework OpenGL -framework AppKit
+  MLX_LIBS = -L$(MLX_F) -lmlx -I$(MLX_F)/mlx.h -framework OpenGL -framework AppKit
 else
 	#*Linux
   CC_FLAGS += -D LINUX
   MLX_F = mlx-linux
   MLX_URL = https://cdn.intra.42.fr/document/document/21665/minilibx-linux.tgz
-  MLX_LIBS = -L$(MLX_F) -lmlx -lXext -lX11
+  MLX_LIBS = -L$(MLX_F) -lmlx -I$(MLX_F)/mlx.h -lXext -lX11
 endif
 
 
@@ -52,37 +52,37 @@ install: $(MLX_F) $(MAPS_F) $(LIBFT_F)
 
 $(NAME): $(MLX_F) $(MAPS_F) $(LIBFT_F) $(OBJ)
 	$(MAKE) -C $(LIBFT_F)
-	$(MAKE) -C $(MLX_F)
 	$(CC) -o $@ $(OBJ) $(MLX_LIBS) $(LIBFLAGS)
-# @echo "$(MAGENTA)$$ASCII_ART$(RESET_COLOR)"
-	@echo "$(GREEN)\n———————————————✣ FDF COMPILED ✣————————————\n$(RESET_COLOR)"
+	@echo "$(GREEN)$$ASCII_ART\n\n———————————————✣ FDF COMPILED ✣————————————\n$(RE)"
 
 $(OBJ_F)%.o: %.c
 	mkdir -p $(@D)
 	$(CC) $(CC_FLAGS) -o $@ -c $<
-	@printf "$(GREEN). $(RESET_COLOR)"
+	@printf "$(GREEN). $(RE)"
 
 # #* set up mlx lib
 
 $(MLX_F):
-	echo "$(GREEN)\n\nDownloading $(MLX_F) ...$(RESET_COLOR)"
-	curl -sS -o $(MLX_ARCH) $(MLX_URL)
-	tar -xvf $(MLX_ARCH)
+	echo "$(GREEN)\n\nDownloading $(MLX_F) ...$(RE)"
+	@curl -sS -o $(MLX_ARCH) $(MLX_URL)
+	@tar -xvf $(MLX_ARCH) -C ./ > /dev/null
 	rm $(MLX_ARCH)
 	mv minilibx* $(MLX_F)
-# mv $(MLX_F)/$(MLX_NAME) ./
+	@echo "$(RE)\nBuilding mlxlib ...$(RE)"
+	$(MAKE) -C $(MLX_F) 2>/dev/null
+	@echo "$(GREEN)\nBuild finished$(RE)"
 
 $(MAPS_F):
 	if	[ ! -d "$(MAPS_F)" ]; then \
 			curl -sS -o $(MAPS_ARCH) $(MAPS_URL); \
-			unzip $(MAPS_ARCH); \
+			unzip -qq $(MAPS_ARCH); \
 			rm $(MAPS_ARCH); \
 			rm -r __MACOSX; \
 			mv test_maps $@; \
 		fi
 
 $(LIBFT_F):
-	echo "$(GREEN)\n\nDownloading $(LIBFT_F) ...$(RESET_COLOR)"
+	echo "$(GREEN)\n\nDownloading $(LIBFT_F) ...$(RE)"
 	git clone $(LIBFT_GIT) $(LIBFT_F)
 
 
@@ -91,13 +91,13 @@ clean:
 	rm -rf $(OBJ_F)
 	$(MAKE) -C $(LIBFT_F) fclean;
 	$(MAKE) -C $(MLX_F) clean;
-	@echo "$(YELLOW)\n CLEAN FDF		🧹✨$(RESET_COLOR)"
+	@echo "$(YELLOW)\n CLEAN FDF		🧹✨$(RE)"
 
 fclean:	clean
 	rm -f $(NAME)
-	@echo "$(YELLOW)FCLEAN FDF		🧹✨\n$(RESET_COLOR)"
+	@echo "$(YELLOW)FCLEAN FDF		🧹✨\n$(RE)"
 
-re:		fclean all
+re:	fclean all
 
 uninstall:
 	rm -rf $(MAPS_F)

@@ -5,31 +5,36 @@
 ✅ connect libft
 ✅ run fancy @curl fdf compilation, or echo like Erwin did (done, differently, works).
 
-
+❗️CHECK FOR LEAKS❗️
 //process
 ✅ error handle
--parse the map:
-    -link all in header
+✅ parse the map:
+    ✅ link all in header
     ✅ read
     ✅ init empty map
     ✅ preformat data
     ✅ fill the map
-    -clean code and add valuable comments, if needed
--open the screen
--draw the line just to see it
--do the calculations
--draw the picture on the screen
+    ✅ clean code and add valuable comments, if needed
+draw the map:
+    ✅ open the screen
+    -put the image pixel by pixel
+    -draw the line just to see it
+    -do the calculations
+    -draw the picture on the screen
+    -❗️CHECK FOR LEAKS❗️
 
 //features
 -add colors
 -change the bg and the main color of the map (like from white to some other)
 - compile multiple files at the same time, both with single file mod
--animate, blur or some other motion effects
+- animate, blur or some other motion effects
 
 //moves and interraction
 -change btw maps with arrow
 -move the image with the mouse translate and rotate
 -zoom
 
+- resize the window with the mouse on the corner ??
 
+❗️CHECK FOR LEAKS❗️
 --check for leaks at the very and and during the process!
