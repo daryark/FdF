@@ -4,14 +4,15 @@ include extras/colors.sh
 #*compilation
 NAME = fdf
 SRC =	main.c \
-		error_check.c map.c parsing.c window.c
+		error_check.c map.c parsing.c \
+		window.c
 
 OBJ = $(addprefix $(OBJ_F), $(SRC:%.c=%.o))
-VPATH = $(SRC_F) $(SRC_F)utils/
+VPATH = $(SRC_F) $(SRC_F)utils/ $(SRC_F)draw/
 SRC_F = src/
 OBJ_F = obj/
 CC = gcc
-CC_FLAGS = -Wall -Wextra -Werror -g $(DEPFLAGS)
+CC_FLAGS = -Wall -Wextra -Werror -O3 -g $(DEPFLAGS)
 DEPFLAGS = -MP -MMD
 
 #*libs
@@ -24,7 +25,7 @@ MAPS_URL = https://cdn.intra.42.fr/document/document/21662/maps.zip
 MAPS_ARCH = maps.zip
 MLX_ARCH = minilibx.tgz
 #* OS dependent flags
-UNAME = $(shell uname -s)
+UNAME = $(uname -s)
 ifeq ($(UNAME), Darwin)
 	#*MacOS
   CC_FLAGS += -D OSX
@@ -36,7 +37,7 @@ else
   CC_FLAGS += -D LINUX
   MLX_F = mlx-linux
   MLX_URL = https://cdn.intra.42.fr/document/document/21665/minilibx-linux.tgz
-  MLX_LIBS = -L$(MLX_F) -lmlx -I$(MLX_F)/mlx.h -lXext -lX11
+  MLX_LIBS = -L$(MLX_F) -lmlx_Linux -I$(MLX_F)/mlx.h -lXext -lX11
 endif
 
 
@@ -51,6 +52,9 @@ run: $(NAME)
 install: $(MLX_F) $(MAPS_F) $(LIBFT_F)
 
 $(NAME): $(MLX_F) $(MAPS_F) $(LIBFT_F) $(OBJ)
+	@echo "$(GREEN)\nBuilding mlxlib ...$(RE)"
+	$(MAKE) -C $(MLX_F) > /dev/null 2>&1
+	@echo "$(GREEN)\nBuild finished$(RE)"
 	$(MAKE) -C $(LIBFT_F)
 	$(CC) -o $@ $(OBJ) $(MLX_LIBS) $(LIBFLAGS)
 	@echo "$(GREEN)$$ASCII_ART\n\n———————————————✣ FDF COMPILED ✣————————————\n$(RE)"
@@ -68,12 +72,10 @@ $(MLX_F):
 	@tar -xvf $(MLX_ARCH) -C ./ > /dev/null
 	rm $(MLX_ARCH)
 	mv minilibx* $(MLX_F)
-	@echo "$(RE)\nBuilding mlxlib ...$(RE)"
-	$(MAKE) -C $(MLX_F) 2>/dev/null
-	@echo "$(GREEN)\nBuild finished$(RE)"
 
 $(MAPS_F):
 	if	[ ! -d "$(MAPS_F)" ]; then \
+			echo "$(GREEN)\nDownloading $(MAPS_F) ...$(RE)"; \
 			curl -sS -o $(MAPS_ARCH) $(MAPS_URL); \
 			unzip -qq $(MAPS_ARCH); \
 			rm $(MAPS_ARCH); \
@@ -82,7 +84,7 @@ $(MAPS_F):
 		fi
 
 $(LIBFT_F):
-	echo "$(GREEN)\n\nDownloading $(LIBFT_F) ...$(RE)"
+	echo "$(GREEN)\nDownloading $(LIBFT_F) ...$(RE)"
 	git clone $(LIBFT_GIT) $(LIBFT_F)
 
 

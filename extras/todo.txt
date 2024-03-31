@@ -4,6 +4,7 @@
 ✅ objs into separate folder
 ✅ connect libft
 ✅ run fancy @curl fdf compilation, or echo like Erwin did (done, differently, works).
+❗️❗️❗️❗️❗️ on mac the command define the system is : shell uname -s, on linux is : uname -s (without shell), find the solution
 
 ❗️CHECK FOR LEAKS❗️
 //process
@@ -19,7 +20,7 @@ draw the map:
     ✅ open the screen
     -put the image pixel by pixel
     -draw the line just to see it
-    -do the calculations
+    -do the calculations, do the calculations for nearest pixel opacity
     -draw the picture on the screen
     -❗️CHECK FOR LEAKS❗️
 

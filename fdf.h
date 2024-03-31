@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 22:19:15 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/03/29 13:43:41 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/03/31 23:46:14 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,13 @@
 # define YELLOW "\033[0;33m"
 # define RESET_COLOR "\033[0m"
 
-// #ifdef LINUX
-// # include "mlx-linux/mlx.h"
-// # else
+
+//! on mac the command define the system is : shell uname -s, on linux is : uname -s (without shell), find the solution
+#ifdef LINUX
+# include "mlx-linux/mlx.h"
+# else
 # include "mlx-osx/mlx.h"
-// #endif
+#endif
 
 # include <fcntl.h>
 # include <stdlib.h>

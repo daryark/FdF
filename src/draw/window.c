@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 03:40:35 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/03/29 21:30:48 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/03/31 23:33:12 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,20 +38,20 @@ void	show_in_window(t_fdf *fdf)
 	t_data	img;
 
 	fdf->mlx = mlx_init();
-	if (fdf->mlx == NULL)
-	{
-		//error return
-	}
+	// if (fdf->mlx == NULL)
+	// {
+	// 	//error return
+	// }
 	fdf->window = mlx_new_window(fdf->mlx, 1200, 1000, "FdF");
 	img.img = mlx_new_image(fdf->mlx, 1200, 1000);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
 	draw_gradient(0, 0, 0, 799, (t_color){15,133,44}, (t_color){3,50,15}, &img, 800);
+	draw_gradient(100, 100, 100, 200, (t_color){255, 0, 0}, (t_color){0, 0, 255}, &img, 100);
 	draw_gradient_horizontal(200, 200, 200, 300, (t_color){225,226,20}, (t_color){15,27,133}, &img, 100);
 	draw_gradient_triangle(300, 300, 400, 300, (t_color){15,27,133}, (t_color){225,226,20}, &img, 100);
-	draw_gradient(100, 100, 100, 200, (t_color){255, 0, 0}, (t_color){0, 0, 255}, &img, 100);
 	draw_lines_random(&img);
 	draw_circle(0, 500, 300, &img);
-	draw_gradient(-100, 500, 200, -200, (t_color){255, 0, 0}, (t_color){0, 0, 255}, &img, 100);
+	// draw_gradient(-100, 500, 200, -200, (t_color){255, 0, 0}, (t_color){0, 0, 255}, &img, 100);
 	mlx_put_image_to_window(fdf->mlx, fdf->window, img.img, 0, 0);
 	mlx_loop(fdf->mlx);
 	mlx_destroy_image(fdf->mlx, fdf->img->img);
@@ -80,7 +80,7 @@ void	draw_lines_random(t_data *img)
 	i = 800;
 	j = 200;
 	while (i-- > 200 && j++ < 1000)
-		my_mlx_pixel_put(img, i - 200, i - j, 0x99FF99); //green
+		my_mlx_pixel_put(img, i, j, 0x99FF99); //green
 	i = 600;
 	j = 200;
 	while (i-- > 200 && j++ < 600)
