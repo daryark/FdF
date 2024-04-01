@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 18:52:24 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/06 04:43:46 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/06 04:45:59 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ void    draw_line_algorithm(t_map p0, t_map p1, t_fdf *fdf)
 //     result.blue = start.blue + (int)((end.blue - start.blue) * t);
 //     return result;
 // }
+
 
 // void draw_gradient_line(int x0, int y0, int x1, int y1, t_color start_color, t_color end_color, t_data *img)
 // {
