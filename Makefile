@@ -1,7 +1,42 @@
 include extras/ascii_art.sh
 include extras/colors.sh
 
-#*compilation
+# links for downloads
+MAPS_URL = https://cdn.intra.42.fr/document/document/21662/maps.zip
+MLX_OSX = https://cdn.intra.42.fr/document/document/21666/minilibx_macos_sierra_20161017.tgz
+MLX_LINUX = https://cdn.intra.42.fr/document/document/21665/minilibx-linux.tgz
+LIBFT_GIT = https://github.com/daryark/libft.git
+# flags, + for downloaded libs to include
+MLX_LIBS_OSX =  -L$(MLX_F) -lmlx -I$(MLX_F)/mlx.h -framework OpenGL -framework AppKit
+MLX_LIBS_LINUX = -L$(MLX_F) -lmlx_Linux -I$(MLX_F)/mlx.h -lXext -lX11
+LIBFLAGS = -L$(LIBFT_F) -lft -I$(LIBFT_F) -I$(LIBFT_F)/src/ft_printf/ -I$(LIBFT_F)/src/get_next_line/
+CC_FLAGS = -Wall -Wextra -Werror -O3 -g $(DEPFLAGS)
+DEPFLAGS = -MP -MMD
+CC = gcc
+# maps
+MAPS_F = maps
+MAPS_ARCH = maps.zip
+MLX_ARCH = minilibx.tgz
+
+# libs
+LIBFT_F = libft
+# OS dependent flags for libs
+UNAME = $(uname -s)
+ifeq ($(UNAME),Darwin)
+	#*MacOS
+  CC_FLAGS += -D OSX
+  MLX_F = mlx-osx
+  MLX_URL = $(MLX_OSX)
+  MLX_LIBS = $(MLX_LIBS_OSX)
+else
+	#*Linux
+  CC_FLAGS += -D LINUX
+  MLX_F = mlx-linux
+  MLX_URL = $(MLX_LINUX)
+  MLX_LIBS = $(MLX_LIBS_LINUX)
+endif
+
+#*COMPILATION
 NAME = fdf
 SRC =	main.c \
 		error_check.c map.c parsing.c \
@@ -11,34 +46,6 @@ OBJ = $(addprefix $(OBJ_F), $(SRC:%.c=%.o))
 VPATH = $(SRC_F) $(SRC_F)utils/ $(SRC_F)draw/
 SRC_F = src/
 OBJ_F = obj/
-CC = gcc
-CC_FLAGS = -Wall -Wextra -Werror -O3 -g $(DEPFLAGS)
-DEPFLAGS = -MP -MMD
-
-#*libs
-LIBFT_F = libft
-LIBFLAGS = -L$(LIBFT_F) -lft -I$(LIBFT_F) -I$(LIBFT_F)/src/ft_printf/ -I$(LIBFT_F)/src/get_next_line/
-LIBFT_GIT = https://github.com/daryark/libft.git
-#* maps
-MAPS_F = maps
-MAPS_URL = https://cdn.intra.42.fr/document/document/21662/maps.zip
-MAPS_ARCH = maps.zip
-MLX_ARCH = minilibx.tgz
-#* OS dependent flags
-UNAME = $(uname -s)
-ifeq ($(UNAME), Darwin)
-	#*MacOS
-  CC_FLAGS += -D OSX
-  MLX_F = mlx-osx
-  MLX_URL = https://cdn.intra.42.fr/document/document/21666/minilibx_macos_sierra_20161017.tgz
-  MLX_LIBS = -L$(MLX_F) -lmlx -I$(MLX_F)/mlx.h -framework OpenGL -framework AppKit
-else
-	#*Linux
-  CC_FLAGS += -D LINUX
-  MLX_F = mlx-linux
-  MLX_URL = https://cdn.intra.42.fr/document/document/21665/minilibx-linux.tgz
-  MLX_LIBS = -L$(MLX_F) -lmlx_Linux -I$(MLX_F)/mlx.h -lXext -lX11
-endif
 
 
 
@@ -51,11 +58,7 @@ run: $(NAME)
 
 install: $(MLX_F) $(MAPS_F) $(LIBFT_F)
 
-$(NAME): $(MLX_F) $(MAPS_F) $(LIBFT_F) $(OBJ)
-	@echo "$(GREEN)\nBuilding mlxlib ...$(RE)"
-	$(MAKE) -C $(MLX_F) > /dev/null 2>&1
-	@echo "$(GREEN)\nBuild finished$(RE)"
-	$(MAKE) -C $(LIBFT_F)
+$(NAME): lbuild $(MAPS_F) $(OBJ)
 	$(CC) -o $@ $(OBJ) $(MLX_LIBS) $(LIBFLAGS)
 	@echo "$(GREEN)$$ASCII_ART\n\n———————————————✣ FDF COMPILED ✣————————————\n$(RE)"
 
@@ -64,7 +67,17 @@ $(OBJ_F)%.o: %.c
 	$(CC) $(CC_FLAGS) -o $@ -c $<
 	@printf "$(GREEN). $(RE)"
 
-# #* set up mlx lib
+
+
+lbuild: $(MLX_F) $(LIBFT_F)
+	@echo "$(GREEN)\nCompliling $(MLX_F) ...$(RE)"
+	$(MAKE) -C $(MLX_F) > /dev/null 2>&1
+	@echo "$(GREEN)\n$(MLX_F) compiled$(RE)"
+	$(MAKE) -C $(LIBFT_F)
+
+$(LIBFT_F):
+	echo "$(GREEN)\nDownloading $(LIBFT_F) ...$(RE)"
+	git clone $(LIBFT_GIT) $(LIBFT_F)
 
 $(MLX_F):
 	echo "$(GREEN)\n\nDownloading $(MLX_F) ...$(RE)"
@@ -83,11 +96,6 @@ $(MAPS_F):
 			mv test_maps $@; \
 		fi
 
-$(LIBFT_F):
-	echo "$(GREEN)\nDownloading $(LIBFT_F) ...$(RE)"
-	git clone $(LIBFT_GIT) $(LIBFT_F)
-
-
 clean:
 	clear;
 	rm -rf $(OBJ_F)
@@ -103,7 +111,7 @@ re:	fclean all
 
 uninstall:
 	rm -rf $(MAPS_F)
-	rm -rf $(MLX_F)
+	rm -rf mlx*/
 	rm -rf $(LIBFT_F)
 
 .PHONY:	all clean fclean re run uninstall

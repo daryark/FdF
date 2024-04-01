@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 22:19:15 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/03/31 23:46:14 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/01 14:03:35 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@
 
 
 //! on mac the command define the system is : shell uname -s, on linux is : uname -s (without shell), find the solution
-#ifdef LINUX
-# include "mlx-linux/mlx.h"
-# else
+// #ifdef LINUX
+// # include "mlx-linux/mlx.h"
+// # else
 # include "mlx-osx/mlx.h"
-#endif
+// #endif
 
 # include <fcntl.h>
 # include <stdlib.h>
