@@ -6,12 +6,15 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 16:40:35 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/03/28 16:46:58 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/01 20:01:21 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../fdf.h"
 
+
+//?CHECK THE OPACITY?
+//*add check for opacity if i will extend with Y Syaosin algorithm
 //pass only valid input
 //don't check for mixed case input: 85AaAa or not hexs
 unsigned int	ft_set_color(char *str)
@@ -37,27 +40,22 @@ unsigned int	ft_set_color(char *str)
 	}
 	return (nb);
 }
-
-//sub-parse color from number, if there is color
-//fills the row of nodes in map with the number and color values
-static void	fill_row(t_map *row, char **arr)
+static void	fill_point(char *str_point, t_map *point, int x, int y)
 {
-	int		j;
 	char	**point_arr;
 
-	j = -1;
-	while (arr[++j])
-	{
-		point_arr = ft_split(arr[j], ',');
-		row[j].val = ft_atoi(point_arr[0]);
-		row[j].color = ft_set_color(point_arr[1]);
-	}
+	point_arr = ft_split(str_point, ',');
+	point->val = ft_atoi(point_arr[0]);
+	point->color = ft_set_color(point_arr[1]);
+	point->x = x;
+	point->y = y;
 }
 
 //if the map is not equal width * hight => not existing node will leave color hex as -1!
 void	parse_file(int fd, t_fdf *fdf)
 {
 	int		i;
+	int		j;
 	char	*line;
 	char	**line_arr;
 
@@ -71,8 +69,13 @@ void	parse_file(int fd, t_fdf *fdf)
 		if (!line)
 			break ;
 		line_arr = ft_split(line, ' ');
-		fill_row(fdf->map[i], line_arr);
+		j = -1;
+		while (line_arr[++j])
+			fill_point(line_arr[j], &fdf->map[i][j], j, i);
 	}
 }
+//second loop goes until the length of the parsed map exists
+//even if it is less then the width
+
 	//*split allocates the **row orf *words
 	//*double split allocates the **mini_row of color and value

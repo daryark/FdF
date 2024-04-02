@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 01:52:44 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/03/28 17:02:37 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/01 20:05:34 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ void	init_map(t_fdf **fdf)
 	}
 }
 
+//?if i will do the map with different line length ->
+//*than change the formula until find the longest line
 //count width in first line
 //then get hight from amount of other lines returned
 void	map_size(char *file, t_fdf *fdf)

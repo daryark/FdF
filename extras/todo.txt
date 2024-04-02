@@ -4,7 +4,6 @@
 ✅ objs into separate folder
 ✅ connect libft
 ✅ run fancy @curl fdf compilation, or echo like Erwin did (done, differently, works).
-❗️❗️❗️❗️❗️ on mac the command define the system is : shell uname -s, on linux is : uname -s (without shell), find the solution
 
 ❗️CHECK FOR LEAKS❗️
 //process
@@ -18,8 +17,9 @@
     ✅ clean code and add valuable comments, if needed
 draw the map:
     ✅ open the screen
+    ✅ draw the line just to see it
     -put the image pixel by pixel
-    -draw the line just to see it
+    -calculate the gap btw two points according to the size of screen
     -do the calculations, do the calculations for nearest pixel opacity
     -draw the picture on the screen
     -❗️CHECK FOR LEAKS❗️
@@ -34,6 +34,7 @@ draw the map:
 -change btw maps with arrow
 -move the image with the mouse translate and rotate
 -zoom
+-change the window size with the mouse hold of the corner and/or keyboard shortcut (kinda Super+/Super-)
 
 - resize the window with the mouse on the corner ??
 

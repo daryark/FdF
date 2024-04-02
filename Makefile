@@ -10,7 +10,7 @@ LIBFT_GIT = https://github.com/daryark/libft.git
 MLX_LIBS_OSX =  -L$(MLX_F) -lmlx -I$(MLX_F)/mlx.h -framework OpenGL -framework AppKit
 MLX_LIBS_LINUX = -L$(MLX_F) -lmlx_Linux -I$(MLX_F)/mlx.h -lXext -lX11
 LIBFLAGS = -L$(LIBFT_F) -lft -I$(LIBFT_F) -I$(LIBFT_F)/src/ft_printf/ -I$(LIBFT_F)/src/get_next_line/
-CC_FLAGS = -Wall -Wextra -Werror -O3 -g $(DEPFLAGS)
+CC_FLAGS = -Wall -Wextra -Werror -O3 -g $(DEPFLAGS) -fsanitize=address #!delete fsanitize
 DEPFLAGS = -MP -MMD
 CC = gcc
 # maps
@@ -21,16 +21,16 @@ MLX_ARCH = minilibx.tgz
 # libs
 LIBFT_F = libft
 # OS dependent flags for libs
-UNAME = $(uname -s)
+UNAME = $(shell uname -s)
 ifeq ($(UNAME),Darwin)
 	#*MacOS
-  CC_FLAGS += -D OSX
+  CC_FLAGS += -DOSX
   MLX_F = mlx-osx
   MLX_URL = $(MLX_OSX)
   MLX_LIBS = $(MLX_LIBS_OSX)
 else
 	#*Linux
-  CC_FLAGS += -D LINUX
+  CC_FLAGS += -DLINUX
   MLX_F = mlx-linux
   MLX_URL = $(MLX_LINUX)
   MLX_LIBS = $(MLX_LIBS_LINUX)
@@ -40,7 +40,7 @@ endif
 NAME = fdf
 SRC =	main.c \
 		error_check.c map.c parsing.c \
-		window.c
+		window.c draw_line_algorithm.c
 
 OBJ = $(addprefix $(OBJ_F), $(SRC:%.c=%.o))
 VPATH = $(SRC_F) $(SRC_F)utils/ $(SRC_F)draw/
@@ -58,8 +58,12 @@ run: $(NAME)
 
 install: $(MLX_F) $(MAPS_F) $(LIBFT_F)
 
-$(NAME): lbuild $(MAPS_F) $(OBJ)
-	$(CC) -o $@ $(OBJ) $(MLX_LIBS) $(LIBFLAGS)
+$(NAME): $(OBJ) $(MLX_F) $(LIBFT_F) $(MAPS_F)
+	$(MAKE) -C $(LIBFT_F)
+	@echo "$(GREEN)\nCompliling $(MLX_F) ...$(RE)"
+	$(MAKE) -C $(MLX_F) > /dev/null 2>&1
+	@echo "$(GREEN)\n$(MLX_F) compiled$(RE)"
+	$(CC) -o $@ $(OBJ) $(MLX_LIBS) $(LIBFLAGS) -fsanitize=address #!delete fsanitize
 	@echo "$(GREEN)$$ASCII_ART\n\n———————————————✣ FDF COMPILED ✣————————————\n$(RE)"
 
 $(OBJ_F)%.o: %.c
@@ -68,12 +72,6 @@ $(OBJ_F)%.o: %.c
 	@printf "$(GREEN). $(RE)"
 
 
-
-lbuild: $(MLX_F) $(LIBFT_F)
-	@echo "$(GREEN)\nCompliling $(MLX_F) ...$(RE)"
-	$(MAKE) -C $(MLX_F) > /dev/null 2>&1
-	@echo "$(GREEN)\n$(MLX_F) compiled$(RE)"
-	$(MAKE) -C $(LIBFT_F)
 
 $(LIBFT_F):
 	echo "$(GREEN)\nDownloading $(LIBFT_F) ...$(RE)"

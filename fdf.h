@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 22:19:15 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/01 14:03:35 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/01 23:05:21 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,41 +16,39 @@
 # define RED "\033[0;31m"
 # define GREEN "\033[0;32m"
 # define YELLOW "\033[0;33m"
-# define RESET_COLOR "\033[0m"
-
-
-//! on mac the command define the system is : shell uname -s, on linux is : uname -s (without shell), find the solution
-// #ifdef LINUX
-// # include "mlx-linux/mlx.h"
-// # else
-# include "mlx-osx/mlx.h"
-// #endif
+# define RE "\033[0m"
 
 # include <fcntl.h>
 # include <stdlib.h>
 # include <math.h>
+// # include <string.h>
+// # include <errno.h>
 
 # include "libft/libft.h"
 # include "libft/src/ft_printf/ft_printf.h"
 # include "libft/src/get_next_line/get_next_line_bonus.h"
 
-// # include <string.h>
-// # include <errno.h>
+# ifdef LINUX
+#  include "mlx-linux/mlx.h"
+# else
+#  include "mlx-osx/mlx.h"
+# endif
 
 typedef struct s_map
 {
 	unsigned int	color;
 	int				val;
+	int				x;
+	int				y;
 }	t_map;
 
-typedef struct s_img
-{
+typedef struct	s_img {
 	void	*img;
-	void	*addr;
-	int		bits_per_px;
-	int		line_len;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
 	int		endian;
-}	t_img;
+}				t_img;
 
 typedef struct s_fdf
 {
@@ -76,6 +74,9 @@ void			init_map(t_fdf **fdf);
 void			free_map(t_map **map);
 //mlx
 void			show_in_window(t_fdf *fdf);
+void			my_mlx_pixel_put(t_img *img, int x, int y, int color);
+void			img_put(t_fdf *fdf);
+void  		 	draw_line_algorithm(t_map p0, t_map p1, t_img *img);
 
 //format and fill the map
 // int		get_height(char *file);
