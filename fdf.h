@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 22:19:15 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/02 17:35:12 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/02 23:36:29 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@
 # endif
 
 # ifndef WIN_WIDTH
-#	define WIN_WIDTH 1200
+#	define WIN_WIDTH 1920
 # endif
 
 # ifndef WIN_HEIGHT
-#	define WIN_HEIGHT 1000
+#	define WIN_HEIGHT 1300
 # endif
 
 # include <fcntl.h>
@@ -67,11 +67,12 @@ typedef struct s_fdf
 	void	*mlx;
 	void	*window;
 	t_img	*img;
+	t_img	*menu_bar;
 }	t_fdf;
 
 // t_fdf	*define_t_fdf(void);
 
-void			print_map(t_fdf *fdf); //!delete after finish the proj
+void			print_map(t_fdf *fd, int modificator); //!delete after finish the proj
 //process
 int				ft_process(char	*file);
 int				check_map_format(char *file);
@@ -81,11 +82,13 @@ unsigned int	ft_set_color(char *str);
 void			parse_file(int fd, t_fdf *fdf);
 void			init_map(t_fdf **fdf);
 void			free_map(t_map **map);
+void   			fill_bg(int width, int height, t_map start, t_img *img);
 //mlx
 void			show_in_window(t_fdf *fdf);
 void			my_mlx_pixel_put(t_img *img, int x, int y, int color);
 void			img_put(t_fdf *fdf);
 void  		 	draw_line_algorithm(t_map p0, t_map p1, t_img *img);
+void			menu_bar_put(t_fdf *fdf);
 
 //format and fill the map
 // int		get_height(char *file);

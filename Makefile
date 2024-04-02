@@ -41,7 +41,7 @@ NAME = fdf
 SRC =	print_map_helper.c \
 		main.c \
 		error_check.c map.c parsing.c \
-		window.c draw_line_algorithm.c
+		window.c draw_line_algorithm.c menu_bar.c
 
 OBJ = $(addprefix $(OBJ_F), $(SRC:%.c=%.o))
 VPATH = $(SRC_F) $(SRC_F)utils/ $(SRC_F)draw/
@@ -67,7 +67,7 @@ $(NAME): $(OBJ) $(MLX_F) $(LIBFT_F) $(MAPS_F)
 	$(CC) -o $@ $(OBJ) $(MLX_LIBS) $(LIBFLAGS) -fsanitize=address #!delete fsanitize
 	@echo "$(GREEN)$$ASCII_ART\n\n———————————————✣ FDF COMPILED ✣————————————\n$(RE)"
 
-$(OBJ_F)%.o: %.c
+$(OBJ_F)%.o: %.c fdf.h
 	mkdir -p $(@D)
 	$(CC) $(CC_FLAGS) -o $@ -c $<
 	@printf "$(GREEN). $(RE)"

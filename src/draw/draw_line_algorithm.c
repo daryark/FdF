@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 18:52:24 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/02 17:18:14 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/02 23:58:10 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,7 @@ void    draw_line_algorithm(t_map p0, t_map p1, t_img *img)
     int i;
 
     d_values = NULL;
-    ft_printf( YELLOW "draw line\n" RE);
     i = -1;
-    // 10 - 0          21 - 1
     if (p1.x - p0.x > p1.y - p0.y)
     {
         if (p0.x > p1.x)
@@ -85,7 +83,6 @@ void    img_put(t_fdf *fdf)
         j = -1;
         while (++j < fdf->width)
         {
-    ft_printf("img_put\n");
             if (j + 1 < fdf->width)
                  draw_line_algorithm(fdf->map[i][j], fdf->map[i][j + 1], fdf->img);
             if (i + 1 < fdf->height)
@@ -93,3 +90,25 @@ void    img_put(t_fdf *fdf)
         }
     }
 }
+
+// void overlay_images(t_img *lower_img, t_img *upper_img, void *mlx_ptr, void *win_ptr) {
+//     int x, y;
+//     unsigned char alpha_upper, alpha_lower;
+//     unsigned int blended_color;
+
+//     for (y = 0; y < lower_img->height; y++) {
+//         for (x = 0; x < lower_img->width; x++) {
+//             // Get the alpha value of the upper image pixel
+//             alpha_upper = (upper_img->addr[y * upper_img->line_length + x * 4 + 3]);
+//             // Get the alpha value of the lower image pixel
+//             alpha_lower = (lower_img->addr[y * lower_img->line_length + x * 4 + 3]);
+//             // Calculate the blended color using alpha blending
+//             blended_color = (alpha_upper * (upper_img->addr[y * upper_img->line_length + x * 4]) +
+//                              alpha_lower * (lower_img->addr[y * lower_img->line_length + x * 4])) / (alpha_upper + alpha_lower);
+//             // Update the lower image pixel with the blended color
+//             *(unsigned int *)(lower_img->addr + y * lower_img->line_length + x * 4) = blended_color;
+//         }
+//     }
+//     // Draw the resulting image onto the window
+//     mlx_put_image_to_window(mlx_ptr, win_ptr, lower_img->img, 0, 0);
+// }

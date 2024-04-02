@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 03:40:35 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/02 17:55:06 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/03 00:12:32 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,32 +18,60 @@ typedef struct s_color {
     int blue;
 } t_color;
 
+void	calc_px_position(t_map *point, int scale)
+{
+	point->x = point->x * scale + 220;
+	point->y = point->y * scale + 20;
+}
+
+// potentially 200 is enough for menu bar on left side
+// and 40 - is for 20 pixels from each side as a border
+//*add adjustment of the map to the center location ??
+//*or just leave with the biggest possible scale ?
+static void	adjust_map_to_window(t_fdf *fdf)
+{
+	int	distance;
+	int	i;
+	int	j;
+
+	distance = 0;
+	if ((WIN_WIDTH - 240) / fdf->width < (WIN_HEIGHT - 40) / fdf->height)
+		distance  = (WIN_WIDTH - 240) / fdf->width;
+	else
+		distance = (WIN_HEIGHT - 40) / fdf->height;
+	ft_printf(GREEN "distance: %d\n"RE, distance); //just printing stuff
+	i = -1; 
+	print_map(fdf, 1); 
+	while (++i < fdf->height)
+	{
+		j = -1;
+		while (++j < fdf->width)
+			calc_px_position(&fdf->map[i][j], distance);
+	}
+	print_map(fdf, 1); 
+}
 
 void	show_in_window(t_fdf *fdf)
 {
 	t_img	img;
+	t_img   menu_bar;
 
-	img.img = NULL;
-	img.addr = NULL;
 	fdf->img = &img;
+	fdf->menu_bar = &menu_bar;
 	fdf->mlx = mlx_init();
 	fdf->window = mlx_new_window(fdf->mlx, WIN_WIDTH, WIN_HEIGHT, "FdF");
 	fdf->img->img = mlx_new_image(fdf->mlx, WIN_WIDTH, WIN_HEIGHT);
 	fdf->img->addr = mlx_get_data_addr(fdf->img->img, &fdf->img->bits_per_pixel, &fdf->img->line_length, &fdf->img->endian);
 	//*calculate real values of the coordinates with the  zoom and positioning adjustment
-	fdf->map[0][0].x = 300;
-	fdf->map[0][0].y = 100;
-	fdf->map[0][1].x = 320;
-	fdf->map[0][1].y = 110;
 	adjust_map_to_window(fdf); //*write the function that zoom the map and center it.
-	draw_line_algorithm(fdf->map[0][0], fdf->map[0][1], fdf->img);
-	my_mlx_pixel_put(fdf->img, 200, 200, 0xFF00000);
-	ft_printf("mlx: %p, window: %p, img: %p, bpp: %d, line_len: %d, endian: %d\n", fdf->mlx, fdf->window, fdf->img, fdf->img->bits_per_pixel, fdf->img->line_length, fdf->img->endian);
-	ft_printf( GREEN "my_mlx_pixel_put\n" RE);
-	// img_put(fdf);
+	img_put(fdf);
+	menu_bar_put(fdf);
 	mlx_put_image_to_window(fdf->mlx, fdf->window, fdf->img->img, 0, 0);
+	mlx_put_image_to_window(fdf->mlx, fdf->window, fdf->menu_bar->img, 0, 0);
+	mlx_string_put(fdf->mlx, fdf->window, 150, 30, 0xffffff, "MENU BAR");
 	mlx_loop(fdf->mlx);
 	mlx_destroy_image(fdf->mlx, fdf->img->img);
+	mlx_destroy_image(fdf->mlx, fdf->menu_bar->img);
 	mlx_destroy_window(fdf->mlx, fdf->window);
 }
 

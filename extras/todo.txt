@@ -19,8 +19,11 @@ draw the map:
     ✅ open the screen
     ✅ draw the line just to see it
     ✅ draw the line with algorithm (bresenham)
-    -zoom the original map to adjust for screen size
-    -put the image pixel by pixel
+    ✅ zoom the original map to adjust for screen size
+    - move map to the center
+    - do the projection
+    - do the menu overlay as a separate layer with some opacity on top of the map 
+        (but so it will not change when map movement is triggered)
     -calculate the gap btw two points according to the size of screen
     -do the calculations, do the calculations for nearest pixel opacity
     -draw the picture on the screen
