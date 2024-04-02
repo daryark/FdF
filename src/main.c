@@ -6,31 +6,11 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 22:12:42 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/01 23:07:03 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/02 14:24:19 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fdf.h"
-
-//just printing staff, remove after the whole function!!!
-void	print_map(t_fdf *fdf)
-{
-	int	i;
-	int	j;
-
-	i = -1;
-	while (fdf->height > ++i)
-	{
-		j = -1;
-		while (fdf->width > ++j)
-		{
-			if (fdf->map[i][j].color == (unsigned int)(-1))
-				ft_printf(RED);
-			ft_printf(" %d,%d " RE, fdf->map[i][j].val, fdf->map[i][j].color);
-		}
-		ft_printf("\n");
-	}
-}
 
 //returns 1, if error happened. else - 0
 int	ft_process(char	*file)
@@ -40,8 +20,10 @@ int	ft_process(char	*file)
 
 	fdf.height = 0;
 	fdf.width = 0;
+	fdf.map = NULL;
 	fdf.mlx = NULL;
 	fdf.window = NULL;
+	fdf.img = NULL;
 	map_size(file, &fdf);
 	ft_printf("w: %d, h: %d\n", fdf.width, fdf.height);//just printing staff, remove after
 	fd = open(file, O_RDONLY);

@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 03:40:35 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/01 23:26:59 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/02 17:14:35 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,21 +25,30 @@ void	show_in_window(t_fdf *fdf)
 
 	img.img = NULL;
 	img.addr = NULL;
+	fdf->img = &img;
 	fdf->mlx = mlx_init();
 	fdf->window = mlx_new_window(fdf->mlx, 1200, 1000, "FdF");
-	fdf->img = &img;
 	fdf->img->img = mlx_new_image(fdf->mlx, 1200, 1000);
 	fdf->img->addr = mlx_get_data_addr(fdf->img->img, &fdf->img->bits_per_pixel, &fdf->img->line_length, &fdf->img->endian);
-	my_mlx_pixel_put(fdf->img, 200, 200, 0xFFFFFF);
+	//*calculate real values of the coordinates with the  zoom and positioning adjustment
+	fdf->map[0][0].x = 300;
+	fdf->map[0][0].y = 100;
+	fdf->map[0][1].x = 320;
+	fdf->map[0][1].y = 110;
+	draw_line_algorithm(fdf->map[0][0], fdf->map[0][1], fdf->img);
+	my_mlx_pixel_put(fdf->img, 200, 200, 0xFF00000);
 	ft_printf("mlx: %p, window: %p, img: %p, bpp: %d, line_len: %d, endian: %d\n", fdf->mlx, fdf->window, fdf->img, fdf->img->bits_per_pixel, fdf->img->line_length, fdf->img->endian);
 	ft_printf( GREEN "my_mlx_pixel_put\n" RE);
-	img_put(fdf);
+	// img_put(fdf);
 	mlx_put_image_to_window(fdf->mlx, fdf->window, fdf->img->img, 0, 0);
 	mlx_loop(fdf->mlx);
 	mlx_destroy_image(fdf->mlx, fdf->img->img);
 	mlx_destroy_window(fdf->mlx, fdf->window);
 }
 
+// go to destination address(start/left upper corner 0,0) and move it to the needed pixel:
+//go through amount of rows before the needed line + go to needed pixel inside line
+//color the needed pixel with the dot - part of the line
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 {
 	char	*dst;

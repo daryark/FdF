@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 16:40:35 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/01 20:01:21 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/02 17:15:35 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ unsigned int	ft_set_color(char *str)
 	int		nb;
 
 	if (!str || !*str)
-		return (0);
+		return (0xaffeff00);
+		// return (0xaff1f1fd);
 	nb = 0;
 	if (*str == '0' && *(str + 1) == 'x')
 		str += 2;

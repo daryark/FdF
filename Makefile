@@ -38,7 +38,8 @@ endif
 
 #*COMPILATION
 NAME = fdf
-SRC =	main.c \
+SRC =	print_map_helper.c \
+		main.c \
 		error_check.c map.c parsing.c \
 		window.c draw_line_algorithm.c
 

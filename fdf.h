@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 22:19:15 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/01 23:05:21 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/02 14:31:13 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ typedef struct s_fdf
 
 // t_fdf	*define_t_fdf(void);
 
+void			print_map(t_fdf *fdf); //!delete after finish the proj
 //process
 int				ft_process(char	*file);
 int				check_map_format(char *file);

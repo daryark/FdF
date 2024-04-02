@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 18:52:24 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/02 13:29:11 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/02 17:18:14 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,22 @@
 //return the array of dependent values for each independent value of the point
 static int    *interpolate_values(int i0, int d0, int i1, int d1)
 {
-    int *d_values;
-    int i;
-    int slope;
+    int     *d_values;
+    int     i;
+    float   slope;
+    float   d_cur;
 
     d_values = malloc(sizeof(int) * (i1 - i0));
     if (!d_values)
         return (NULL);
-    slope = (d1 - d0)/(i1 - i0);
+    slope = (float)(d1 - d0) / (i1 - i0);
     i = 0;
-    while (i0 < i1)
+    d_cur = d0;
+    while (i0++ < i1)
     {
-        ft_printf(YELLOW "interpolate\n" RE);
-        d_values[i] = d0;
-        d0 += slope;
+        d_values[i] = d_cur;
+        d_cur += slope;
         i++;
-        i0++;
     }
     return (d_values);
 }
@@ -42,8 +42,10 @@ void    draw_line_algorithm(t_map p0, t_map p1, t_img *img)
     int *d_values;
     int i;
 
+    d_values = NULL;
     ft_printf( YELLOW "draw line\n" RE);
     i = -1;
+    // 10 - 0          21 - 1
     if (p1.x - p0.x > p1.y - p0.y)
     {
         if (p0.x > p1.x)
@@ -51,19 +53,20 @@ void    draw_line_algorithm(t_map p0, t_map p1, t_img *img)
         d_values = interpolate_values(p0.x, p0.y, p1.x, p1.y);
         if (!d_values)
             return ;
-        while (p0.x++ < p1.x)
-            my_mlx_pixel_put(img, p0.x, d_values[++i], p0.color); //*what to do with color gradient
+        while (p0.x < p1.x)
+            my_mlx_pixel_put(img, p0.x++, d_values[++i], p0.color); //*what to do with color gradient
     }
     else
     {
-        if (p1.y - p0.y > p1.x - p0.x)
+        if (p0.y > p1.y)
             ft_swap(&p0.y, &p1.y);
         d_values = interpolate_values(p0.y, p0.x, p1.y, p1.x);
         if (!d_values)
             return ;
-        while ( p0.y++ < p1.y)
-            my_mlx_pixel_put(img, d_values[++i], p0.y, p0.color);        
+        while ( p0.y < p1.y)
+            my_mlx_pixel_put(img, d_values[++i], p0.y++, p0.color);
     }
+    if (d_values)
         free(d_values);
 }
 //one coordinate is independent(i), other - dependent(d) on first coordinte

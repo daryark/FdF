@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 01:52:44 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/01 20:05:34 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/02 14:23:08 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,6 @@ void	free_map(t_map **map)
 }
 
 //init the empty map
-//(unsigned int)(-1) leads to be the largest value of unsigned int
-// after type cast, so the hex color can never reach this value. 
-//Means i can define it that way to see if the point exists
-//=> has been filled at least with 0, if no color specified.
 void	init_map(t_fdf **fdf)
 {
 	int		i;
@@ -49,10 +45,14 @@ void	init_map(t_fdf **fdf)
 		while (++j < (*fdf)->width)
 		{
 			(*fdf)->map[i][j].color = (unsigned int)(-1);
-			(*fdf)->map[i][j].val = -1;
+			(*fdf)->map[i][j].val = 0;
 		}
 	}
 }
+//(unsigned int)(-1) leads to be the largest value of unsigned int
+// after type cast, so the hex color can never reach this value. 
+//Means i can define it that way to see if the point exists
+//=> has been filled at least with 0, if no color specified.
 
 //?if i will do the map with different line length ->
 //*than change the formula until find the longest line
