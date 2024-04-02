@@ -50,7 +50,7 @@ OBJ_F = obj/
 
 
 
-.SILENT:
+# .SILENT:
 all: $(NAME)
 
 run: $(NAME)
@@ -113,7 +113,7 @@ uninstall:
 	rm -rf mlx*/
 	rm -rf $(LIBFT_F)
 
-.PHONY:	all clean fclean re run uninstall
+.PHONY:	all clean fclean re run uninstall install
 
 #  -g flag in cc flags is helpful when you need to debug program
 # as it allows to trace execution of the program back to the original source code.

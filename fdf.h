@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 22:19:15 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/02 14:31:13 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/02 17:35:12 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,20 @@
 # define YELLOW "\033[0;33m"
 # define RE "\033[0m"
 
+# ifdef LINUX
+#  include "mlx-linux/mlx.h"
+# else
+#  include "mlx-osx/mlx.h"
+# endif
+
+# ifndef WIN_WIDTH
+#	define WIN_WIDTH 1200
+# endif
+
+# ifndef WIN_HEIGHT
+#	define WIN_HEIGHT 1000
+# endif
+
 # include <fcntl.h>
 # include <stdlib.h>
 # include <math.h>
@@ -27,12 +41,6 @@
 # include "libft/libft.h"
 # include "libft/src/ft_printf/ft_printf.h"
 # include "libft/src/get_next_line/get_next_line_bonus.h"
-
-# ifdef LINUX
-#  include "mlx-linux/mlx.h"
-# else
-#  include "mlx-osx/mlx.h"
-# endif
 
 typedef struct s_map
 {

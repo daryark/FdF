@@ -19,6 +19,7 @@ draw the map:
     ✅ open the screen
     ✅ draw the line just to see it
     ✅ draw the line with algorithm (bresenham)
+    -zoom the original map to adjust for screen size
     -put the image pixel by pixel
     -calculate the gap btw two points according to the size of screen
     -do the calculations, do the calculations for nearest pixel opacity
@@ -35,6 +36,9 @@ draw the map:
 -change btw maps with arrow
 -move the image with the mouse translate and rotate
 -zoom
+
+//window size
+-choose the size from terminal (in make run 1000 1200) or in make or in some settings...
 -change the window size with the mouse hold of the corner and/or keyboard shortcut (kinda Super+/Super-)
 -choose the size of window before open (with optional argv and macros set up),
     if there is an opportunity to make "fullscreen" mode and back, or resize with mouse holding
