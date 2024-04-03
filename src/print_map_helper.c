@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 14:17:31 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/02 21:49:13 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/04 01:39:40 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	print_map(t_fdf *fdf, int modificator)
 			{
 				if (fdf->map[i][j].color == (unsigned int)(-1))
 					ft_printf(RED);
-				ft_printf(" %d,%d " RE, fdf->map[i][j].val, fdf->map[i][j].color);
+				ft_printf(" %d,%x " RE, fdf->map[i][j].val, fdf->map[i][j].color);
 			}
 			else
 				ft_printf(GREEN " %d,%d " RE, fdf->map[i][j].x, fdf->map[i][j].y);

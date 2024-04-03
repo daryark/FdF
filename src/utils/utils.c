@@ -6,11 +6,24 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 20:34:29 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/03 20:38:57 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/04 01:58:29 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../fdf.h"
+
+void	init_fdf(t_fdf *fdf)
+{
+	fdf->height = 0;
+	fdf->width = 0;
+	fdf->zoom = 1;
+	fdf->slope = 0.0;
+	fdf->map = NULL;
+	fdf->mlx = NULL;
+	fdf->window = NULL;
+	fdf->img = NULL;
+	fdf->menu = NULL;
+}
 
 void    swap_points(t_map *p0, t_map *p1)
 {

@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 22:19:15 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/03 21:36:33 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/04 01:58:03 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,10 +86,11 @@ typedef struct s_fdf
 
 void			print_map(t_fdf *fd, int modificator); //!delete after finish the proj
 //process
-void			ft_process(char	*file, t_fdf *fdf);
+void			ft_process(char	*file);
 int				check_map_format(char *file);
 void			parse_file(int fd, t_fdf *fdf);
 //utils
+void			init_fdf(t_fdf *fdf);
 void			map_size(char *file, t_fdf *fdf);
 void			init_map(t_fdf **fdf);
 void			free_map(t_map **map);

@@ -55,15 +55,17 @@ all: $(NAME)
 
 run: $(NAME)
 # ./$(NAME) m maps/*
-	./$(NAME) maps/elem-col.fdf
+	./$(NAME) maps/42.fdf
 
 install: $(MLX_F) $(MAPS_F) $(LIBFT_F)
 
 $(NAME): $(OBJ) $(MLX_F) $(LIBFT_F) $(MAPS_F)
 	$(MAKE) -C $(LIBFT_F)
-	@echo "$(GREEN)\nCompliling $(MLX_F) ...$(RE)"
-	$(MAKE) -C $(MLX_F) > /dev/null 2>&1
-	@echo "$(GREEN)\n$(MLX_F) compiled$(RE)"
+	@if [ ! -d "$(MLX_F)" ] || [ ! -f "$(MLX_F)/libmlx.a" ]; then \
+		echo "$(GREEN)\nCompiling $(MLX_F) ...$(RE)"; \
+		$(MAKE) -C $(MLX_F) > /dev/null 2>&1; \
+		echo "$(GREEN)\n$(MLX_F) compiled$(RE)"; \
+	fi
 	$(CC) -o $@ $(OBJ) $(MLX_LIBS) $(LIBFLAGS) -fsanitize=address #!delete fsanitize
 	@echo "$(GREEN)$$ASCII_ART\n\n———————————————✣ FDF COMPILED ✣————————————\n$(RE)"
 
