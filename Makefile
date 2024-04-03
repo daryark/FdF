@@ -40,8 +40,8 @@ endif
 NAME = fdf
 SRC =	print_map_helper.c \
 		main.c \
-		error_check.c map.c parsing.c \
-		window.c draw_line_algorithm.c menu_bar.c
+		error_check.c map.c parsing.c utils.c \
+		window.c draw_line_algorithm.c menu.c
 
 OBJ = $(addprefix $(OBJ_F), $(SRC:%.c=%.o))
 VPATH = $(SRC_F) $(SRC_F)utils/ $(SRC_F)draw/

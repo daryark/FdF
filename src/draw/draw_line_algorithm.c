@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 18:52:24 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/02 23:58:10 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/03 22:20:18 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int    *interpolate_values(int i0, int d0, int i1, int d1)
 
 //takes start and end points (p0, p1)
 // point is of struct t_map that has x and y coordinates
-void    draw_line_algorithm(t_map p0, t_map p1, t_img *img)
+void    draw_line_algorithm(t_map p0, t_map p1, t_fdf *fdf)
 {
     int *d_values;
     int i;
@@ -52,7 +52,7 @@ void    draw_line_algorithm(t_map p0, t_map p1, t_img *img)
         if (!d_values)
             return ;
         while (p0.x < p1.x)
-            my_mlx_pixel_put(img, p0.x++, d_values[++i], p0.color); //*what to do with color gradient
+            my_mlx_pixel_put(fdf->img, p0.x++, d_values[++i], p0.color);
     }
     else
     {
@@ -62,7 +62,7 @@ void    draw_line_algorithm(t_map p0, t_map p1, t_img *img)
         if (!d_values)
             return ;
         while ( p0.y < p1.y)
-            my_mlx_pixel_put(img, d_values[++i], p0.y++, p0.color);
+            my_mlx_pixel_put(fdf->img, d_values[++i], p0.y++, p0.color);
     }
     if (d_values)
         free(d_values);
@@ -71,44 +71,3 @@ void    draw_line_algorithm(t_map p0, t_map p1, t_img *img)
 // the coordinate which has more dots on the axis is independent.
 // if Y is independent, than calculate opposite.
 // if the line goes from rigth to left (backwards on the screen), swap start/end points
-
-void    img_put(t_fdf *fdf)
-{
-    int i;
-    int j;
-
-    i = -1;
-    while (++i < fdf->height)
-    {
-        j = -1;
-        while (++j < fdf->width)
-        {
-            if (j + 1 < fdf->width)
-                 draw_line_algorithm(fdf->map[i][j], fdf->map[i][j + 1], fdf->img);
-            if (i + 1 < fdf->height)
-                 draw_line_algorithm(fdf->map[i][j], fdf->map[i + 1][j], fdf->img);
-        }
-    }
-}
-
-// void overlay_images(t_img *lower_img, t_img *upper_img, void *mlx_ptr, void *win_ptr) {
-//     int x, y;
-//     unsigned char alpha_upper, alpha_lower;
-//     unsigned int blended_color;
-
-//     for (y = 0; y < lower_img->height; y++) {
-//         for (x = 0; x < lower_img->width; x++) {
-//             // Get the alpha value of the upper image pixel
-//             alpha_upper = (upper_img->addr[y * upper_img->line_length + x * 4 + 3]);
-//             // Get the alpha value of the lower image pixel
-//             alpha_lower = (lower_img->addr[y * lower_img->line_length + x * 4 + 3]);
-//             // Calculate the blended color using alpha blending
-//             blended_color = (alpha_upper * (upper_img->addr[y * upper_img->line_length + x * 4]) +
-//                              alpha_lower * (lower_img->addr[y * lower_img->line_length + x * 4])) / (alpha_upper + alpha_lower);
-//             // Update the lower image pixel with the blended color
-//             *(unsigned int *)(lower_img->addr + y * lower_img->line_length + x * 4) = blended_color;
-//         }
-//     }
-//     // Draw the resulting image onto the window
-//     mlx_put_image_to_window(mlx_ptr, win_ptr, lower_img->img, 0, 0);
-// }

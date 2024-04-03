@@ -25,25 +25,24 @@ draw the map:
     ❗️❗️❗️ DIVIDE AND CONQUER - DIVIDE FUNCS AND CLEAN + SEPARATE THE CODE, NAMING, FUNCTIONS, FILES
     ⬆️ ⬆️ ⬆️
     
-    - move map to the center
-    - do the projection
-    - do the menu overlay as a separate layer with some opacity on top of the map 
-        (but so it will not change when map movement is triggered)
-    -calculate the gap btw two points according to the size of screen
-    -do the calculations, do the calculations for nearest pixel opacity
-    -draw the picture on the screen
+    - move map to the center 👈
+    - do the projection 👈
+    - add the color gradient 👈
+    🤓 - look in subject, what else to do in main part
     -❗️CHECK FOR LEAKS❗️
-
-//features
--add colors
--change the bg and the main color of the map (like from white to some other)
-- compile multiple files at the same time, both with single file mod
-- animate, blur or some other motion effects
+    -
 
 //moves and interraction
 -change btw maps with arrow
 -move the image with the mouse translate and rotate
 -zoom
+
+//features
+- do the menu overlay as a separate layer with some opacity on top of the map 
+    (but so it will not change when map movement is triggered)
+-change the bg and the main color of the map (like from white to some other)
+- compile multiple files at the same time, both with single file mod
+- animate, blur or some other motion effects
 
 //window size
 -choose the size from terminal (in make run 1000 1200) or in make or in some settings...

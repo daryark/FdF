@@ -1,37 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_check.c                                      :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/23 23:14:37 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/03 15:36:19 by dyarkovs         ###   ########.fr       */
+/*   Created: 2024/04/03 20:34:29 by dyarkovs          #+#    #+#             */
+/*   Updated: 2024/04/03 20:38:57 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../fdf.h"
 
-//if map is valid - return opened fd num
-// else return -1, fd still open
-int	check_map_format(char *file)
+void    swap_points(t_map *p0, t_map *p1)
 {
-	int		len;
-	int		i;
-	char	*format;
-	int		fd;
+    t_map   tmp;
 
-	fd = open(file, O_RDONLY);
-	if (fd < 0)
-		return (-1);
-	format = ".fdf";
-	i = ft_strlen(format);
-	len = ft_strlen(file);
-	while (--i >= 0)
-	{
-		len--;
-		if (file[len] != format[i])
-			return (-1);
-	}
-	return (fd);
+    tmp.color = p0->color;
+    tmp.val = p0->val;
+    tmp.x = p0->x;
+    tmp.y = p0->y;
+    p0->color = p1->color;
+    p0->val = p1->val;
+    p0->x = p1->x;
+    p0->y = p1->y;
+    p1->color = tmp.color;
+    p1->val = tmp.val;
+    p1->x = tmp.x;
+    p1->y = tmp.y;
 }

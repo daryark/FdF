@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 01:52:44 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/02 14:23:08 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/03 15:07:16 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,10 @@ void	map_size(char *file, t_fdf *fdf)
 
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
+	{
+		close(fd);
 		return ;
+	}
 	line = get_next_line(fd);
 	while (*line)
 	{
