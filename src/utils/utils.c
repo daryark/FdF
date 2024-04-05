@@ -6,13 +6,13 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 20:34:29 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/04 01:58:29 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/05 14:45:17 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../fdf.h"
 
-void	init_fdf(t_fdf *fdf)
+void	set_default_values(t_fdf *fdf)
 {
 	fdf->height = 0;
 	fdf->width = 0;

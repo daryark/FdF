@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 03:40:35 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/03 20:57:42 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/06 01:50:31 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,56 +29,30 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-static void	px_real_position(t_map *point, int zoom)
-{
-	point->x = point->x * zoom + 20 + (WIN_WIDTH / 4);
-	point->y = point->y * zoom + 20;
-}
-
-// potentially 200 is enough for menu bar on left side
-// and 40 - is for 20 pixels from each side as a border
-//!add adjustment of the map to the center location ??
-//*or just leave with the biggest possible scale ?
-static void	adjust_map_to_window(t_fdf *fdf)
-{
-	int	i;
-	int	j;
-
-	if ((WIN_WIDTH - 40 - (WIN_WIDTH / 4)) / fdf->width < (WIN_HEIGHT - 40) / fdf->height)
-		fdf->zoom  = (WIN_WIDTH - 40 - (WIN_WIDTH / 4)) / fdf->width;
-	else
-		fdf->zoom = (WIN_HEIGHT - 40) / fdf->height;
-	ft_printf(GREEN "fdf->zoom: %d\n"RE, fdf->zoom); //just printing stuff
-	i = -1; 
-	print_map(fdf, 1); 
-	while (++i < fdf->height)
-	{
-		j = -1;
-		while (++j < fdf->width)
-			px_real_position(&fdf->map[i][j], fdf->zoom);
-	}
-	print_map(fdf, 1);
-}
-
 void    img_put(t_fdf *fdf)
 {
-    int i;
+    int i; 
     int j;
 
     fdf->img->img = mlx_new_image(fdf->mlx, WIN_WIDTH, WIN_HEIGHT);
     fdf->img->addr = mlx_get_data_addr(fdf->img->img, &fdf->img->bpp, &fdf->img->len, &fdf->img->endian);
-	adjust_map_to_window(fdf); //*write the function that zoom the map and center it.
-    i = -1;
-    while (++i < fdf->height)
+    i = 0;
+    while (i < fdf->height)
     {
-        j = -1;
-        while (++j < fdf->width)
+        j = 0;
+        while (j < fdf->width)
         {
-            if (j + 1 < fdf->width)
+            if (j + 1 < fdf->width 
+                && fdf->map[i][j].color != (unsigned int)(-1)
+                && fdf->map[i][j + 1].color != (unsigned int)(-1))
                  draw_line_algorithm(fdf->map[i][j], fdf->map[i][j + 1], fdf);
-            if (i + 1 < fdf->height)
+            if (i + 1 < fdf->height
+                && fdf->map[i][j].color != (unsigned int)(-1)
+                && fdf->map[i + 1][j].color != (unsigned int)(-1))
                  draw_line_algorithm(fdf->map[i][j], fdf->map[i + 1][j], fdf);
+            j++;
         }
+        i++;
     }
 }
 
@@ -93,6 +67,7 @@ void	show_in_window(t_fdf *fdf)
 	fdf->window = mlx_new_window(fdf->mlx, WIN_WIDTH, WIN_HEIGHT, "FdF");
 	img_put(fdf);
 	menu_put(fdf);
+    print_center_vector_helper(fdf); //just printing stuff, remove later;
 	mlx_put_image_to_window(fdf->mlx, fdf->window, fdf->img->img, 0, 0);
 	mlx_put_image_to_window(fdf->mlx, fdf->window, fdf->menu->img, 0, 0);
 	menu_text_put(fdf);

@@ -23,9 +23,9 @@ void    menu_put(t_fdf *fdf)
 	p0.y = 0;
 	p0.color = 0x552f2f2f;
 	p0.val = 0;
-    fdf->menu->img = mlx_new_image(fdf->mlx, (WIN_WIDTH / 4), WIN_HEIGHT);
+    fdf->menu->img = mlx_new_image(fdf->mlx, 300, WIN_HEIGHT);
     fdf->menu->addr = mlx_get_data_addr(fdf->menu->img, &fdf->menu->bpp, &fdf->menu->len, &fdf->menu->endian);
-	fill_bg((WIN_WIDTH / 4), WIN_HEIGHT, p0, fdf->menu);
+	fill_bg( 300, WIN_HEIGHT, p0, fdf->menu);
 }
 
 void    fill_bg(int width, int height, t_map start, t_img *img)

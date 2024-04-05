@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 22:19:15 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/04 01:58:03 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/06 01:52:29 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,14 @@
 #  include "mlx-osx/mlx.h"
 # endif
 
+# define MENU_WIDTH 300
+
 # ifndef WIN_WIDTH
-#	define WIN_WIDTH 820 //1920
+#	define WIN_WIDTH 920 //1920
 # endif
 
 # ifndef WIN_HEIGHT
-#	define WIN_HEIGHT 1300 //1300
+#	define WIN_HEIGHT 1080 //1300
 # endif
 
 # include <fcntl.h>
@@ -68,7 +70,10 @@ typedef struct s_fdf
 	void	*window;
 	t_img	*img;
 	t_img	*menu;
+
 	int		zoom;
+	int		offset_x;
+	int		offset_y;
 	float	slope;
 }	t_fdf;
 
@@ -85,22 +90,27 @@ typedef struct s_fdf
 // }	t_color;
 
 void			print_map(t_fdf *fd, int modificator); //!delete after finish the proj
+void			print_center_vector_helper(t_fdf *fdf); //!delete after finish the proj
 //process
-void			ft_process(char	*file);
+int			ft_process(char	*file);
 int				check_map_format(char *file);
 void			parse_file(int fd, t_fdf *fdf);
 //utils
-void			init_fdf(t_fdf *fdf);
+void			set_default_values(t_fdf *fdf);
 void			map_size(char *file, t_fdf *fdf);
 void			init_map(t_fdf **fdf);
 void			free_map(t_map **map);
-unsigned int	ft_set_color(char *str);
 void		    swap_points(t_map *p0, t_map *p1);
+unsigned int	ft_set_color(char *str);
+//screen math
+void			calc_zoom(t_fdf *fdf);
+void			make_zoom(t_map *point, int zoom);
+void			calc_offset(t_fdf *fdf);
+void			set_offset(t_map *point, int offset_x, int offset_y);
+void    		isometric(int *x, int *y, int z);
 //mlx
 void			show_in_window(t_fdf *fdf);
-//mlx img
 void			img_put(t_fdf *fdf);
-//mlx menu
 void			menu_put(t_fdf *fdf);
 void   			menu_text_put(t_fdf *fdf);
 //mlx utils ?

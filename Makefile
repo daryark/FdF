@@ -10,7 +10,7 @@ LIBFT_GIT = https://github.com/daryark/libft.git
 MLX_LIBS_OSX =  -L$(MLX_F) -lmlx -I$(MLX_F)/mlx.h -framework OpenGL -framework AppKit
 MLX_LIBS_LINUX = -L$(MLX_F) -lmlx_Linux -I$(MLX_F)/mlx.h -lXext -lX11
 LIBFLAGS = -L$(LIBFT_F) -lft -I$(LIBFT_F) -I$(LIBFT_F)/src/ft_printf/ -I$(LIBFT_F)/src/get_next_line/
-CC_FLAGS = -Wall -Wextra -Werror -O3 -g $(DEPFLAGS) -fsanitize=address #!delete fsanitize
+CC_FLAGS = -Wall -Wextra -Werror -O3 -g $(DEPFLAGS)
 DEPFLAGS = -MP -MMD
 CC = gcc
 # maps
@@ -38,19 +38,19 @@ endif
 
 #*COMPILATION
 NAME = fdf
-SRC =	print_map_helper.c \
-		main.c \
-		error_check.c map.c parsing.c utils.c \
-		window.c draw_line_algorithm.c menu.c
+SRC =	main.c \
+		error_check.c map.c parsing.c utils.c px_position.c \
+		window.c draw_line_algorithm.c menu.c	\
+		print_map_helper.c
 
 OBJ = $(addprefix $(OBJ_F), $(SRC:%.c=%.o))
-VPATH = $(SRC_F) $(SRC_F)utils/ $(SRC_F)draw/
+VPATH = $(SRC_F) $(SRC_F)utils/ $(SRC_F)parse/ $(SRC_F)draw/
 SRC_F = src/
 OBJ_F = obj/
 
 
 
-# .SILENT:
+.SILENT:
 all: $(NAME)
 
 run: $(NAME)
@@ -66,14 +66,13 @@ $(NAME): $(OBJ) $(MLX_F) $(LIBFT_F) $(MAPS_F)
 		$(MAKE) -C $(MLX_F) > /dev/null 2>&1; \
 		echo "$(GREEN)\n$(MLX_F) compiled$(RE)"; \
 	fi
-	$(CC) -o $@ $(OBJ) $(MLX_LIBS) $(LIBFLAGS) -fsanitize=address #!delete fsanitize
+	$(CC) -o $@ $(OBJ) $(MLX_LIBS) $(LIBFLAGS) 
 	@echo "$(GREEN)$$ASCII_ART\n\n———————————————✣ FDF COMPILED ✣————————————\n$(RE)"
 
 $(OBJ_F)%.o: %.c fdf.h
 	mkdir -p $(@D)
 	$(CC) $(CC_FLAGS) -o $@ -c $<
 	@printf "$(GREEN). $(RE)"
-
 
 
 $(LIBFT_F):

@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 16:40:35 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/03 19:27:53 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/06 01:51:04 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,19 @@ unsigned int	ft_set_color(char *str)
 	return (nb);
 }
 
-static void	fill_point(char *str_point, t_map *point, int x, int y)
+static void	fill_point(char *str_point, t_fdf *fdf, int x, int y)
 {
 	char	**point_arr;
 
 	point_arr = ft_split(str_point, ',');
-	point->val = ft_atoi(point_arr[0]);
-	point->color = ft_set_color(point_arr[1]);
-	point->x = x;
-	point->y = y;
+	fdf->map[y][x].val = ft_atoi(point_arr[0]);
+	fdf->map[y][x].color = ft_set_color(point_arr[1]);
+	fdf->map[y][x].x = x;
+	fdf->map[y][x].y = y;
+	make_zoom(&fdf->map[y][x], fdf->zoom);
+	set_offset(&fdf->map[y][x], fdf->offset_x, fdf->offset_y);
+	// isometric(&fdf->map[y][x].x, &fdf->map[y][x].y, fdf->map[y][x].val);
+	//*maybe do the isometric first and then zoom, but then only now calc the zoom to new coord 
 }
 
 //if the map is not equal width * hight => not existing node will leave color hex as -1!
@@ -65,6 +69,11 @@ void	parse_file(int fd, t_fdf *fdf)
 	if (!fdf->map)
 		return ;
 	i = -1;
+	calc_zoom(fdf);
+	calc_offset(fdf);
+	ft_printf("w: %d, h: %d\n", fdf->width, fdf->height);
+	ft_printf("zoom: %d, offset_x: %d, offset_y: %d\n", fdf->zoom, fdf->offset_x, fdf->offset_y);
+
 	while (fdf->height > ++i)
 	{
 		line = get_next_line(fd);
@@ -73,8 +82,9 @@ void	parse_file(int fd, t_fdf *fdf)
 		line_arr = ft_split(line, ' ');
 		j = -1;
 		while (line_arr[++j])
-			fill_point(line_arr[j], &fdf->map[i][j], j, i);
+			fill_point(line_arr[j], fdf, j, i);
 	}
+	// print_map(fdf, 1);
 }
 //second loop goes until the length of the parsed map exists
 //even if it is less then the width
