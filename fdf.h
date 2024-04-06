@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 22:19:15 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/06 01:52:29 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/06 04:22:39 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # define MENU_WIDTH 300
 
 # ifndef WIN_WIDTH
-#	define WIN_WIDTH 920 //1920
+#	define WIN_WIDTH 1920 //1920
 # endif
 
 # ifndef WIN_HEIGHT
