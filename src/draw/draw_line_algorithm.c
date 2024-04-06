@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 18:52:24 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/06 04:41:13 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/06 04:43:46 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ void    draw_line_algorithm(t_map p0, t_map p1, t_fdf *fdf)
 // the coordinate which has more dots on the axis is independent.
 // if Y is independent, than calculate opposite.
 // if the line goes from rigth to left (backwards on the screen), swap start/end points
-
 
 
 //***
