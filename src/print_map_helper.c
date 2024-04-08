@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 14:17:31 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/06 02:53:24 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/08 16:44:55 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	print_center_vector_helper(t_fdf *fdf)
     while (i < WIN_HEIGHT)
     {    
         my_mlx_pixel_put(fdf->img, WIN_WIDTH/2, i, 0x80ffff00);
-        my_mlx_pixel_put(fdf->img, (WIN_WIDTH/2)+ MENU_WIDTH, i, 0x800000ff);
+        // my_mlx_pixel_put(fdf->img, (WIN_WIDTH/2)+ MENU_WIDTH, i, 0x800000ff);
         my_mlx_pixel_put(fdf->img, (WIN_WIDTH/2)+ (MENU_WIDTH/2), i, 0x8000ff00);
         i++;
     }

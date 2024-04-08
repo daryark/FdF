@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 22:19:15 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/06 04:22:39 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/09 00:59:04 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@
 # include <fcntl.h>
 # include <stdlib.h>
 # include <math.h>
+#include <limits.h>
 // # include <string.h>
 // # include <errno.h>
 
@@ -92,7 +93,7 @@ typedef struct s_fdf
 void			print_map(t_fdf *fd, int modificator); //!delete after finish the proj
 void			print_center_vector_helper(t_fdf *fdf); //!delete after finish the proj
 //process
-int			ft_process(char	*file);
+int				ft_process(char	*file);
 int				check_map_format(char *file);
 void			parse_file(int fd, t_fdf *fdf);
 //utils
@@ -100,21 +101,24 @@ void			set_default_values(t_fdf *fdf);
 void			map_size(char *file, t_fdf *fdf);
 void			init_map(t_fdf **fdf);
 void			free_map(t_map **map);
-void		    swap_points(t_map *p0, t_map *p1);
+void		    swap_points(t_map *a, t_map *b);
 unsigned int	ft_set_color(char *str);
+unsigned int    interpolate_color(int i0, int i_curr, int i1, int clr0, int clr1);
 //screen math
 void			calc_zoom(t_fdf *fdf);
 void			make_zoom(t_map *point, int zoom);
 void			calc_offset(t_fdf *fdf);
 void			set_offset(t_map *point, int offset_x, int offset_y);
+void			center_map(t_fdf *fdf);
 void    		isometric(int *x, int *y, int z);
+void			transform_point(t_map *a, t_fdf *fdf);
 //mlx
 void			show_in_window(t_fdf *fdf);
 void			img_put(t_fdf *fdf);
 void			menu_put(t_fdf *fdf);
 void   			menu_text_put(t_fdf *fdf);
 //mlx utils ?
-void  		 	draw_line_algorithm(t_map p0, t_map p1, t_fdf *fdf);
+void  		 	draw_line_algorithm(t_map a, t_map b, t_fdf *fdf);
 void			my_mlx_pixel_put(t_img *img, int x, int y, int color);
 void   			fill_bg(int width, int height, t_map start, t_img *img);
 

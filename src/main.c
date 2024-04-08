@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 22:12:42 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/05 14:57:23 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/09 00:37:41 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ int	ft_process(char	*file)
 	}
 	set_default_values(&fdf);
 	map_size(file, &fdf);
+	//*calc_zoom here 
+	calc_offset(&fdf);
 	parse_file(fd, &fdf);
 	close (fd);
 	if (!fdf.map)

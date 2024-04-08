@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 16:40:35 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/06 04:34:23 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/09 00:43:36 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,9 @@ static void	fill_point(char *str_point, t_fdf *fdf, int x, int y)
 	fdf->map[y][x].color = ft_set_color(point_arr[1]);
 	fdf->map[y][x].x = x;
 	fdf->map[y][x].y = y;
-	isometric(&fdf->map[y][x].x, &fdf->map[y][x].y, fdf->map[y][x].val);
 	make_zoom(&fdf->map[y][x], fdf->zoom);
+	isometric(&fdf->map[y][x].x, &fdf->map[y][x].y, fdf->map[y][x].val);
 	set_offset(&fdf->map[y][x], fdf->offset_x, fdf->offset_y);
-	//*maybe do the isometric first and then zoom, but then only now calc the zoom to new coord 
 }
 
 //if the map is not equal width * hight => not existing node will leave color hex as -1!
@@ -69,11 +68,11 @@ void	parse_file(int fd, t_fdf *fdf)
 	if (!fdf->map)
 		return ;
 	i = -1;
-	fdf->zoom = 20;
-	// calc_zoom(fdf); //!don't calc_zoom here, as isometric is not done yet!!
-	calc_offset(fdf);
-	ft_printf("w: %d, h: %d\n", fdf->width, fdf->height);
-	ft_printf("zoom: %d, offset_x: %d, offset_y: %d\n", fdf->zoom, fdf->offset_x, fdf->offset_y);
+	// fdf->zoom =  30;
+	// // calc_zoom(fdf); //!don't calc_zoom here, as isometric is not done yet!!
+	// calc_offset(fdf);
+	// ft_printf("w: %d, h: %d\n", fdf->width, fdf->height);
+	// ft_printf("zoom: %d, offset_x: %d, offset_y: %d\n", fdf->zoom, fdf->offset_x, fdf->offset_y);
 
 	while (fdf->height > ++i)
 	{

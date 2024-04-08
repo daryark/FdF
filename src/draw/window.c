@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 03:40:35 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/06 04:23:57 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/09 01:01:22 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,24 @@ void    img_put(t_fdf *fdf)
         j = 0;
         while (j < fdf->width)
         {
+            // transform_point(&fdf->map[i][j], fdf);
+            // center_map(fdf);
             if (j + 1 < fdf->width 
                 && fdf->map[i][j].color != (unsigned int)(-1)
                 && fdf->map[i][j + 1].color != (unsigned int)(-1))
-                 draw_line_algorithm(fdf->map[i][j], fdf->map[i][j + 1], fdf);
+                {
+                    // set_offset(&fdf->map[i][j], fdf->offset_x, fdf->offset_y);
+                    // set_offset(&fdf->map[i][j + 1], fdf->offset_x, fdf->offset_y);
+                    draw_line_algorithm(fdf->map[i][j], fdf->map[i][j + 1], fdf);
+                }
             if (i + 1 < fdf->height
                 && fdf->map[i][j].color != (unsigned int)(-1)
                 && fdf->map[i + 1][j].color != (unsigned int)(-1))
-                 draw_line_algorithm(fdf->map[i][j], fdf->map[i + 1][j], fdf);
+                {
+                // set_offset(&fdf->map[i][j], fdf->offset_x, fdf->offset_y);
+                // set_offset(&fdf->map[i][j + 1], fdf->offset_x, fdf->offset_y);
+                draw_line_algorithm(fdf->map[i][j], fdf->map[i + 1][j], fdf);
+                }
             j++;
         }
         i++;
