@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 01:52:44 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/03 15:07:16 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/10 18:50:23 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,5 +81,7 @@ void	map_size(char *file, t_fdf *fdf)
 		fdf->height++;
 		line = get_next_line(fd);
 	}
+	fdf->real_h = fdf->height;
+	fdf->real_w = fdf->width;
 	close(fd);
 }

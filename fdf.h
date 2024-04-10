@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 22:19:15 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/09 00:59:04 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/10 19:23:12 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ typedef struct s_fdf
 {
 	int		width;
 	int		height;
+	int		real_w;
+	int		real_h;
 	t_map	**map;
 
 	void	*mlx;
@@ -90,8 +92,9 @@ typedef struct s_fdf
 // 	int b;
 // }	t_color;
 
-void			print_map(t_fdf *fd, int modificator); //!delete after finish the proj
+void			print_map(t_fdf *fdf, int modificator); //!delete after finish the proj
 void			print_center_vector_helper(t_fdf *fdf); //!delete after finish the proj
+void			check_corners_red(t_fdf *fdf, int l_x, int l_y, int h_x, int h_y); //!delete after finish the proj
 //process
 int				ft_process(char	*file);
 int				check_map_format(char *file);
@@ -107,7 +110,7 @@ unsigned int    interpolate_color(int i0, int i_curr, int i1, int clr0, int clr1
 //screen math
 void			calc_zoom(t_fdf *fdf);
 void			make_zoom(t_map *point, int zoom);
-void			calc_offset(t_fdf *fdf);
+void			calc_offset(t_fdf *fdf, int x_low, int y_low);
 void			set_offset(t_map *point, int offset_x, int offset_y);
 void			center_map(t_fdf *fdf);
 void    		isometric(int *x, int *y, int z);

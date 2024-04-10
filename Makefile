@@ -55,7 +55,7 @@ all: $(NAME)
 
 run: $(NAME)
 # ./$(NAME) m maps/*
-	./$(NAME) maps/42.fdf
+	./$(NAME) extras/42.fdf
 
 install: $(MLX_F) $(MAPS_F) $(LIBFT_F)
 

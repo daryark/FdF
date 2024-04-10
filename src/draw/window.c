@@ -6,17 +6,11 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 03:40:35 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/09 01:01:22 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/10 18:57:15 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../fdf.h"
-
-typedef struct s_color {
-    int red;
-    int green;
-    int blue;
-} t_color;
 
 // go to destination address(start/left upper corner 0,0) and move it to the needed pixel:
 //go through amount of rows before the needed line + go to needed pixel inside line
@@ -37,29 +31,21 @@ void    img_put(t_fdf *fdf)
     fdf->img->img = mlx_new_image(fdf->mlx, WIN_WIDTH, WIN_HEIGHT);
     fdf->img->addr = mlx_get_data_addr(fdf->img->img, &fdf->img->bpp, &fdf->img->len, &fdf->img->endian);
     i = 0;
+    center_map(fdf);
+    // transform_point(&fdf->map[i][j], fdf);
     while (i < fdf->height)
     {
         j = 0;
         while (j < fdf->width)
         {
-            // transform_point(&fdf->map[i][j], fdf);
-            // center_map(fdf);
             if (j + 1 < fdf->width 
                 && fdf->map[i][j].color != (unsigned int)(-1)
                 && fdf->map[i][j + 1].color != (unsigned int)(-1))
-                {
-                    // set_offset(&fdf->map[i][j], fdf->offset_x, fdf->offset_y);
-                    // set_offset(&fdf->map[i][j + 1], fdf->offset_x, fdf->offset_y);
                     draw_line_algorithm(fdf->map[i][j], fdf->map[i][j + 1], fdf);
-                }
             if (i + 1 < fdf->height
                 && fdf->map[i][j].color != (unsigned int)(-1)
                 && fdf->map[i + 1][j].color != (unsigned int)(-1))
-                {
-                // set_offset(&fdf->map[i][j], fdf->offset_x, fdf->offset_y);
-                // set_offset(&fdf->map[i][j + 1], fdf->offset_x, fdf->offset_y);
                 draw_line_algorithm(fdf->map[i][j], fdf->map[i + 1][j], fdf);
-                }
             j++;
         }
         i++;
