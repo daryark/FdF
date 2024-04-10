@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 18:52:24 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/09 00:18:05 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/10 13:57:00 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ void    draw_line_algorithm(t_map a, t_map b, t_fdf *fdf)
         {
             d_value = interpolate_val(a.x, i, a.y, fdf->slope);
             cur_clr = interpolate_color(a.x, i, b.x, a.color, b.color);
-            my_mlx_pixel_put(fdf->img, i, d_value, cur_clr);
+            if (i > 0 && i <= WIN_WIDTH)
+                my_mlx_pixel_put(fdf->img, i, d_value, cur_clr);
             i++;
         }
     }
@@ -72,7 +73,8 @@ void    draw_line_algorithm(t_map a, t_map b, t_fdf *fdf)
         {
             d_value = interpolate_val(a.y, i, a.x, fdf->slope);
             cur_clr = interpolate_color(a.y, i, b.y, a.color, b.color);
-            my_mlx_pixel_put(fdf->img, d_value, i, cur_clr);
+            if (i > 0 && i <= WIN_HEIGHT)
+                my_mlx_pixel_put(fdf->img, d_value, i, cur_clr);
             i++;
         }
     }
