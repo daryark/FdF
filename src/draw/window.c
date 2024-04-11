@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 03:40:35 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/11 02:45:09 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/11 04:28:54 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,7 @@ void    img_put(t_fdf *fdf)
     int i; 
     int j;
 
-    fdf->img->img = mlx_new_image(fdf->mlx, WIN_WIDTH, WIN_HEIGHT);
-    fdf->img->addr = mlx_get_data_addr(fdf->img->img, &fdf->img->bpp, &fdf->img->len, &fdf->img->endian);
-    print_center_vector_helper(fdf); //just printing stuff, remove later;
     i = -1;
-    transform_map(fdf);
-    center_map(fdf);
     while (++i < fdf->height)
     {
         j = -1;
@@ -48,6 +43,7 @@ void    img_put(t_fdf *fdf)
                 draw_line_algorithm(fdf->map[i][j], fdf->map[i + 1][j], fdf);
         }
     }
+    mlx_put_image_to_window(fdf->mlx, fdf->window, fdf->img->img, 0, 0);
 }
 
 void	show_in_window(t_fdf *fdf)
@@ -64,9 +60,11 @@ void	show_in_window(t_fdf *fdf)
         return ;
     }
 	fdf->window = mlx_new_window(fdf->mlx, WIN_WIDTH, WIN_HEIGHT, "FdF");
-	img_put(fdf);
+	fdf->img->img = mlx_new_image(fdf->mlx, WIN_WIDTH, WIN_HEIGHT);
+    fdf->img->addr = mlx_get_data_addr(fdf->img->img, &fdf->img->bpp, &fdf->img->len, &fdf->img->endian);
+    print_center_vector_helper(fdf); //just printing stuff, remove later;
+    img_put(fdf);
 	menu_put(fdf);
-	mlx_put_image_to_window(fdf->mlx, fdf->window, fdf->img->img, 0, 0);
 	mlx_put_image_to_window(fdf->mlx, fdf->window, fdf->menu->img, 0, 0);
 	menu_text_put(fdf);
 	// mlx_mouse_hook(fdf->window, mouse_hook, fdf);

@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 22:19:15 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/11 02:37:29 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/11 03:48:15 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,19 @@
 # define MENU_WIDTH 300
 
 # ifndef WIN_WIDTH
-#	define WIN_WIDTH 3000 //1920
+#  ifdef LINUX
+#	 define WIN_WIDTH 3000
+#  else
+#   define WIN_WIDTH 1920
+#  endif
 # endif
 
 # ifndef WIN_HEIGHT
-#	define WIN_HEIGHT 2080 //1300
+#  ifdef LINUX
+#	 define WIN_HEIGHT 2080
+#  else
+#   define WIN_HEIGHT 1300
+#  endif
 # endif
 
 # include <fcntl.h>

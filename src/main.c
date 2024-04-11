@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 22:12:42 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/11 03:02:05 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/11 04:16:11 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ int	ft_process(char	*file)
 	if (!fdf.map)
 		return (1);
 	fdf.zoom = 50; //delete later, only for test purpose
+	transform_map(&fdf);
+    center_map(&fdf);
 	show_in_window(&fdf);
 	return (0);
 }
