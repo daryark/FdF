@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 12:15:04 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/10 19:24:16 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/11 02:14:07 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,17 @@
 
 void	calc_zoom(t_fdf *fdf)
 {
-	if ((WIN_WIDTH - MENU_WIDTH) / fdf->real_w < WIN_HEIGHT / fdf->real_h)
-		fdf->zoom  = ((WIN_WIDTH - MENU_WIDTH) / fdf->real_w);
+	int	potential_zoom_x;
+	int	potential_zoom_y;
+
+	potential_zoom_x = (WIN_WIDTH - MENU_WIDTH) / fdf->real_w;
+	potential_zoom_y = WIN_HEIGHT / fdf->real_h;
+	if (potential_zoom_x <= 0 || potential_zoom_y <= 0)
+		fdf->zoom = 1;
+	else if (potential_zoom_x < potential_zoom_y)
+		fdf->zoom  = potential_zoom_x;
 	else
-		fdf->zoom = WIN_HEIGHT / fdf->real_h;
+		fdf->zoom = potential_zoom_y;
 }
 
 void	calc_offset(t_fdf *fdf, int x_low, int y_low)
@@ -30,21 +37,24 @@ void	calc_offset(t_fdf *fdf, int x_low, int y_low)
 		fdf->offset_y += ft_abs(y_low);
 }
 
-void    isometric(int *x, int *y, int z)
+void	transform_map(t_fdf *fdf)
 {
-	float a;
-	
-	a = *x;
-    *x = (a - *y) * cos(0.523599);
-    *y = (a + *y) * sin(0.523599) - z;
-	
-}
-//check if this func is actually used ??
-void	transform_point(t_map *a, t_fdf *fdf)
-{
-	make_zoom(a, fdf->zoom);
-	isometric(&a->x, &a->y, a->val);
-	set_offset(a, fdf->offset_x, fdf->offset_y);
+	int	i;
+	int	j;
+
+	// print_map(fdf, 0);
+	// print_map(fdf, 1);
+	i = -1;
+	while (++i < fdf->height)
+	{
+		j = -1;
+		while (++j < fdf->width)
+		{
+			make_zoom(&fdf->map[i][j], fdf->zoom);
+			do_isometric(&fdf->map[i][j].x, &fdf->map[i][j].y, fdf->map[i][j].val);
+			// set_offset(a, fdf->offset_x, fdf->offset_y);
+		}
+	}
 }
 // void	real_map_size(t_fdf *fdf)
 // {
@@ -104,12 +114,17 @@ void	center_map(t_fdf *fdf)
 	fdf->real_w = (x_high - x_low);
 	fdf->real_h = (y_high - y_low);
 	calc_offset(fdf, x_low, y_low);
+	check_corners_red(fdf, x_low, y_low, x_high, y_high); //just print helper, delete later
 	i = -1;
-	check_corners_red(fdf, x_low, y_low, x_high, y_high);
+	// calc_zoom(fdf);
+	// ft_printf("zoom available: %d\n", fdf->zoom);
 	while (++i < fdf->height)
 	{
 		j = -1;
 		while (++j < fdf->width)
+		{
+			// make_zoom(&fdf->map[i][j], fdf->zoom);
 			set_offset(&fdf->map[i][j], fdf->offset_x, fdf->offset_y);
+		}
 	}
 }

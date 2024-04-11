@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 22:19:15 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/10 19:23:12 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/11 02:37:29 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@
 # define MENU_WIDTH 300
 
 # ifndef WIN_WIDTH
-#	define WIN_WIDTH 1920 //1920
+#	define WIN_WIDTH 3000 //1920
 # endif
 
 # ifndef WIN_HEIGHT
-#	define WIN_HEIGHT 1080 //1300
+#	define WIN_HEIGHT 2080 //1300
 # endif
 
 # include <fcntl.h>
@@ -41,6 +41,7 @@
 // # include <string.h>
 // # include <errno.h>
 
+# include "./keycode.h"
 # include "libft/libft.h"
 # include "libft/src/ft_printf/ft_printf.h"
 # include "libft/src/get_next_line/get_next_line_bonus.h"
@@ -103,7 +104,8 @@ void			parse_file(int fd, t_fdf *fdf);
 void			set_default_values(t_fdf *fdf);
 void			map_size(char *file, t_fdf *fdf);
 void			init_map(t_fdf **fdf);
-void			free_map(t_map **map);
+void			fill_point(char *str_point, t_fdf *fdf, int x, int y);
+void			free_map(t_fdf *fdf);
 void		    swap_points(t_map *a, t_map *b);
 unsigned int	ft_set_color(char *str);
 unsigned int    interpolate_color(int i0, int i_curr, int i1, int clr0, int clr1);
@@ -113,8 +115,8 @@ void			make_zoom(t_map *point, int zoom);
 void			calc_offset(t_fdf *fdf, int x_low, int y_low);
 void			set_offset(t_map *point, int offset_x, int offset_y);
 void			center_map(t_fdf *fdf);
-void    		isometric(int *x, int *y, int z);
-void			transform_point(t_map *a, t_fdf *fdf);
+void    		do_isometric(int *x, int *y, int z);
+void			transform_map(t_fdf *fdf);
 //mlx
 void			show_in_window(t_fdf *fdf);
 void			img_put(t_fdf *fdf);
@@ -124,11 +126,8 @@ void   			menu_text_put(t_fdf *fdf);
 void  		 	draw_line_algorithm(t_map a, t_map b, t_fdf *fdf);
 void			my_mlx_pixel_put(t_img *img, int x, int y, int color);
 void   			fill_bg(int width, int height, t_map start, t_img *img);
-
-//format and fill the map
-// int		get_height(char *file);
-// int		get_width(char *file);
-// int		hex_to_decimal(char *s);
-// void	fill_map(char *file, t_fdf **d);
+//hooks
+int				key_hook(int keycode, t_fdf *fdf);
+int				mouse_hook(int keycode, t_fdf *fdf);
 
 #endif

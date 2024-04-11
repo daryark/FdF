@@ -6,15 +6,14 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 03:40:35 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/10 18:57:15 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/11 02:45:09 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../fdf.h"
 
-// go to destination address(start/left upper corner 0,0) and move it to the needed pixel:
-//go through amount of rows before the needed line + go to needed pixel inside line
-//color the needed pixel with the dot - part of the line
+// go to first window px and move it to px: pass rows before
+// needed line +  pxs' inside line. fill the px with color;
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 {
 	char	*dst;
@@ -30,13 +29,14 @@ void    img_put(t_fdf *fdf)
 
     fdf->img->img = mlx_new_image(fdf->mlx, WIN_WIDTH, WIN_HEIGHT);
     fdf->img->addr = mlx_get_data_addr(fdf->img->img, &fdf->img->bpp, &fdf->img->len, &fdf->img->endian);
-    i = 0;
+    print_center_vector_helper(fdf); //just printing stuff, remove later;
+    i = -1;
+    transform_map(fdf);
     center_map(fdf);
-    // transform_point(&fdf->map[i][j], fdf);
-    while (i < fdf->height)
+    while (++i < fdf->height)
     {
-        j = 0;
-        while (j < fdf->width)
+        j = -1;
+        while (++j < fdf->width)
         {
             if (j + 1 < fdf->width 
                 && fdf->map[i][j].color != (unsigned int)(-1)
@@ -46,9 +46,7 @@ void    img_put(t_fdf *fdf)
                 && fdf->map[i][j].color != (unsigned int)(-1)
                 && fdf->map[i + 1][j].color != (unsigned int)(-1))
                 draw_line_algorithm(fdf->map[i][j], fdf->map[i + 1][j], fdf);
-            j++;
         }
-        i++;
     }
 }
 
@@ -60,16 +58,24 @@ void	show_in_window(t_fdf *fdf)
 	fdf->img = &img;
 	fdf->menu = &menu;
 	fdf->mlx = mlx_init();
+    if(!fdf->mlx)
+    {
+        free_map(fdf);
+        return ;
+    }
 	fdf->window = mlx_new_window(fdf->mlx, WIN_WIDTH, WIN_HEIGHT, "FdF");
 	img_put(fdf);
 	menu_put(fdf);
-    print_center_vector_helper(fdf); //just printing stuff, remove later;
 	mlx_put_image_to_window(fdf->mlx, fdf->window, fdf->img->img, 0, 0);
 	mlx_put_image_to_window(fdf->mlx, fdf->window, fdf->menu->img, 0, 0);
 	menu_text_put(fdf);
-	mlx_loop(fdf->mlx);
+	// mlx_mouse_hook(fdf->window, mouse_hook, fdf);
+	mlx_key_hook(fdf->window, key_hook, fdf);
+    mlx_loop(fdf->mlx);
 	mlx_destroy_image(fdf->mlx, fdf->img->img);
 	mlx_destroy_image(fdf->mlx, fdf->menu->img);
 	mlx_destroy_window(fdf->mlx, fdf->window);
+    if (fdf->map != NULL)
+    free_map(fdf);
 }
 

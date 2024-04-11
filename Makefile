@@ -39,12 +39,13 @@ endif
 #*COMPILATION
 NAME = fdf
 SRC =	main.c \
-		error_check.c map.c parsing.c utils.c px_position.c \
+		map.c utils.c setters.c px_position.c \
 		window.c draw_line_algorithm.c menu.c	\
+		hooks.c \
 		print_map_helper.c
 
 OBJ = $(addprefix $(OBJ_F), $(SRC:%.c=%.o))
-VPATH = $(SRC_F) $(SRC_F)utils/ $(SRC_F)parse/ $(SRC_F)draw/
+VPATH = $(SRC_F) $(SRC_F)utils/ $(SRC_F)move/ $(SRC_F)draw/
 SRC_F = src/
 OBJ_F = obj/
 
@@ -56,6 +57,9 @@ all: $(NAME)
 run: $(NAME)
 # ./$(NAME) m maps/*
 	./$(NAME) extras/42.fdf
+
+jul: $(NAME)
+	./$(NAME) maps/julia.fdf
 
 install: $(MLX_F) $(MAPS_F) $(LIBFT_F)
 

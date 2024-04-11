@@ -6,13 +6,38 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 22:12:42 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/10 18:52:52 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/11 03:02:05 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fdf.h"
 
-//returns 1, if error happened. else - 0
+//if the map is not equal width * hight
+//=> not existing node will leave color hex as -1!
+void	parse_file(int fd, t_fdf *fdf)
+{
+	int		i;
+	int		j;
+	char	*line;
+	char	**line_arr;
+
+	init_map(&fdf);
+	if (!fdf->map)
+		return ;
+	i = -1;
+
+	while (fdf->height > ++i)
+	{
+		line = get_next_line(fd);
+		if (!line)
+			break ;
+		line_arr = ft_split(line, ' ');
+		j = -1;
+		while (line_arr[++j])
+			fill_point(line_arr[j], fdf, j, i);
+	}
+}
+
 int	ft_process(char	*file)
 {
 	t_fdf	fdf;
@@ -27,11 +52,11 @@ int	ft_process(char	*file)
 	}
 	set_default_values(&fdf);
 	map_size(file, &fdf);
-	// calc_zoom(&fdf);
 	parse_file(fd, &fdf);
 	close (fd);
 	if (!fdf.map)
 		return (1);
+	fdf.zoom = 50; //delete later, only for test purpose
 	show_in_window(&fdf);
 	return (0);
 }

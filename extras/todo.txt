@@ -21,14 +21,11 @@ draw the map:
     ✅ draw the line with algorithm (bresenham)
     ✅ zoom the original map to adjust for screen size
 
-    ⬇️ ⬇️ ⬇️
-    ❗️❗️❗️ DIVIDE AND CONQUER - DIVIDE FUNCS AND CLEAN + SEPARATE THE CODE, NAMING, FUNCTIONS, FILES
-    ⬆️ ⬆️ ⬆️
-    
-    - move map to the center 👈
-    - do the projection 👈
-    - add the color gradient 👈
+    ✅ move map to the center
+    ✅ do the projection 
+    ✅ add the color gradient 
     🤓 - look in subject, what else to do in main part
+    - DIVIDE FUNCS AND CLEAN + SEPARATE THE CODE, NAMING, FUNCTIONS, FILES
     -❗️CHECK FOR LEAKS❗️
     -
 

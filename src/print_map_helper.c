@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 14:17:31 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/10 19:24:24 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/11 02:45:22 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,17 +41,16 @@ void	print_center_vector_helper(t_fdf *fdf)
 {
 	int i;
 
-	i = 0;
-    while (i < WIN_HEIGHT)
+	i = -1;
+    while (++i < WIN_HEIGHT)
     {    
-        my_mlx_pixel_put(fdf->img, WIN_WIDTH/2, i, 0x80ffff00);
+        // my_mlx_pixel_put(fdf->img, WIN_WIDTH/2, i, 0x1a00ff00);
         // my_mlx_pixel_put(fdf->img, (WIN_WIDTH/2)+ MENU_WIDTH, i, 0x800000ff);
-        my_mlx_pixel_put(fdf->img, (WIN_WIDTH/2)+ (MENU_WIDTH/2), i, 0x8000ff00);
-        i++;
+        my_mlx_pixel_put(fdf->img, (WIN_WIDTH / 2) + (MENU_WIDTH / 2), i, 0x0d950d);
     }
-	i = 0;
-	while (i < WIN_WIDTH)
-        my_mlx_pixel_put(fdf->img, i++, WIN_HEIGHT/2, 0x8000ff00);
+	i = -1;
+	while (++i < WIN_WIDTH)
+        my_mlx_pixel_put(fdf->img, i, WIN_HEIGHT/2, 0x0d950d);
 }
 
 void	check_corners_red(t_fdf *fdf, int l_x, int l_y, int h_x, int h_y)

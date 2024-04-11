@@ -6,20 +6,21 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 01:52:44 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/10 18:50:23 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/11 02:42:06 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../fdf.h"
 
-void	free_map(t_map **map)
+void	free_map(t_fdf *fdf)
 {
 	int	i;
 
-	i = -1;
-	while (map[++i])
-		free(map[i]);
-	free(map);
+	i = 0;
+	while (&fdf->map[i])
+		free(fdf->map[i++]);
+	free(fdf->map);
+	fdf->map = NULL;
 }
 
 //init the empty map
@@ -38,7 +39,7 @@ void	init_map(t_fdf **fdf)
 		(*fdf)->map[i] = (t_map *)malloc(sizeof(t_map) * (*fdf)->width);
 		if (!(*fdf)->map[i])
 		{
-			free_map((*fdf)->map);
+			free_map(*fdf);
 			return ;
 		}
 		j = -1;
@@ -50,14 +51,24 @@ void	init_map(t_fdf **fdf)
 	}
 }
 //(unsigned int)(-1) leads to be the largest value of unsigned int
-// after type cast, so the hex color can never reach this value. 
-//Means i can define it that way to see if the point exists
-//=> has been filled at least with 0, if no color specified.
+// after type cast, so the hex color can't be that high =>
+// if it stays (unsigned int)(-1), point doesn't exist. 
 
-//?if i will do the map with different line length ->
-//*than change the formula until find the longest line
+void	fill_point(char *str_point, t_fdf *fdf, int x, int y)
+{
+	char	**point_arr;
+
+	point_arr = ft_split(str_point, ',');
+	fdf->map[y][x].val = ft_atoi(point_arr[0]);
+	fdf->map[y][x].color = ft_set_color(point_arr[1]);
+	fdf->map[y][x].x = x;
+	fdf->map[y][x].y = y;
+}
+
 //count width in first line
 //then get hight from amount of other lines returned
+//*if i will do the map with different line length ->
+//*than change the formula until find the longest line
 void	map_size(char *file, t_fdf *fdf)
 {
 	char	*line;

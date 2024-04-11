@@ -5,20 +5,45 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/03 20:34:29 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/10 19:25:01 by dyarkovs         ###   ########.fr       */
+/*   Created: 2024/03/23 23:14:37 by dyarkovs          #+#    #+#             */
+/*   Updated: 2024/04/11 02:42:48 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../fdf.h"
 
+//if map is valid - return opened fd num
+// else return -1, fd still open
+int	check_map_format(char *file)
+{
+	int		len;
+	int		i;
+	char	*format;
+	int		fd;
+
+	fd = open(file, O_RDONLY);
+	if (fd < 0)
+		return (-1);
+	format = ".fdf";
+	i = ft_strlen(format);
+	len = ft_strlen(file);
+	while (--i >= 0)
+	{
+		len--;
+		if (file[len] != format[i])
+			return (-1);
+	}
+	return (fd);
+}
+
+//zoom  2
 void	set_default_values(t_fdf *fdf)
 {
 	fdf->height = 0;
 	fdf->width = 0;
     fdf->real_h = 0;
     fdf->real_w = 0;
-	fdf->zoom = 30;
+	fdf->zoom = 2;
     fdf->offset_x = 0;
     fdf->offset_y = 0;
 	fdf->slope = 0.0;
@@ -29,33 +54,27 @@ void	set_default_values(t_fdf *fdf)
 	fdf->menu = NULL;
 }
 
-void    swap_points(t_map *a, t_map *b)
-{
-    t_map   tmp;
 
-    tmp.color = a->color;
-    tmp.val = a->val;
-    tmp.x = a->x;
-    tmp.y = a->y;
-    a->color = b->color;
-    a->val = b->val;
-    a->x = b->x;
-    a->y = b->y;
-    b->color = tmp.color;
-    b->val = tmp.val;
-    b->x = tmp.x;
-    b->y = tmp.y;
-}
-
-void	make_zoom(t_map *point, int zoom)
+unsigned int	ft_set_color(char *str)
 {
-	point->x *= zoom;
-	point->y *= zoom;
-	point->val = point->val * (1 + (zoom - 1) * point->val / WIN_HEIGHT);
-}
+	int		nb;
 
-void	set_offset(t_map *point, int offset_x, int offset_y)
-{
-	point->x += offset_x;
-	point->y += offset_y;
+	if (!str || !*str)
+		return (0xffffff);
+	nb = 0;
+	if (*str == '0' && *(str + 1) == 'x')
+		str += 2;
+	while ((*str >= '0' && *str <= '9')
+		|| (*str >= 'a' && *str <= 'f')
+		|| (*str >= 'A' && *str <= 'F'))
+	{
+		if (*str >= '0' && *str <= '9')
+			nb = (nb * 16) + (*str - '0');
+		else if (*str >= 'a' && *str <= 'f')
+			nb = (nb * 16) + (*str - 'a' + 10);
+		else
+			nb = (nb * 16) + (*str - 'A' + 10);
+		str++;
+	}
+	return (nb);
 }
