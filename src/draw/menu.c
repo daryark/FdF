@@ -26,6 +26,8 @@ void    menu_put(t_fdf *fdf)
     fdf->menu->img = mlx_new_image(fdf->mlx, 300, WIN_HEIGHT);
     fdf->menu->addr = mlx_get_data_addr(fdf->menu->img, &fdf->menu->bpp, &fdf->menu->len, &fdf->menu->endian);
 	fill_bg( 300, WIN_HEIGHT, p0, fdf->menu);
+    mlx_put_image_to_window(fdf->mlx, fdf->window, fdf->menu->img, 0, 0);
+	menu_text_put(fdf);
 }
 
 void    fill_bg(int width, int height, t_map start, t_img *img)

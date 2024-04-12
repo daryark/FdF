@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 22:19:15 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/11 03:48:15 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/12 11:39:35 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ void			check_corners_red(t_fdf *fdf, int l_x, int l_y, int h_x, int h_y); //!del
 int				ft_process(char	*file);
 int				check_map_format(char *file);
 void			parse_file(int fd, t_fdf *fdf);
+int				show_in_window(t_fdf *fdf);
 //utils
 void			set_default_values(t_fdf *fdf);
 void			map_size(char *file, t_fdf *fdf);
@@ -126,7 +127,6 @@ void			center_map(t_fdf *fdf);
 void    		do_isometric(int *x, int *y, int z);
 void			transform_map(t_fdf *fdf);
 //mlx
-void			show_in_window(t_fdf *fdf);
 void			img_put(t_fdf *fdf);
 void			menu_put(t_fdf *fdf);
 void   			menu_text_put(t_fdf *fdf);
