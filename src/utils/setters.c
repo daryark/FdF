@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 20:34:29 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/11 03:05:19 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/12 16:16:37 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,11 @@ void    swap_points(t_map *a, t_map *b)
     b->y = tmp.y;
 }
 
-void	make_zoom(t_map *point, int zoom)
+void	make_zoom(t_map *point, float zoom)
 {
-	point->x *= zoom;
-	point->y *= zoom;
-	point->val = point->val * (1 + (zoom - 1) * point->val / WIN_HEIGHT);
-    // point->val = point->val * 20;
+    point->x *= zoom;
+    point->y *= zoom;
+    point->val *= zoom;
 }
 
 void	set_offset(t_map *point, int offset_x, int offset_y)

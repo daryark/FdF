@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 01:52:44 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/11 02:42:06 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/12 17:07:51 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,29 +24,30 @@ void	free_map(t_fdf *fdf)
 }
 
 //init the empty map
-void	init_map(t_fdf **fdf)
+void	init_map(t_fdf *fdf)
 {
 	int		i;
 	int		j;
 
-	(*fdf)->map = (t_map **)malloc(sizeof(t_map *) * (*fdf)->height);
-	if (!(*fdf)->map)
+	fdf->map = (t_map **)malloc(sizeof(t_map *) * fdf->height);
+	if (!fdf->map)
 		return ;
 	i = -1;
-	while (++i < (*fdf)->height)
+	while (++i < fdf->height)
 	{
 		j = 0;
-		(*fdf)->map[i] = (t_map *)malloc(sizeof(t_map) * (*fdf)->width);
-		if (!(*fdf)->map[i])
+		fdf->map[i] = (t_map *)malloc(sizeof(t_map) * fdf->width);
+		if (!fdf->map[i])
 		{
-			free_map(*fdf);
+			free_map(fdf);
+			free(fdf->corner);
 			return ;
 		}
 		j = -1;
-		while (++j < (*fdf)->width)
+		while (++j < fdf->width)
 		{
-			(*fdf)->map[i][j].color = (unsigned int)(-1);
-			(*fdf)->map[i][j].val = 0;
+			fdf->map[i][j].color = (unsigned int)(-1);
+			fdf->map[i][j].val = 0;
 		}
 	}
 }
@@ -92,7 +93,31 @@ void	map_size(char *file, t_fdf *fdf)
 		fdf->height++;
 		line = get_next_line(fd);
 	}
-	fdf->real_h = fdf->height;
-	fdf->real_w = fdf->width;
 	close(fd);
+}
+
+void	map_real_size(t_fdf *fdf)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	reset_corner(fdf->corner);
+	while (i < fdf->height)
+	{
+		j = 0;
+		while (j < fdf->width)
+		{
+			if (fdf->map[i][j].x < fdf->corner->x_low)
+				fdf->corner->x_low = fdf->map[i][j].x;
+			else if (fdf->map[i][j].x > fdf->corner->x_high)
+				fdf->corner->x_high = fdf->map[i][j].x;
+			if (fdf->map[i][j].y < fdf->corner->y_low)
+				fdf->corner->y_low = fdf->map[i][j].y;
+			else if (fdf->map[i][j].y > fdf->corner->y_high)
+				fdf->corner->y_high = fdf->map[i][j].y;
+			j++;
+		}
+		i++;
+	}
 }

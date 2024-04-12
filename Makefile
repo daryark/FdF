@@ -4,6 +4,7 @@ include extras/colors.sh
 # links for downloads
 MAPS_URL = https://cdn.intra.42.fr/document/document/21662/maps.zip
 MLX_OSX = https://cdn.intra.42.fr/document/document/21666/minilibx_macos_sierra_20161017.tgz
+# MLX_OSX = https://cdn.intra.42.fr/document/document/21664/minilibx_mms_20191025_beta.tgz;
 MLX_LINUX = https://cdn.intra.42.fr/document/document/21665/minilibx-linux.tgz
 LIBFT_GIT = https://github.com/daryark/libft.git
 # flags, + for downloaded libs to include

@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 22:12:42 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/12 11:38:45 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/12 17:43:04 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	parse_file(int fd, t_fdf *fdf)
 	char	*line;
 	char	**line_arr;
 
-	init_map(&fdf);
+	init_map(fdf);
 	if (!fdf->map)
 		return ;
 	i = -1;
@@ -56,9 +56,11 @@ int	ft_process(char	*file)
 	close (fd);
 	if (!fdf.map)
 		return (1);
-	fdf.zoom = 50; //delete later, only for test purpose
+	fdf.zoom = 400;//temp value, delete later
 	transform_map(&fdf);
     center_map(&fdf);
+	printf("centered again map\n"); //just print
+	print_map(&fdf, 1); //tmp print map, delete later
 	if (show_in_window(&fdf))
 		return (1);
 	return (0);

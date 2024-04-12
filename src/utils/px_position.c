@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 12:15:04 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/11 02:14:07 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/12 18:13:03 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,34 @@
 
 void	calc_zoom(t_fdf *fdf)
 {
-	int	potential_zoom_x;
-	int	potential_zoom_y;
-
-	potential_zoom_x = (WIN_WIDTH - MENU_WIDTH) / fdf->real_w;
-	potential_zoom_y = WIN_HEIGHT / fdf->real_h;
-	if (potential_zoom_x <= 0 || potential_zoom_y <= 0)
-		fdf->zoom = 1;
-	else if (potential_zoom_x < potential_zoom_y)
+	float	potential_zoom_x;
+	float	potential_zoom_y;
+	int		real_h;
+	int		real_w;
+	
+	real_w = fdf->corner->x_high - fdf->corner->x_low;
+	real_h = fdf->corner->y_high - fdf->corner->y_low;
+	potential_zoom_x = (float)(WIN_WIDTH - MENU_WIDTH) / (float)real_w;
+	potential_zoom_y = (float)WIN_HEIGHT / (float)real_h;
+	printf("prev: %f, x: %f, y: %f, rh: %d, rw: %d\n", fdf->zoom, potential_zoom_x, potential_zoom_y, real_h, real_w);
+	if (potential_zoom_x < potential_zoom_y)
 		fdf->zoom  = potential_zoom_x;
 	else
 		fdf->zoom = potential_zoom_y;
+	printf("new zoom %f\n", fdf->zoom);
 }
 
-void	calc_offset(t_fdf *fdf, int x_low, int y_low)
+void	calc_offset(t_fdf *fdf)
 {
-	fdf->offset_x = ((WIN_WIDTH - MENU_WIDTH) / 2) - ((fdf->real_w - 1) / 2) + MENU_WIDTH;
-	fdf->offset_y = (WIN_HEIGHT / 2) - ((fdf->real_h - 1) / 2);
-	if (x_low < 0)
-		fdf->offset_x += ft_abs(x_low);
-	if (y_low < 0)
-		fdf->offset_y += ft_abs(y_low);
+	int real_w = (fdf->corner->x_high - fdf->corner->x_low);
+	int real_h = (fdf->corner->y_high - fdf->corner->y_low);
+	fdf->offset_x = ((WIN_WIDTH - MENU_WIDTH) / 2) - ((real_w - 1) / 2) + MENU_WIDTH;
+	fdf->offset_y = (WIN_HEIGHT / 2) - ((real_h - 1) / 2);
+	printf("offset_x: %d, offset_y: %d\n", fdf->offset_x, fdf->offset_y);
+	if (fdf->corner->x_low < 0)
+		fdf->offset_x += ft_abs(fdf->corner->x_low);
+	if (fdf->corner->y_low < 0)
+		fdf->offset_y += ft_abs(fdf->corner->y_low);
 }
 
 void	transform_map(t_fdf *fdf)
@@ -42,8 +49,6 @@ void	transform_map(t_fdf *fdf)
 	int	i;
 	int	j;
 
-	// print_map(fdf, 0);
-	// print_map(fdf, 1);
 	i = -1;
 	while (++i < fdf->height)
 	{
@@ -52,79 +57,37 @@ void	transform_map(t_fdf *fdf)
 		{
 			make_zoom(&fdf->map[i][j], fdf->zoom);
 			do_isometric(&fdf->map[i][j].x, &fdf->map[i][j].y, fdf->map[i][j].val);
-			// set_offset(a, fdf->offset_x, fdf->offset_y);
 		}
 	}
-}
-// void	real_map_size(t_fdf *fdf)
-// {
-// 	int j;
-// 	int i;
-// 	int	x_low = INT_MAX;
-// 	int y_low = INT_MAX;
-// 	int x_high = INT_MIN;
-// 	int y_high = INT_MIN;
-	
-// 	i = -1;
-// 	while (i < fdf->height)
-// 	{
-// 		j = -1;
-// 		while (++j < fdf->width)
-// 		{
-// 			if (fdf->map[i][j].x < x_low)
-// 				x_low = fdf->map[i][j].x;
-// 			else if (fdf->map[i][j].x > x_high)
-// 				x_high = fdf->map[i][j].x;
-// 			if (fdf->map[i][j].y < y_low)
-// 				y_low = fdf->map[i][j].y;
-// 			else if (fdf->map[i][j].y > y_high)
-// 				y_high = fdf->map[i][j].y;
-// 		}
-// 	}
-// 	fdf->real_w = (x_high - x_low);
-// 	fdf->real_h = (y_high - y_low);
-// }
-
-void	center_map(t_fdf *fdf)
-{
-	int	x_low = INT_MAX;
-	int y_low = INT_MAX;
-	int x_high = INT_MIN;
-	int y_high = INT_MIN;
-
-	int j;
-	int i = 0;
-	while (i < fdf->height)
-	{
-		j = 0;
-		while (j < fdf->width)
-		{
-			if (fdf->map[i][j].x < x_low)
-				x_low = fdf->map[i][j].x;
-			else if (fdf->map[i][j].x > x_high)
-				x_high = fdf->map[i][j].x;
-			if (fdf->map[i][j].y < y_low)
-				y_low = fdf->map[i][j].y;
-			else if (fdf->map[i][j].y > y_high)
-				y_high = fdf->map[i][j].y;
-			j++;
-		}
-		i++;
-	}
-	fdf->real_w = (x_high - x_low);
-	fdf->real_h = (y_high - y_low);
-	calc_offset(fdf, x_low, y_low);
-	check_corners_red(fdf, x_low, y_low, x_high, y_high); //just print helper, delete later
+	printf("map after first zoom and isometric\n");
+	print_map(fdf, 1);
+	map_real_size(fdf);
+	calc_zoom(fdf);
 	i = -1;
-	// calc_zoom(fdf);
-	// ft_printf("zoom available: %d\n", fdf->zoom);
 	while (++i < fdf->height)
 	{
 		j = -1;
 		while (++j < fdf->width)
-		{
-			// make_zoom(&fdf->map[i][j], fdf->zoom);
+			make_zoom(&fdf->map[i][j], fdf->zoom);
+	}
+	printf("second recalculated zoom map\n");
+	print_map(fdf, 1);
+}
+
+void	center_map(t_fdf *fdf)
+{
+	int i;
+	int j;
+
+	map_real_size(fdf);
+	printf("w: %d, h: %d\n", (fdf->corner->x_high - fdf->corner->x_low), (fdf->corner->y_high - fdf->corner->y_low));
+	calc_offset(fdf);
+	check_corners_red(fdf); //just print helper, delete later
+	i = -1;
+	while (++i < fdf->height)
+	{
+		j = -1;
+		while (++j < fdf->width)
 			set_offset(&fdf->map[i][j], fdf->offset_x, fdf->offset_y);
-		}
 	}
 }

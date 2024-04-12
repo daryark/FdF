@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 23:14:37 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/11 02:42:48 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/12 17:10:21 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,8 @@ void	set_default_values(t_fdf *fdf)
 {
 	fdf->height = 0;
 	fdf->width = 0;
-    fdf->real_h = 0;
-    fdf->real_w = 0;
-	fdf->zoom = 2;
+    fdf->corner = malloc(sizeof(t_corner));
+	fdf->zoom = 2.0;
     fdf->offset_x = 0;
     fdf->offset_y = 0;
 	fdf->slope = 0.0;
@@ -53,7 +52,13 @@ void	set_default_values(t_fdf *fdf)
 	fdf->img = NULL;
 	fdf->menu = NULL;
 }
-
+void	reset_corner(t_corner *p)
+{
+	p->x_low = INT_MAX;
+	p->y_low = INT_MAX;
+	p->x_high = INT_MIN;
+	p->y_high = INT_MIN;
+}
 
 unsigned int	ft_set_color(char *str)
 {

@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 14:17:31 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/11 02:45:22 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/12 17:09:41 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	print_map(t_fdf *fdf, int modificator)
 		}
 		ft_printf("\n");
 	}
+	ft_printf("\n");
 }
 
 void	print_center_vector_helper(t_fdf *fdf)
@@ -48,12 +49,12 @@ void	print_center_vector_helper(t_fdf *fdf)
         // my_mlx_pixel_put(fdf->img, (WIN_WIDTH/2)+ MENU_WIDTH, i, 0x800000ff);
         my_mlx_pixel_put(fdf->img, (WIN_WIDTH / 2) + (MENU_WIDTH / 2), i, 0x0d950d);
     }
-	i = -1;
+	i = MENU_WIDTH - 1;
 	while (++i < WIN_WIDTH)
         my_mlx_pixel_put(fdf->img, i, WIN_HEIGHT/2, 0x0d950d);
 }
 
-void	check_corners_red(t_fdf *fdf, int l_x, int l_y, int h_x, int h_y)
+void	check_corners_red(t_fdf *fdf)
 {
 	int	i;
 	int j;
@@ -64,8 +65,8 @@ void	check_corners_red(t_fdf *fdf, int l_x, int l_y, int h_x, int h_y)
 		j = -1;
 		while (++j < fdf->width)
 		{
-			if (fdf->map[i][j].x == l_x || fdf->map[i][j].y == l_y
-			|| fdf->map[i][j].x == h_x || fdf->map[i][j].y == h_y)
+			if (fdf->map[i][j].x == fdf->corner->x_low || fdf->map[i][j].y == fdf->corner->y_low
+			|| fdf->map[i][j].x == fdf->corner->x_high || fdf->map[i][j].y == fdf->corner->y_high)
 				fdf->map[i][j].color = 0xff0000;
 		}
 	}
