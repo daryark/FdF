@@ -12,48 +12,48 @@
 
 #include "../../fdf.h"
 
-
 //*change the menu placement, when height > width
 // with portrait direction, put menu on top for full width, 1/4 height
-void    menu_put(t_fdf *fdf)
+void	menu_put(t_fdf *fdf)
 {
-    t_map   p0;
+	t_map	p0;
 
-    p0.x = 0;
+	p0.x = 0;
 	p0.y = 0;
 	p0.color = 0x552f2f2f;
 	p0.val = 0;
-    fdf->menu->img = mlx_new_image(fdf->mlx, 300, WIN_HEIGHT);
-    fdf->menu->addr = mlx_get_data_addr(fdf->menu->img, &fdf->menu->bpp, &fdf->menu->len, &fdf->menu->endian);
+	fdf->menu->img = mlx_new_image(fdf->mlx, 300, WIN_HEIGHT);
+	fdf->menu->addr = mlx_get_data_addr(fdf->menu->img, &fdf->menu->bpp, \
+	&fdf->menu->len, &fdf->menu->endian);
 	fill_bg( 300, WIN_HEIGHT, p0, fdf->menu);
-    mlx_put_image_to_window(fdf->mlx, fdf->window, fdf->menu->img, 0, 0);
+	mlx_put_image_to_window(fdf->mlx, fdf->window, fdf->menu->img, 0, 0);
 	menu_text_put(fdf);
 }
 
-void    fill_bg(int width, int height, t_map start, t_img *img)
+void	fill_bg(int width, int height, t_map start, t_img *img)
 {
-    int x;
+	int	x;
 
-    x = start.x;
-    while (start.y < height)
-    {
-        while (start.x < width)
-            my_mlx_pixel_put(img, start.x++, start.y, start.color);
-        start.x = x;
-        start.y++;
-    }
+	x = start.x;
+	while (start.y < height)
+	{
+		while (start.x < width)
+			my_mlx_pixel_put(img, start.x++, start.y, start.color);
+		start.x = x;
+		start.y++;
+	}
 }
 
 //*if screen sizes less then the height of text put into it, adjust line gaps
-void    menu_text_put(t_fdf *fdf)
+void	menu_text_put(t_fdf *fdf)
 {
-    int line_y;
-    int clr;
+	int	line_y;
+	int	clr;
 
-    line_y = 30;
-    clr = 0xdcdcdc;
+	line_y = 30;
+	clr = 0xdcdcdc;
 	mlx_string_put(fdf->mlx, fdf->window, 30, line_y, clr, "MENU BAR");
-	mlx_string_put(fdf->mlx, fdf->window, 30, line_y += 50, clr, "first rule");
+	mlx_string_put(fdf->mlx, fdf->window, 30, line_y += 50, clr, "⬆️ ⬇️ ⬅️ ➡️");
 	mlx_string_put(fdf->mlx, fdf->window, 30, line_y += 30, clr, "second rule");
 	mlx_string_put(fdf->mlx, fdf->window, 30, line_y += 30, clr, "third rule");
 }

@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 22:19:15 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/12 17:12:48 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/12 23:55:49 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ typedef struct s_map
 	int				y;
 }					t_map;
 
-typedef struct	s_img {
+typedef struct s_img {
 	void			*img;
 	char			*addr;
 	int				bpp; //bits per pixel
@@ -74,9 +74,9 @@ typedef struct	s_img {
 typedef struct s_corner
 {
 	int				x_low;
-	int 			x_high;
-	int 			y_low;
-	int 			y_high;
+	int				x_high;
+	int				y_low;
+	int				y_high;
 }					t_corner;
 
 typedef struct s_fdf
@@ -97,53 +97,44 @@ typedef struct s_fdf
 	float			slope;
 }					t_fdf;
 
-
-// typedef struct s_interpolate
-// {
-
-// }
-// typedef struct s_color
-// {
-// 	int	r;
-// 	int	g;
-// 	int b;
-// }	t_color;
-
 void			print_map(t_fdf *fdf, int modificator); //!delete after finish the proj
 void			print_center_vector_helper(t_fdf *fdf); //!delete after finish the proj
 void			check_corners_red(t_fdf *fdf); //!delete after finish the proj
 //process
 int				ft_process(char	*file);
 int				check_map_format(char *file);
-void			parse_file(int fd, t_fdf *fdf);
+void			parse_file(char *file, t_fdf *fdf);
 int				show_in_window(t_fdf *fdf);
 //utils
-void			set_default_values(t_fdf *fdf);
+int				set_default_values(t_fdf *fdf);
 void			map_size(char *file, t_fdf *fdf);
 void			map_real_size(t_fdf *fdf);
 void			reset_corner(t_corner *p);
 void			init_map(t_fdf *fdf);
 void			fill_point(char *str_point, t_fdf *fdf, int x, int y);
 void			free_map(t_fdf *fdf);
-void		    swap_points(t_map *a, t_map *b);
+void			swap_points(t_map *a, t_map *b);
 unsigned int	ft_set_color(char *str);
-unsigned int    interpolate_color(int i0, int i_curr, int i1, int clr0, int clr1);
+unsigned int	interpolate_color(int i0, int i_curr, int i1, int clr0, int clr1);
+int				open_error(int fd);
+void			clean_all(t_fdf *fdf);
+void			free_lines(char **line_arr);
 //screen math
 void			calc_zoom(t_fdf *fdf);
 void			make_zoom(t_map *point, float zoom);
 void			calc_offset(t_fdf *fdf);
 void			set_offset(t_map *point, int offset_x, int offset_y);
 void			center_map(t_fdf *fdf);
-void    		do_isometric(int *x, int *y, int z);
+void			do_isometric(int *x, int *y, int z);
 void			transform_map(t_fdf *fdf);
 //mlx
 void			img_put(t_fdf *fdf);
 void			menu_put(t_fdf *fdf);
-void   			menu_text_put(t_fdf *fdf);
+void			menu_text_put(t_fdf *fdf);
 //mlx utils ?
-void  		 	draw_line_algorithm(t_map a, t_map b, t_fdf *fdf);
+void			draw_line_algorithm(t_map a, t_map b, t_fdf *fdf);
 void			my_mlx_pixel_put(t_img *img, int x, int y, int color);
-void   			fill_bg(int width, int height, t_map start, t_img *img);
+void			fill_bg(int width, int height, t_map start, t_img *img);
 //hooks
 int				key_hook(int keycode, t_fdf *fdf);
 int				mouse_hook(int keycode, t_fdf *fdf);
