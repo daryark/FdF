@@ -40,8 +40,8 @@ endif
 #*COMPILATION
 NAME = fdf
 SRC =	main.c \
-		map.c utils.c setters.c px_position.c \
-		window.c draw_line_algorithm.c menu.c	\
+		map.c utils.c set_val.c px_position.c error.c clean.c \
+		window.c draw_line_algorithm.c menu.c \
 		hooks.c \
 		print_map_helper.c
 

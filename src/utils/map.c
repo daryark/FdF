@@ -6,22 +6,11 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 01:52:44 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/14 14:16:44 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/14 17:47:42 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../fdf.h"
-
-void	free_map(t_fdf *fdf)
-{
-	int	i;
-
-	i = 0;
-	while (fdf->map[i] && i < fdf->height)
-		free(fdf->map[i++]);
-	free(fdf->map);
-	fdf->map = NULL;
-}
 
 //init the empty map
 void	init_map(t_fdf *fdf)
@@ -38,11 +27,8 @@ void	init_map(t_fdf *fdf)
 	{
 		j = 0;
 		fdf->map[i] = (t_map *)malloc(sizeof(t_map) * fdf->width);
-		if (!fdf->map[i])
-		{
-			clean_all(fdf);
+		if (is_alloc_err_cleaner(fdf->map[i], fdf))
 			return ;
-		}
 		j = -1;
 		while (++j < fdf->width)
 		{
@@ -62,15 +48,13 @@ void	fill_point(char *str_point, t_fdf *fdf, int x, int y)
 	point_arr = ft_split(str_point, ',');
 	fdf->map[y][x].val = ft_atoi(point_arr[0]);
 	fdf->map[y][x].color = ft_set_color(point_arr[1]);
-	// free_lines(point_arr);
+	free_lines(point_arr);
 	fdf->map[y][x].x = x;
 	fdf->map[y][x].y = y;
 }
 
 //count width in first line
 //then get hight from amount of other lines returned
-//*if i will do the map with different line length ->
-//*than change the formula until find the longest line
 void	map_size(char *file, t_fdf *fdf)
 {
 	char	*line;
@@ -84,7 +68,8 @@ void	map_size(char *file, t_fdf *fdf)
 	i = -1;
 	while (line[++i])
 	{
-		if (line[i] != ' ' && (line[i + 1] == ' ' || line[i + i] == '\n'))
+		if ((line[i] == ' ' && line[i - 1] != ' ')
+			|| (line[i] != ' ' && !line[i + 1]))
 			fdf->width++;
 	}
 	while (line != NULL)
@@ -120,4 +105,6 @@ void	map_real_size(t_fdf *fdf)
 		}
 		i++;
 	}
+	fdf->corner->real_w = fdf->corner->x_high - fdf->corner->x_low;
+	fdf->corner->real_h = fdf->corner->y_high - fdf->corner->y_low;
 }

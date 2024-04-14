@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 22:12:42 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/14 13:58:44 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/14 17:41:20 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	parse_file(char *file, t_fdf *fdf)
 		j = -1;
 		while (line_arr[++j])
 			fill_point(line_arr[j], fdf, j, i);
-		// free_lines(line_arr);
+		free_lines(line_arr);
 	}
 }
 
@@ -51,12 +51,11 @@ int	ft_process(char	*file)
 		return (1);
 	map_size(file, &fdf);
 	parse_file(file, &fdf);
-	if (!fdf.map)
-	{
-		clean_all(&fdf);
+	if (is_alloc_err_cleaner(fdf.map, &fdf))
 		return (1);
-	}
 	transform_map(&fdf);
+	if (fdf.zoom < 0)
+		return (1);
 	center_map(&fdf);
 	if (!show_in_window(&fdf))
 		return (1);
@@ -74,7 +73,10 @@ int	main(int argc, char **argv)
 			return (1);
 		}
 		if (ft_process(argv[1]))
+		{
+			ft_putendl_fd(RED "Error in process" RE, 2);
 			return (1);
+		}
 	}
 	else
 		ft_putendl_fd(YELLOW "Add exactly one file to read from!" RE, 2);

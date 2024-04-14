@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 12:15:04 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/12 22:43:24 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/14 17:53:01 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,30 +16,30 @@ void	calc_zoom(t_fdf *fdf)
 {
 	float	potential_zoom_x;
 	float	potential_zoom_y;
-	int		real_h;
-	int		real_w;
 
-	real_w = fdf->corner->x_high - fdf->corner->x_low;
-	real_h = fdf->corner->y_high - fdf->corner->y_low;
-	potential_zoom_x = (float)(WIN_WIDTH - MENU_WIDTH) / (float)real_w;
-	potential_zoom_y = (float)WIN_HEIGHT / (float)real_h;
+	map_real_size(fdf);
+	potential_zoom_x = (float)(WIN_WIDTH - MENU_WIDTH) / \
+		(float)fdf->corner->real_w;
+	potential_zoom_y = (float)WIN_HEIGHT / (float)fdf->corner->real_h;
 	if (potential_zoom_x < potential_zoom_y)
 		fdf->zoom = potential_zoom_x;
 	else
 		fdf->zoom = potential_zoom_y;
+	if (fdf->zoom < 0)
+	{
+		ft_putendl_fd("Error calculating zoom", 2);
+		clean_all(fdf);
+		return ;
+	}
 	printf("new zoom %f\n", fdf->zoom);
 }
 
 void	calc_offset(t_fdf *fdf)
 {
-	int	real_w;
-	int	real_h;
-
-	real_w = (fdf->corner->x_high - fdf->corner->x_low);
-	real_h = (fdf->corner->y_high - fdf->corner->y_low);
+	map_real_size(fdf);
 	fdf->offset_x = ((WIN_WIDTH - MENU_WIDTH) / 2) \
-		- ((real_w - 1) / 2) + MENU_WIDTH;
-	fdf->offset_y = (WIN_HEIGHT / 2) - ((real_h - 1) / 2);
+		- ((fdf->corner->real_w - 1) / 2) + MENU_WIDTH;
+	fdf->offset_y = (WIN_HEIGHT / 2) - ((fdf->corner->real_h - 1) / 2);
 	if (fdf->corner->x_low < 0)
 		fdf->offset_x += ft_abs(fdf->corner->x_low);
 	if (fdf->corner->y_low < 0)
@@ -62,8 +62,17 @@ void	transform_map(t_fdf *fdf)
 				fdf->map[i][j].val);
 		}
 	}
-	map_real_size(fdf);
+	zoom_map_to_win_size(fdf);
+}
+
+void	zoom_map_to_win_size(t_fdf *fdf)
+{
+	int	i;
+	int	j;
+
 	calc_zoom(fdf);
+	if (fdf->zoom < 0)
+		return ;
 	i = -1;
 	while (++i < fdf->height)
 	{
@@ -78,7 +87,6 @@ void	center_map(t_fdf *fdf)
 	int	i;
 	int	j;
 
-	map_real_size(fdf);
 	calc_offset(fdf);
 	check_corners_red(fdf); //just print helper, delete later
 	i = -1;

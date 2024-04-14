@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 03:40:35 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/12 23:42:38 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/14 17:25:40 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,19 +53,23 @@ void	img_put(t_fdf *fdf)
 
 int	show_in_window(t_fdf *fdf)
 {
-	// t_img	img;
-	// t_img	menu;
+	t_img	img;
+	t_img	menu;
 
-	// fdf->img = &img;
-	// fdf->menu = &menu;
-	// fdf->mlx = mlx_init();
+	fdf->img = &img;
+	fdf->menu = &menu;
+	fdf->mlx = mlx_init();
 	if (!fdf->mlx)
 	{
-		free_map(fdf);
-		free(fdf->corner);
+		clean_all(fdf);
 		return (0);
 	}
-	// fdf->window = mlx_new_window(fdf->mlx, WIN_WIDTH, WIN_HEIGHT, "FdF");
+	fdf->window = mlx_new_window(fdf->mlx, WIN_WIDTH, WIN_HEIGHT, "FdF");
+	if (!fdf->window)
+	{
+		clean_all(fdf);
+		return (0);
+	}
 	img_put(fdf);
 	// mlx_mouse_hook(fdf->window, mouse_hook, fdf);
 	mlx_hook(fdf->window, KEY_PRESS, KEY_PRESS_MASK, key_hook, fdf);
