@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 03:40:35 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/14 20:50:31 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/14 21:52:05 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,5 @@ int	show_in_window(t_fdf *fdf)
 	// mlx_mouse_hook(fdf->window, mouse_hook, fdf);
 	mlx_hook(fdf->window, KEY_PRESS, KEY_PRESS_MASK, key_hook, fdf);
 	mlx_loop(fdf->mlx);
-	mlx_destroy_image(fdf->mlx, fdf->img->img);
-	mlx_destroy_image(fdf->mlx, fdf->menu->img);
-	mlx_destroy_window(fdf->mlx, fdf->window);
-	clean_all(fdf);
 	return (1);
 }

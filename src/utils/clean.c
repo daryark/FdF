@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 17:26:35 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/14 17:43:37 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/14 21:57:05 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	clean_all(t_fdf *fdf)
 		free_map(fdf);
 	if (fdf->corner != NULL)
 		free (fdf->corner);
+	printf("%p, menu: %p\n", fdf->img->img, fdf->menu->img);
 	if (fdf->img != NULL && fdf->img->img != NULL)
 		mlx_destroy_image(fdf->mlx, fdf->img->img);
 	if (fdf->menu != NULL && fdf->menu->img != NULL)

@@ -6,19 +6,16 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 23:45:31 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/14 20:51:37 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/14 21:57:09 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../fdf.h"
 
-void	move_img(t_fdf *arg, char direction)
+void	move_img(t_fdf *fdf, char direction)
 {
 	int	i;
 	int	j;
-	t_fdf	*fdf;
-
-	fdf = (t_fdf *) arg;
 
 	i = -1;
 	mlx_destroy_image(fdf->mlx, fdf->img->img);
@@ -53,6 +50,8 @@ int	key_hook(int keycode, t_fdf *fdf)
 {
 	if (keycode == CLOSE_BTN || keycode == HK_ESC)
 	{
+		mlx_destroy_image(fdf->mlx, fdf->img->img);
+		mlx_destroy_image(fdf->mlx, fdf->menu->img);
 		clean_all(fdf);
 		exit(EXIT_SUCCESS);
 	}
