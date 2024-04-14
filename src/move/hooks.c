@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 23:45:31 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/14 23:50:05 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/15 00:02:32 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,27 +27,23 @@ static void	move_img(t_fdf *fdf, char direction)
 		while (++j < fdf->width)
 		{
 			if (direction == 'u')
-			{
-				fdf->shift_y -= 30;
 				fdf->map[i][j].y -= 30;
-			}
 			if (direction == 'd')
-			{
-				fdf->shift_y += 30;
 				fdf->map[i][j].y += 30;
-			}
 			if (direction == 'l')
-			{
-				fdf->shift_x -= 30;
 				fdf->map[i][j].x -= 30;
-			}
 			if (direction == 'r')
-			{
-				fdf->shift_x += 30;
 				fdf->map[i][j].x += 30;
-			}
 		}
 	}
+	if (direction == 'u')
+		fdf->shift_y -= 30;
+	if (direction == 'd')
+		fdf->shift_y += 30;
+	if (direction == 'l')
+		fdf->shift_x -= 30;
+	if (direction == 'r')
+		fdf->shift_x += 30;
 	img_put(fdf);
 }
 
@@ -84,6 +80,7 @@ int	key_hook(int keycode, t_fdf *fdf)
 		mlx_clear_window(fdf->mlx, fdf->window);
 		reset_map(fdf);
 		fdf->zoom *= 0.9;
+		printf("shift x: %d, y: %d\n", fdf->shift_x, fdf->shift_y);
 		transform_map(fdf);
 		center_map(fdf);
 		img_put(fdf);
