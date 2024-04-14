@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 22:12:42 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/13 00:08:38 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/14 13:58:44 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,31 +39,28 @@ void	parse_file(char *file, t_fdf *fdf)
 		j = -1;
 		while (line_arr[++j])
 			fill_point(line_arr[j], fdf, j, i);
-		free_lines(line_arr);
+		// free_lines(line_arr);
 	}
 }
 
 int	ft_process(char	*file)
 {
-	t_fdf	*fdf;
+	t_fdf	fdf;
 
-	fdf = (t_fdf *)malloc(sizeof(t_fdf));
-	if (!fdf)
+	if (set_default_values(&fdf))
 		return (1);
-	if (set_default_values(fdf))
-		return (1);
-	map_size(file, fdf);
-	parse_file(file, fdf);
-	if (!fdf->map)
+	map_size(file, &fdf);
+	parse_file(file, &fdf);
+	if (!fdf.map)
 	{
-		clean_all(fdf);
+		clean_all(&fdf);
 		return (1);
 	}
-	transform_map(fdf);
-	center_map(fdf);
-	if (!show_in_window(fdf))
+	transform_map(&fdf);
+	center_map(&fdf);
+	if (!show_in_window(&fdf))
 		return (1);
-	clean_all(fdf);
+	clean_all(&fdf);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 23:14:37 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/12 23:55:56 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/14 13:58:33 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,6 @@ void	clean_all(t_fdf *fdf)
 		(void)fdf->mlx; //check if i need this line
 		free(fdf->mlx);
 	}
-	free(fdf);
 }
 
 void	free_lines( char **line_arr)
@@ -136,7 +135,7 @@ unsigned int	ft_set_color(char *str)
 	return (nb);
 }
 
-int	open_error(fd)
+int	open_error(int fd)
 {
 	if (fd < 0)
 	{

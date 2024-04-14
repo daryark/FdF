@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 01:52:44 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/13 00:18:34 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/14 14:16:44 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	free_map(t_fdf *fdf)
 	int	i;
 
 	i = 0;
-	while (i < fdf->height)
+	while (fdf->map[i] && i < fdf->height)
 		free(fdf->map[i++]);
 	free(fdf->map);
 	fdf->map = NULL;
@@ -40,8 +40,7 @@ void	init_map(t_fdf *fdf)
 		fdf->map[i] = (t_map *)malloc(sizeof(t_map) * fdf->width);
 		if (!fdf->map[i])
 		{
-			free_map(fdf);
-			free(fdf->corner);
+			clean_all(fdf);
 			return ;
 		}
 		j = -1;
@@ -63,7 +62,7 @@ void	fill_point(char *str_point, t_fdf *fdf, int x, int y)
 	point_arr = ft_split(str_point, ',');
 	fdf->map[y][x].val = ft_atoi(point_arr[0]);
 	fdf->map[y][x].color = ft_set_color(point_arr[1]);
-	free_lines(point_arr);
+	// free_lines(point_arr);
 	fdf->map[y][x].x = x;
 	fdf->map[y][x].y = y;
 }
