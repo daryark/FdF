@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 22:19:15 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/14 17:59:32 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/14 23:46:32 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,15 +88,19 @@ typedef struct s_fdf
 	int				height;
 	t_corner		*corner;
 	t_map			**map;
+	t_map			**map_orig;
 
 	void			*mlx;
 	void			*window;
 	t_img			*img;
 	t_img			*menu;
+	int				err;
 
 	float			zoom;
 	int				offset_x;
 	int				offset_y;
+	int				shift_x;
+	int				shift_y;
 	float			slope;
 }					t_fdf;
 
@@ -111,7 +115,7 @@ int				show_in_window(t_fdf *fdf);
 int				check_map_format(char *file);
 int				open_error(int fd);
 int				is_alloc_err_cleaner(void *data, t_fdf *fdf);
-void			free_map(t_fdf *fdf);
+void			free_map(t_fdf *fdf, int option);
 void			clean_all(t_fdf *fdf);
 void			free_lines(char **line_arr);
 //utils
@@ -122,10 +126,12 @@ void			fill_point(char *str_point, t_fdf *fdf, int x, int y);
 void			swap_points(t_map *a, t_map *b);
 unsigned int	ft_set_color(char *str);
 unsigned int	interpolate_color(int i0, int i_curr, int i1, int clr0, int clr1);
+void			map_dup(t_fdf *fdf);
+void			reset_map(t_fdf *fdf);
 //screen math
 void			map_size(char *file, t_fdf *fdf);
 void			map_real_size(t_fdf *fdf);
-void			calc_zoom(t_fdf *fdf);
+void			adjust_zoom(t_fdf *fdf);
 void			make_zoom(t_map *point, float zoom);
 void			zoom_map_to_win_size(t_fdf *fdf);
 void			calc_offset(t_fdf *fdf);

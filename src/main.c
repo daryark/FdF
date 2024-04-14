@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 22:12:42 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/14 17:41:20 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/14 23:07:31 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,13 @@ int	ft_process(char	*file)
 		return (1);
 	map_size(file, &fdf);
 	parse_file(file, &fdf);
-	if (is_alloc_err_cleaner(fdf.map, &fdf))
+	if (!fdf.map)
+		return (1);
+	map_dup(&fdf);
+	if (!fdf.map_orig)
 		return (1);
 	transform_map(&fdf);
+	zoom_map_to_win_size(&fdf);
 	if (fdf.zoom < 0)
 		return (1);
 	center_map(&fdf);

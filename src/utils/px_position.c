@@ -6,13 +6,13 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 12:15:04 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/14 17:53:01 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/14 23:47:20 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../fdf.h"
 
-void	calc_zoom(t_fdf *fdf)
+void	adjust_zoom(t_fdf *fdf)
 {
 	float	potential_zoom_x;
 	float	potential_zoom_y;
@@ -62,15 +62,16 @@ void	transform_map(t_fdf *fdf)
 				fdf->map[i][j].val);
 		}
 	}
-	zoom_map_to_win_size(fdf);
 }
 
 void	zoom_map_to_win_size(t_fdf *fdf)
 {
 	int	i;
 	int	j;
+	int	total_zoom;
 
-	calc_zoom(fdf);
+	total_zoom = fdf->zoom;
+	adjust_zoom(fdf);
 	if (fdf->zoom < 0)
 		return ;
 	i = -1;
@@ -80,6 +81,8 @@ void	zoom_map_to_win_size(t_fdf *fdf)
 		while (++j < fdf->width)
 			make_zoom(&fdf->map[i][j], fdf->zoom);
 	}
+	fdf->zoom *= total_zoom;
+	printf("total zoom: %f\n", fdf->zoom);
 }
 
 void	center_map(t_fdf *fdf)
@@ -94,6 +97,6 @@ void	center_map(t_fdf *fdf)
 	{
 		j = -1;
 		while (++j < fdf->width)
-			set_offset(&fdf->map[i][j], fdf->offset_x, fdf->offset_y);
+			set_offset(&fdf->map[i][j], fdf->offset_x + fdf->shift_x, fdf->offset_y + fdf->shift_y);
 	}
 }

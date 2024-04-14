@@ -6,27 +6,39 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 17:26:35 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/14 21:57:05 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/14 22:58:17 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../fdf.h"
 
-void	free_map(t_fdf *fdf)
+void	free_map(t_fdf *fdf, int option)
 {
 	int	i;
 
 	i = 0;
-	while (fdf->map[i] && i < fdf->height)
+	if (option == 'm')
+	{
+		while (fdf->map[i] && i < fdf->height)
 		free(fdf->map[i++]);
-	free(fdf->map);
-	fdf->map = NULL;
+		free(fdf->map);
+		fdf->map = NULL;
+	}
+	else if (option == 'o')
+	{
+		while (fdf->map_orig[i] && i < fdf->height)
+		free(fdf->map_orig[i++]);
+		free(fdf->map_orig);
+		fdf->map_orig = NULL;
+	}
 }
 
 void	clean_all(t_fdf *fdf)
 {
 	if (fdf->map != NULL)
-		free_map(fdf);
+		free_map(fdf, 'm');
+	if (fdf->map_orig != NULL)
+		free_map(fdf, 'o');
 	if (fdf->corner != NULL)
 		free (fdf->corner);
 	printf("%p, menu: %p\n", fdf->img->img, fdf->menu->img);

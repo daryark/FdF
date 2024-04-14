@@ -6,13 +6,13 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 23:45:31 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/14 21:57:09 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/14 23:50:05 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../fdf.h"
 
-void	move_img(t_fdf *fdf, char direction)
+static void	move_img(t_fdf *fdf, char direction)
 {
 	int	i;
 	int	j;
@@ -27,13 +27,25 @@ void	move_img(t_fdf *fdf, char direction)
 		while (++j < fdf->width)
 		{
 			if (direction == 'u')
+			{
+				fdf->shift_y -= 30;
 				fdf->map[i][j].y -= 30;
+			}
 			if (direction == 'd')
+			{
+				fdf->shift_y += 30;
 				fdf->map[i][j].y += 30;
+			}
 			if (direction == 'l')
+			{
+				fdf->shift_x -= 30;
 				fdf->map[i][j].x -= 30;
+			}
 			if (direction == 'r')
+			{
+				fdf->shift_x += 30;
 				fdf->map[i][j].x += 30;
+			}
 		}
 	}
 	img_put(fdf);
@@ -45,16 +57,18 @@ int	mouse_hook(int keycode, t_fdf *fdf)
 	ft_printf("hello from my hook, %d\n", keycode);
 	return (0);
 }
+static void	close_prog(t_fdf *fdf)
+{
+	mlx_destroy_image(fdf->mlx, fdf->img->img);
+	mlx_destroy_image(fdf->mlx, fdf->menu->img);
+	clean_all(fdf);
+	exit(EXIT_SUCCESS);
+}
 
 int	key_hook(int keycode, t_fdf *fdf)
 {
 	if (keycode == CLOSE_BTN || keycode == HK_ESC)
-	{
-		mlx_destroy_image(fdf->mlx, fdf->img->img);
-		mlx_destroy_image(fdf->mlx, fdf->menu->img);
-		clean_all(fdf);
-		exit(EXIT_SUCCESS);
-	}
+		close_prog(fdf);
 	else if (keycode == HK_UP)
 		move_img(fdf, 'u');
 	else if (keycode == HK_DOWN)
@@ -63,6 +77,28 @@ int	key_hook(int keycode, t_fdf *fdf)
 		move_img(fdf, 'l');
 	else if (keycode == HK_RIGHT)
 		move_img(fdf, 'r');
+	else if (keycode == HK_MINUS)
+	{
+		mlx_destroy_image(fdf->mlx, fdf->img->img);
+		mlx_destroy_image(fdf->mlx, fdf->menu->img);
+		mlx_clear_window(fdf->mlx, fdf->window);
+		reset_map(fdf);
+		fdf->zoom *= 0.9;
+		transform_map(fdf);
+		center_map(fdf);
+		img_put(fdf);
+	}
+	else if (keycode == HK_PLUS)
+	{
+		mlx_destroy_image(fdf->mlx, fdf->img->img);
+		mlx_destroy_image(fdf->mlx, fdf->menu->img);
+		mlx_clear_window(fdf->mlx, fdf->window);
+		reset_map(fdf);
+		fdf->zoom *= 1.1;
+		transform_map(fdf);
+		center_map(fdf);
+		img_put(fdf);
+	}
 	else
 		ft_printf("hello from my hook, %d\n", keycode);
 	return (0);

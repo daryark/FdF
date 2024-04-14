@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 23:14:37 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/14 17:46:10 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/14 23:46:53 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int	set_default_values(t_fdf *fdf)
 	fdf->zoom = 50.0;
 	fdf->offset_x = 0;
 	fdf->offset_y = 0;
+	fdf->shift_x = 0;
+	fdf->shift_y = 0;
 	fdf->slope = 0.0;
 	fdf->map = NULL;
 	fdf->corner = malloc(sizeof(t_corner));
@@ -28,6 +30,7 @@ int	set_default_values(t_fdf *fdf)
 	fdf->menu = NULL;
 	fdf->mlx = NULL;
 	fdf->window = NULL;
+	fdf->err = 0;
 	return (0);
 }
 
@@ -39,6 +42,24 @@ void	reset_corner(t_corner *p)
 	p->y_high = INT_MIN;
 	p->real_w = 0;
 	p->real_h = 0;
+}
+void	reset_map(t_fdf *fdf)
+{
+	int		i;
+	int		j;
+
+	i = -1;
+	while (++i < fdf->height)
+	{
+		j = -1;
+		while (++j < fdf->width)
+		{
+			fdf->map[i][j].color = fdf->map_orig[i][j].color;
+			fdf->map[i][j].val = fdf->map_orig[i][j].val;
+			fdf->map[i][j].x = fdf->map_orig[i][j].x;
+			fdf->map[i][j].y = fdf->map_orig[i][j].y;
+		}
+	}
 }
 
 unsigned int	ft_set_color(char *str)

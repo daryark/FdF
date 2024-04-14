@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 01:52:44 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/14 17:47:42 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/14 23:16:46 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@ void	init_map(t_fdf *fdf)
 	int		j;
 
 
-	fdf->map = (t_map **)malloc(sizeof(t_map *) * fdf->height);
+	fdf->map = malloc(sizeof(t_map *) * fdf->height);
 	if (!fdf->map)
 		return ;
 	i = -1;
 	while (++i < fdf->height)
 	{
 		j = 0;
-		fdf->map[i] = (t_map *)malloc(sizeof(t_map) * fdf->width);
+		fdf->map[i] = malloc(sizeof(t_map) * fdf->width);
 		if (is_alloc_err_cleaner(fdf->map[i], fdf))
 			return ;
 		j = -1;
@@ -107,4 +107,30 @@ void	map_real_size(t_fdf *fdf)
 	}
 	fdf->corner->real_w = fdf->corner->x_high - fdf->corner->x_low;
 	fdf->corner->real_h = fdf->corner->y_high - fdf->corner->y_low;
+}
+
+void	map_dup(t_fdf *fdf)
+{
+	int		i;
+	int		j;
+
+	fdf->map_orig = malloc(sizeof(t_map *) * fdf->height);
+	if (is_alloc_err_cleaner(fdf->map_orig, fdf))
+		return ;
+	i = -1;
+	while (++i < fdf->height)
+	{
+		j = 0;
+		fdf->map_orig[i] = malloc(sizeof(t_map) * fdf->width);
+		if (is_alloc_err_cleaner(fdf->map_orig[i], fdf))
+			return ;
+		j = -1;
+		while (++j < fdf->width)
+		{
+			fdf->map_orig[i][j].color = fdf->map[i][j].color;
+			fdf->map_orig[i][j].val = fdf->map[i][j].val;
+			fdf->map_orig[i][j].x = fdf->map[i][j].x;
+			fdf->map_orig[i][j].y = fdf->map[i][j].y;
+		}
+	}
 }
