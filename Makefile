@@ -42,7 +42,7 @@ NAME = fdf
 SRC =	main.c \
 		map.c utils.c set_val.c px_position.c error.c clean.c \
 		window.c draw_line_algorithm.c menu.c \
-		hooks.c \
+		hooks.c events.c \
 		print_map_helper.c
 
 OBJ = $(addprefix $(OBJ_F), $(SRC:%.c=%.o))

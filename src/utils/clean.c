@@ -6,46 +6,39 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 17:26:35 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/14 22:58:17 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/15 21:49:32 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../fdf.h"
 
-void	free_map(t_fdf *fdf, int option)
+void	free_map(t_map **map, int height)
 {
 	int	i;
 
 	i = 0;
-	if (option == 'm')
-	{
-		while (fdf->map[i] && i < fdf->height)
-		free(fdf->map[i++]);
-		free(fdf->map);
-		fdf->map = NULL;
-	}
-	else if (option == 'o')
-	{
-		while (fdf->map_orig[i] && i < fdf->height)
-		free(fdf->map_orig[i++]);
-		free(fdf->map_orig);
-		fdf->map_orig = NULL;
-	}
+	while (map[i] && i < height)
+		free(map[i++]);
+	free(map);
+	map = NULL;
+}
+void	destroy_img(t_fdf *fdf)
+{
+	if (fdf->img != NULL && fdf->img->img != NULL)
+		mlx_destroy_image(fdf->mlx, fdf->img->img);
+	if (fdf->menu != NULL && fdf->menu->img != NULL)
+		mlx_destroy_image(fdf->mlx, fdf->menu->img);
 }
 
 void	clean_all(t_fdf *fdf)
 {
 	if (fdf->map != NULL)
-		free_map(fdf, 'm');
+		free_map(fdf->map, fdf->height);
 	if (fdf->map_orig != NULL)
-		free_map(fdf, 'o');
+		free_map(fdf->map_orig, fdf->height);
 	if (fdf->corner != NULL)
 		free (fdf->corner);
-	printf("%p, menu: %p\n", fdf->img->img, fdf->menu->img);
-	if (fdf->img != NULL && fdf->img->img != NULL)
-		mlx_destroy_image(fdf->mlx, fdf->img->img);
-	if (fdf->menu != NULL && fdf->menu->img != NULL)
-		mlx_destroy_image(fdf->mlx, fdf->menu->img);
+	destroy_img(fdf);
 	if (fdf->window != NULL)
 		mlx_destroy_window(fdf->mlx, fdf->window);
 	if (fdf->mlx)

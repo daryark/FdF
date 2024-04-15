@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 12:15:04 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/14 23:52:27 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/15 22:51:18 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void	transform_map(t_fdf *fdf)
 		j = -1;
 		while (++j < fdf->width)
 		{
+			fdf->map[i][j].val *= fdf->z_coef;
 			make_zoom(&fdf->map[i][j], fdf->zoom);
 			do_isometric(&fdf->map[i][j].x, &fdf->map[i][j].y, \
 				fdf->map[i][j].val);

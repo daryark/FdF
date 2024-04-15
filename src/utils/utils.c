@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 23:14:37 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/14 23:46:53 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/15 22:49:45 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	set_default_values(t_fdf *fdf)
 	fdf->shift_y = 0;
 	fdf->slope = 0.0;
 	fdf->map = NULL;
+	fdf->map_orig = NULL;
 	fdf->corner = malloc(sizeof(t_corner));
 	if (is_alloc_err_cleaner(fdf->corner, fdf))
 		return (1);
@@ -31,6 +32,8 @@ int	set_default_values(t_fdf *fdf)
 	fdf->mlx = NULL;
 	fdf->window = NULL;
 	fdf->err = 0;
+	fdf->z_event = 0;
+	fdf->z_coef = 1;
 	return (0);
 }
 

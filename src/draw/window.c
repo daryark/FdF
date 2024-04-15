@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 03:40:35 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/14 22:43:41 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/15 22:58:18 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,15 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 
 	dst = img->addr + (y * img->len + x * (img->bpp / 8));
 	*(unsigned int *)dst = color;
+}
+
+void	redraw_img(t_fdf *fdf)
+{
+	destroy_img(fdf);
+	reset_map(fdf);
+	transform_map(fdf);
+	center_map(fdf);
+	img_put(fdf);
 }
 
 void	img_put(t_fdf *fdf)
@@ -59,20 +68,17 @@ int	show_in_window(t_fdf *fdf)
 	fdf->img = &img;
 	fdf->menu = &menu;
 	fdf->mlx = mlx_init();
-	if (!fdf->mlx)
-	{
-		clean_all(fdf);
+	if (is_alloc_err_cleaner(fdf->mlx, fdf))
 		return (0);
-	}
 	fdf->window = mlx_new_window(fdf->mlx, WIN_WIDTH, WIN_HEIGHT, "FdF");
-	if (!fdf->window)
-	{
-		clean_all(fdf);
+	if (is_alloc_err_cleaner(fdf->window, fdf))
 		return (0);
-	}
 	img_put(fdf);
 	// mlx_mouse_hook(fdf->window, mouse_hook, fdf);
-	mlx_hook(fdf->window, KEY_PRESS, KEY_PRESS_MASK, key_hook, fdf);
+	// mlx_hook(fdf->window, MOUSE_MOVE_UP | MOUSE_MOVE_DOWN, \
+		// MOUSE_WHEEL_MASK, mouse_hook, fdf);
+	mlx_hook(fdf->window, KEY_PRESS, KEY_PRESS_MASK, key_press_hook, fdf);
+	mlx_hook(fdf->window, KEY_RELEASE, KEY_RELEASE_MASK, key_release_hook, fdf);
 	mlx_loop(fdf->mlx);
 	return (1);
 }

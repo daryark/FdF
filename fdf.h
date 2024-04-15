@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 22:19:15 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/14 23:46:32 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/15 22:58:57 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,10 @@ typedef struct s_fdf
 	int				offset_y;
 	int				shift_x;
 	int				shift_y;
+	float			z_coef;
 	float			slope;
+
+	int				z_event;
 }					t_fdf;
 
 void			print_map(t_fdf *fdf, int modificator); //!delete after finish the proj
@@ -115,7 +118,8 @@ int				show_in_window(t_fdf *fdf);
 int				check_map_format(char *file);
 int				open_error(int fd);
 int				is_alloc_err_cleaner(void *data, t_fdf *fdf);
-void			free_map(t_fdf *fdf, int option);
+void			free_map(t_map **map, int height);
+void			destroy_img(t_fdf *fdf);
 void			clean_all(t_fdf *fdf);
 void			free_lines(char **line_arr);
 //utils
@@ -146,8 +150,13 @@ void			menu_text_put(t_fdf *fdf);
 void			draw_line_algorithm(t_map a, t_map b, t_fdf *fdf);
 void			my_mlx_pixel_put(t_img *img, int x, int y, int color);
 void			fill_bg(int width, int height, t_map start, t_img *img);
+void			redraw_img(t_fdf *fdf);
 //hooks
-int				key_hook(int keycode, t_fdf *fdf);
-int				mouse_hook(int keycode, t_fdf *fdf);
-
+int				key_press_hook(int keycode, t_fdf *fdf);
+int				key_release_hook(int keycode, t_fdf *fdf);
+// int				mouse_hook(int keycode, t_fdf *fdf);
+//events
+void			zoom_event(t_fdf *fdf, int keycode);
+void			move_event(t_fdf *fdf, int keycode);
+void			close_event(t_fdf*fdf);
 #endif
