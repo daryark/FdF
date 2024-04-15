@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 14:17:31 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/12 17:09:41 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/16 00:18:20 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	print_map(t_fdf *fdf, int modificator)
 				ft_printf(" %d,%x " RE, fdf->map[i][j].val, fdf->map[i][j].color);
 			}
 			else
-				ft_printf(GREEN " %d,%d " RE, fdf->map[i][j].x, fdf->map[i][j].y);
+				ft_printf(" %d,%d ", fdf->map[i][j].x, fdf->map[i][j].y);
 		}
 		ft_printf("\n");
 	}
