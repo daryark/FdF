@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 23:45:31 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/16 00:33:24 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/16 01:54:23 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	high_change_event(t_fdf *fdf, int keycode)
 		fdf->z_coef += 0.1;
 	if (keycode == HK_MINUS)
 		fdf->z_coef -= 0.1;
+	printf("z_coef: %f\n", fdf->z_coef);
 	redraw_img(fdf);
 }
 
@@ -36,8 +37,8 @@ int	key_press_hook(int keycode, t_fdf *fdf)
 	else if ((keycode == HK_MINUS || keycode == HK_PLUS)
 		&& fdf->z_event)
 		high_change_event(fdf, keycode);
-	else
-		ft_printf("key:	%d\n", keycode);
+	// else
+	// 	ft_printf("key:	%d\n", keycode);
 	return (0);
 }
 

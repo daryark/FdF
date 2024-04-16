@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 22:19:15 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/15 22:58:57 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/16 01:56:53 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 #  include "mlx-osx/mlx.h"
 # endif
 
-# define MENU_WIDTH 300
+# define MENU_WIDTH 350
 
 # ifndef WIN_WIDTH
 #  ifdef LINUX
@@ -109,7 +109,7 @@ typedef struct s_fdf
 
 void			print_map(t_fdf *fdf, int modificator); //!delete after finish the proj
 void			print_center_vector_helper(t_fdf *fdf); //!delete after finish the proj
-void			check_corners_red(t_fdf *fdf); //!delete after finish the proj
+void			check_corners_green(t_fdf *fdf); //!delete after finish the proj
 //process
 int				ft_process(char	*file);
 void			parse_file(char *file, t_fdf *fdf);
@@ -122,6 +122,7 @@ void			free_map(t_map **map, int height);
 void			destroy_img(t_fdf *fdf);
 void			clean_all(t_fdf *fdf);
 void			free_lines(char **line_arr);
+void			warning_put(t_fdf *fdf);
 //utils
 int				set_default_values(t_fdf *fdf);
 void			reset_corner(t_corner *p);

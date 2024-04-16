@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 12:15:04 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/16 00:29:15 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/16 02:00:59 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ void	adjust_zoom(t_fdf *fdf)
 		(float)fdf->corner->real_w;
 	potential_zoom_y = (float)WIN_HEIGHT / (float)fdf->corner->real_h;
 	if (potential_zoom_x < potential_zoom_y)
-		fdf->zoom = potential_zoom_x;
+		fdf->zoom *= potential_zoom_x;
 	else
-		fdf->zoom = potential_zoom_y;
+		fdf->zoom *= potential_zoom_y;
 	if (fdf->zoom < 0)
 	{
 		ft_putendl_fd("Error calculating zoom", 2);
@@ -67,23 +67,9 @@ void	transform_map(t_fdf *fdf)
 
 void	zoom_map_to_win_size(t_fdf *fdf)
 {
-	int	i;
-	int	j;
-	int	total_zoom;
-
-	total_zoom = fdf->zoom;
 	adjust_zoom(fdf);
-	if (fdf->zoom < 0)
-		return ;
-	i = -1;
-	while (++i < fdf->height)
-	{
-		j = -1;
-		while (++j < fdf->width)
-			make_zoom(&fdf->map[i][j], fdf->zoom);
-	}
-	fdf->zoom *= total_zoom;
-	printf("total zoom: %f\n", fdf->zoom);
+	reset_map(fdf);
+	transform_map(fdf);
 }
 
 void	center_map(t_fdf *fdf)
@@ -92,7 +78,6 @@ void	center_map(t_fdf *fdf)
 	int	j;
 
 	calc_offset(fdf);
-	check_corners_red(fdf); //just print helper, delete later
 	i = -1;
 	while (++i < fdf->height)
 	{
