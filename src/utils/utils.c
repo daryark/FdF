@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 23:14:37 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/15 22:49:45 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/16 03:32:21 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int	set_default_values(t_fdf *fdf)
 	fdf->err = 0;
 	fdf->z_event = 0;
 	fdf->z_coef = 1;
+	fdf->prev_mv = 0;
 	return (0);
 }
 
@@ -46,6 +47,7 @@ void	reset_corner(t_corner *p)
 	p->real_w = 0;
 	p->real_h = 0;
 }
+
 void	reset_map(t_fdf *fdf)
 {
 	int		i;

@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 15:05:09 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/16 01:36:59 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/16 03:40:17 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,12 @@ static void	do_shift(t_fdf *fdf, int keycode)
 		fdf->shift_x += 30;
 }
 
-void	move_event(t_fdf *fdf, int keycode)
+static void	move_img(t_fdf *fdf, int keycode)
 {
 	int	i;
 	int	j;
 
 	i = -1;
-	destroy_img(fdf);
 	while (++i < fdf->height)
 	{
 		j = -1;
@@ -63,6 +62,16 @@ void	move_event(t_fdf *fdf, int keycode)
 		}
 	}
 	do_shift(fdf, keycode);
+}
+
+void	move_event(t_fdf *fdf, int keycode)
+{
+	destroy_img(fdf);
+	move_img(fdf, keycode);
+	if (fdf->prev_mv)
+		move_img(fdf, fdf->prev_mv);
+	if (!fdf->prev_mv)
+		fdf->prev_mv = keycode;
 	img_put(fdf);
 }
 

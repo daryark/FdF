@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 12:15:04 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/16 02:00:59 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/16 02:04:05 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ void	center_map(t_fdf *fdf)
 	{
 		j = -1;
 		while (++j < fdf->width)
-			set_offset(&fdf->map[i][j], (fdf->offset_x + fdf->shift_x), (fdf->offset_y + fdf->shift_y));
+			set_offset(&fdf->map[i][j], (fdf->offset_x + fdf->shift_x), \
+				(fdf->offset_y + fdf->shift_y));
 	}
 }

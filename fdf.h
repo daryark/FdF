@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 22:19:15 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/16 01:56:53 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/16 03:32:05 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ typedef struct s_fdf
 	float			slope;
 
 	int				z_event;
+	int				prev_mv;
 }					t_fdf;
 
 void			print_map(t_fdf *fdf, int modificator); //!delete after finish the proj
@@ -160,4 +161,5 @@ int				key_release_hook(int keycode, t_fdf *fdf);
 void			zoom_event(t_fdf *fdf, int keycode);
 void			move_event(t_fdf *fdf, int keycode);
 void			close_event(t_fdf*fdf);
+
 #endif
