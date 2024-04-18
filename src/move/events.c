@@ -6,11 +6,41 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 15:05:09 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/16 03:40:17 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/18 17:20:46 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../fdf.h"
+
+void	rotate_event(t_fdf *fdf, int keycode)
+{
+	if (fdf->pre_event == HK_X && keycode == HK_MINUS)
+		fdf->angle_x += 10;
+	else if (fdf->pre_event == HK_X && keycode == HK_PLUS)
+		fdf->angle_x -= 10;
+	else if (fdf->pre_event == HK_Z && keycode == HK_MINUS)
+		fdf->angle_z += 10;
+	else if (fdf->pre_event == HK_Z && keycode == HK_PLUS)
+		fdf->angle_z -= 10;
+	else if (fdf->pre_event == HK_Y && keycode == HK_MINUS)
+		fdf->angle_y += 10;
+	else if (fdf->pre_event == HK_Y && keycode == HK_PLUS)
+		fdf->angle_y -= 10;
+	redraw_img(fdf);
+	// if (fdf->pre_event == HK_X)
+	// 	rotate_x(fdf, keycode);
+	// else if (fdf->pre_event == HK_Z)
+	// 	rotate_z(fdf, keycode);
+}
+
+void	hight_change_event(t_fdf *fdf, int keycode)
+{
+	if (keycode == HK_PLUS)
+		fdf->z_coef += 0.1;
+	if (keycode == HK_MINUS)
+		fdf->z_coef -= 0.1;
+	redraw_img(fdf);
+}
 
 void	zoom_event(t_fdf *fdf, int keycode)
 {
@@ -28,49 +58,13 @@ void	zoom_event(t_fdf *fdf, int keycode)
 	redraw_img(fdf);
 }
 
-static void	do_shift(t_fdf *fdf, int keycode)
-{
-	if (keycode == HK_UP)
-		fdf->shift_y -= 30;
-	if (keycode == HK_DOWN)
-		fdf->shift_y += 30;
-	if (keycode == HK_LEFT)
-		fdf->shift_x -= 30;
-	if (keycode == HK_RIGHT)
-		fdf->shift_x += 30;
-}
-
-static void	move_img(t_fdf *fdf, int keycode)
-{
-	int	i;
-	int	j;
-
-	i = -1;
-	while (++i < fdf->height)
-	{
-		j = -1;
-		while (++j < fdf->width)
-		{
-			if (keycode == HK_UP)
-				fdf->map[i][j].y -= 30;
-			if (keycode == HK_DOWN)
-				fdf->map[i][j].y += 30;
-			if (keycode == HK_LEFT)
-				fdf->map[i][j].x -= 30;
-			if (keycode == HK_RIGHT)
-				fdf->map[i][j].x += 30;
-		}
-	}
-	do_shift(fdf, keycode);
-}
-
 void	move_event(t_fdf *fdf, int keycode)
 {
 	destroy_img(fdf);
 	move_img(fdf, keycode);
 	if (fdf->prev_mv)
 		move_img(fdf, fdf->prev_mv);
-	if (!fdf->prev_mv)
+	else
 		fdf->prev_mv = keycode;
 	img_put(fdf);
 }

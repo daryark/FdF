@@ -26,6 +26,12 @@
 // #  define MOUSE_MOVE_MASK   MouseMoveMask
 # else
 #  define HK_Z              6
+#  define HK_X              7
+#  define HK_Y              16
+#  define HK_ARROW_L        43
+#  define HK_ARROW_R        47
+#  define HK_CTRL_L         256
+#  define HK_CTRL_R         264
 #  define HK_ESC            53
 #  define HK_PLUS           24
 #  define HK_MINUS          27
@@ -33,7 +39,7 @@
 #  define HK_DOWN           125
 #  define HK_LEFT           123
 #  define HK_RIGHT          124
-#  define CLOSE_BTN         7 //?add HK_***
+#  define CLOSE_BTN         51 //backspace
 
 #  define KEY_PRESS         2
 #  define KEY_RELEASE       3

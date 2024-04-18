@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 22:19:15 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/16 03:32:05 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/18 17:01:13 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,6 @@
 # include <math.h>
 # include <limits.h>
 # include <stdio.h> //!delete later
-// # include <string.h>
-// # include <errno.h>
 
 # include "./keycode.h"
 # include "libft/libft.h"
@@ -96,15 +94,18 @@ typedef struct s_fdf
 	t_img			*menu;
 	int				err;
 
+	float			slope;
 	float			zoom;
 	int				offset_x;
 	int				offset_y;
 	int				shift_x;
 	int				shift_y;
 	float			z_coef;
-	float			slope;
+	float			angle_x;
+	float			angle_y;
+	float			angle_z;
 
-	int				z_event;
+	int				pre_event; //when event triggered with two buttons
 	int				prev_mv;
 }					t_fdf;
 
@@ -143,7 +144,7 @@ void			zoom_map_to_win_size(t_fdf *fdf);
 void			calc_offset(t_fdf *fdf);
 void			set_offset(t_map *point, int offset_x, int offset_y);
 void			center_map(t_fdf *fdf);
-void			do_isometric(int *x, int *y, int z);
+void			do_isometric(int *x, int *y, int *z, t_fdf *fdf);
 void			transform_map(t_fdf *fdf);
 //window
 void			img_put(t_fdf *fdf);
@@ -160,6 +161,10 @@ int				key_release_hook(int keycode, t_fdf *fdf);
 //events
 void			zoom_event(t_fdf *fdf, int keycode);
 void			move_event(t_fdf *fdf, int keycode);
+void			hight_change_event(t_fdf *fdf, int keycode);
+void			rotate_event(t_fdf *fdf, int keycode);
 void			close_event(t_fdf*fdf);
+//event utils
+void			move_img(t_fdf *fdf, int keycode);
 
 #endif

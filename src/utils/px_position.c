@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 12:15:04 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/16 02:04:05 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/18 17:24:26 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ void	adjust_zoom(t_fdf *fdf)
 	float	potential_zoom_y;
 
 	map_real_size(fdf);
-	potential_zoom_x = (float)(WIN_WIDTH - MENU_WIDTH) / \
+	potential_zoom_x = (float)(WIN_WIDTH - 20 - MENU_WIDTH) / \
 		(float)fdf->corner->real_w;
-	potential_zoom_y = (float)WIN_HEIGHT / (float)fdf->corner->real_h;
+	potential_zoom_y = (float)(WIN_HEIGHT - 20) / (float)fdf->corner->real_h;
 	if (potential_zoom_x < potential_zoom_y)
 		fdf->zoom *= potential_zoom_x;
 	else
@@ -60,7 +60,7 @@ void	transform_map(t_fdf *fdf)
 			fdf->map[i][j].val *= fdf->z_coef;
 			make_zoom(&fdf->map[i][j], fdf->zoom);
 			do_isometric(&fdf->map[i][j].x, &fdf->map[i][j].y, \
-				fdf->map[i][j].val);
+				&fdf->map[i][j].val, fdf);
 		}
 	}
 }

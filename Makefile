@@ -42,7 +42,7 @@ NAME = fdf
 SRC =	main.c \
 		map.c utils.c set_val.c px_position.c error.c clean.c \
 		window.c draw_line_algorithm.c menu.c \
-		hooks.c events.c \
+		hooks.c events.c event_utils.c \
 		print_map_helper.c
 
 OBJ = $(addprefix $(OBJ_F), $(SRC:%.c=%.o))
@@ -57,7 +57,7 @@ all: $(NAME)
 
 run: $(NAME)
 # ./$(NAME) m maps/*
-	./$(NAME) maps/42.fdf
+	./$(NAME) extras/42.fdf
 
 jul: $(NAME)
 	./$(NAME) maps/julia.fdf
@@ -74,7 +74,7 @@ $(NAME): $(OBJ) $(MLX_F) $(LIBFT_F) $(MAPS_F)
 	$(CC) -o $@ $(OBJ) $(MLX_LIBS) $(LIBFLAGS) 
 	@echo "$(GREEN)$$ASCII_ART\n\n———————————————✣ FDF COMPILED ✣————————————\n$(RE)"
 
-$(OBJ_F)%.o: %.c fdf.h
+$(OBJ_F)%.o: %.c fdf.h keycode.h
 	mkdir -p $(@D)
 	$(CC) $(CC_FLAGS) -o $@ -c $<
 	@printf "$(GREEN). $(RE)"

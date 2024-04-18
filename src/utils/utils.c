@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 23:14:37 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/16 03:32:21 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/18 16:35:30 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,12 @@ int	set_default_values(t_fdf *fdf)
 	fdf->mlx = NULL;
 	fdf->window = NULL;
 	fdf->err = 0;
-	fdf->z_event = 0;
+	fdf->pre_event = 0;
 	fdf->z_coef = 1;
 	fdf->prev_mv = 0;
+	fdf->angle_x = 30;
+	fdf->angle_y = 330;
+	fdf->angle_z = 30;
 	return (0);
 }
 

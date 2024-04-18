@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 03:40:35 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/15 22:58:18 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/18 16:03:49 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	img_put(t_fdf *fdf)
 	fdf->img->addr = mlx_get_data_addr(fdf->img->img, &fdf->img->bpp, \
 	&fdf->img->len, &fdf->img->endian);
 	i = -1;
+	// print_center_vector_helper(fdf);
 	while (++i < fdf->height)
 	{
 		j = -1;

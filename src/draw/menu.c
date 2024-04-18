@@ -17,6 +17,10 @@
 void	menu_put(t_fdf *fdf)
 {
 	t_map	p0;
+	void	*img;
+	char	*relative_path = "./menu6.xpm";
+	int		img_width;
+	int		img_height;
 
 	p0.x = 0;
 	p0.y = 0;
@@ -26,8 +30,9 @@ void	menu_put(t_fdf *fdf)
 	fdf->menu->addr = mlx_get_data_addr(fdf->menu->img, &fdf->menu->bpp, \
 	&fdf->menu->len, &fdf->menu->endian);
 	fill_bg(MENU_WIDTH, WIN_HEIGHT, p0, fdf->menu);
+	img = mlx_xpm_file_to_image(fdf->mlx, relative_path, &img_width, &img_height);
 	mlx_put_image_to_window(fdf->mlx, fdf->window, fdf->menu->img, 0, 0);
-	menu_text_put(fdf);
+	mlx_put_image_to_window(fdf->mlx, fdf->window, img, 0, 0);
 	warning_put(fdf);
 }
 
@@ -51,15 +56,15 @@ void	fill_bg(int width, int height, t_map start, t_img *img)
 }
 
 //*if screen sizes less then the height of text put into it, adjust line gaps
-void	menu_text_put(t_fdf *fdf)
-{
-	int	line_y;
-	int	clr;
+// void	menu_text_put(t_fdf *fdf)
+// {
+// 	int	line_y;
+// 	int	clr;
 
-	line_y = 30;
-	clr = 0xdcdcdc;
-	mlx_string_put(fdf->mlx, fdf->window, 30, line_y, clr, "MENU BAR");
-	mlx_string_put(fdf->mlx, fdf->window, 30, line_y += 50, clr, "⬆️ ⬇️ ⬅️ ➡️");
-	mlx_string_put(fdf->mlx, fdf->window, 30, line_y += 30, clr, "second rule");
-	mlx_string_put(fdf->mlx, fdf->window, 30, line_y += 30, clr, "third rule");
-}
+// 	line_y = 300;
+// 	clr = 0xdcdcdc;
+// 	mlx_string_put(fdf->mlx, fdf->window, 30, line_y, clr, "MENU BAR");
+// 	mlx_string_put(fdf->mlx, fdf->window, 30, line_y += 50, clr, "< /\\ \\/ >");
+// 	mlx_string_put(fdf->mlx, fdf->window, 30, line_y += 30, clr, "second rule");
+// 	mlx_string_put(fdf->mlx, fdf->window, 30, line_y += 30, clr, "third rule");
+// }
