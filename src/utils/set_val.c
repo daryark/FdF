@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 20:34:29 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/19 22:18:53 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/19 23:19:12 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ int	set_default_values(t_fdf *fdf)
 	fdf->slope = 0.0;
 	fdf->map = NULL;
 	fdf->map_orig = NULL;
-	fdf->corner = malloc(sizeof(t_corner));
-	if (is_alloc_err_cleaner(fdf->corner, fdf))
+	fdf->edge = malloc(sizeof(t_edge));
+	if (is_alloc_err_cleaner(fdf->edge, fdf))
 		return (1);
 	fdf->img = NULL;
 	fdf->menu = NULL;
@@ -54,7 +54,7 @@ int	set_default_values(t_fdf *fdf)
 	return (0);
 }
 
-void	reset_corner(t_corner *p)
+void	reset_edge(t_edge *p)
 {
 	p->x_low = INT_MAX;
 	p->y_low = INT_MAX;

@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 01:52:44 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/19 23:11:25 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/20 01:29:18 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,30 +81,28 @@ void	map_size(char *file, t_fdf *fdf)
 	close(fd);
 }
 
-void	map_real_size(t_fdf *fdf)
+void	find_map_edges(t_fdf *fdf)
 {
 	int	i;
 	int	j;
 
-	i = 0;
-	reset_corner(fdf->corner);
-	while (i < fdf->height)
+	i = -1;
+	reset_edge(fdf->edge);
+	// printf("map real size\n");
+	while (++i < fdf->height)
 	{
-		j = 0;
-		while (j < fdf->width)
+		j = -1;
+		while (++j < fdf->width)
 		{
-			fdf->corner->x_low = min(fdf->map[i][j].x, fdf->corner->x_low);
-			fdf->corner->y_low = min(fdf->map[i][j].y, fdf->corner->y_low);
-			fdf->corner->z_low = min(fdf->map[i][j].val, fdf->corner->z_low);
-			fdf->corner->x_high = max(fdf->map[i][j].x, fdf->corner->x_high);
-			fdf->corner->y_high = max(fdf->map[i][j].y, fdf->corner->y_high);
-			fdf->corner->z_high = max(fdf->map[i][j].val, fdf->corner->z_high);
-			j++;
+			// fdf->map[i][j].x += fdf->shift_x;
+			// fdf->map[i][j].y += fdf->shift_y;
+			min_p(&fdf->map[i][j], fdf->edge);
+			max_p(&fdf->map[i][j], fdf->edge);
 		}
-		i++;
 	}
-	fdf->corner->real_w = fdf->corner->x_high - fdf->corner->x_low;
-	fdf->corner->real_h = fdf->corner->y_high - fdf->corner->y_low;
+	// printf("xl: %d, xh: %d, yl: %d, yh: %d\n", fdf->edge->x_low, fdf->edge->x_high, fdf->edge->y_low, fdf->edge->y_high);
+	fdf->edge->real_w = fdf->edge->x_high - fdf->edge->x_low;
+	fdf->edge->real_h = fdf->edge->y_high - fdf->edge->y_low;
 }
 
 void	map_dup(t_fdf *fdf)
@@ -118,7 +116,6 @@ void	map_dup(t_fdf *fdf)
 	i = -1;
 	while (++i < fdf->height)
 	{
-		j = 0;
 		fdf->map_orig[i] = malloc(sizeof(t_map) * fdf->width);
 		if (is_alloc_err_cleaner(fdf->map_orig[i], fdf))
 			return ;

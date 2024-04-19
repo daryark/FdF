@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 23:45:31 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/19 18:47:08 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/19 23:56:52 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	key_press_hook(int keycode, t_fdf *fdf)
 
 int	key_release_hook(int keycode, t_fdf *fdf)
 {
-	ft_printf("key:	%d\n", keycode);
+	// ft_printf("key:	%d\n", keycode);
 	if (keycode == HK_Z && fdf->pre_event == HK_Z)
 		fdf->pre_event = 0;
 	else if (keycode == HK_X && fdf->pre_event == HK_X)

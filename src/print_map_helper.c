@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 14:17:31 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/18 16:18:30 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/20 01:01:16 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,31 +46,31 @@ void	print_center_vector_helper(t_fdf *fdf)
 	int	z;
 
 	i = -1;
-    while (++i < WIN_HEIGHT)
+    while (++i < WIN_H)
     {    
-		x = (WIN_WIDTH / 2) + (MENU_WIDTH / 2);
+		x = (WIN_W / 2) + (MENU_W / 2);
 		y = i;
 		z = 0;
-        // my_mlx_pixel_put(fdf->img, WIN_WIDTH/2, i, 0x1a00ff00);
-        // my_mlx_pixel_put(fdf->img, (WIN_WIDTH/2)+ MENU_WIDTH, i, 0x800000ff);
+        // my_mlx_pixel_put(fdf->img, WIN_W/2, i, 0x1a00ff00);
+        // my_mlx_pixel_put(fdf->img, (WIN_W/2)+ MENU_W, i, 0x800000ff);
 		// set_offset(&(t_map){.x = x, .y = y, .val = z, .color = 0}, fdf->offset_x, fdf->offset_y);
 		do_isometric(&x, &y, &z, fdf);
-        // my_mlx_pixel_put(fdf->img, (WIN_WIDTH / 2) + (MENU_WIDTH / 2), i, 0x0d950d);
+        // my_mlx_pixel_put(fdf->img, (WIN_W / 2) + (MENU_W / 2), i, 0x0d950d);
         my_mlx_pixel_put(fdf->img, x, y, 0x0d950d);
     }
 
-	i = MENU_WIDTH - 1;
-	while (++i < WIN_WIDTH)
+	i = MENU_W - 1;
+	while (++i < WIN_W)
     {   
 		x = i;
-		y = WIN_HEIGHT/2;
+		y = WIN_H/2;
 		z = 0;
 		do_isometric(&x, &y, &z, fdf);
 		// set_offset(&(t_map){.x = x, .y = y, .val = z, .color = 0}, fdf->offset_x, fdf->offset_y);
 		my_mlx_pixel_put(fdf->img, x, y, 0x0d950d);
 	}
-	// i = fdf->corner->y_low;
-	// while (i < fdf->corner->y_high)
+	// i = fdf->edge->y_low;
+	// while (i < fdf->edge->y_high)
 	// {
 	// 	x = 0;
 	// 	y = 0;
@@ -78,10 +78,10 @@ void	print_center_vector_helper(t_fdf *fdf)
 	// 	do_isometric(&x, &y, &z);
 	// 	my_mlx_pixel_put(fdf->img, x, y, 0x0d950d);
 	// }
-        // my_mlx_pixel_put(fdf->img, i, WIN_HEIGHT/2, 0x0d950d);
+        // my_mlx_pixel_put(fdf->img, i, WIN_H/2, 0x0d950d);
 }
 
-void	check_corners_green(t_fdf *fdf)
+void	check_edges_green(t_fdf *fdf)
 {
 	int	i;
 	int j;
@@ -92,8 +92,8 @@ void	check_corners_green(t_fdf *fdf)
 		j = -1;
 		while (++j < fdf->width)
 		{
-			if (fdf->map[i][j].x == fdf->corner->x_low || fdf->map[i][j].y == fdf->corner->y_low
-			|| fdf->map[i][j].x == fdf->corner->x_high || fdf->map[i][j].y == fdf->corner->y_high)
+			if (fdf->map[i][j].x == fdf->edge->x_low || fdf->map[i][j].y == fdf->edge->y_low
+			|| fdf->map[i][j].x == fdf->edge->x_high || fdf->map[i][j].y == fdf->edge->y_high)
 				fdf->map[i][j].color = 0x00ff00;
 		}
 	}

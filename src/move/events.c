@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 15:05:09 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/19 18:19:58 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/20 00:11:18 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,12 @@ void	zoom_event(t_fdf *fdf, int keycode)
 
 void	move_event(t_fdf *fdf, int keycode)
 {
-	destroy_img(fdf);
-	move_img(fdf, keycode);
+	do_shift(fdf, keycode);
 	if (fdf->prev_mv)
-		move_img(fdf, fdf->prev_mv);
+		do_shift(fdf, fdf->prev_mv);
 	else
 		fdf->prev_mv = keycode;
-	img_put(fdf);
+	redraw_img(fdf);
 }
 
 void	close_event(t_fdf *fdf)

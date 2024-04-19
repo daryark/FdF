@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 12:15:04 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/19 17:44:04 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/20 01:09:32 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ void	adjust_zoom(t_fdf *fdf)
 	float	potential_zoom_x;
 	float	potential_zoom_y;
 
-	map_real_size(fdf);
-	potential_zoom_x = (float)(WIN_WIDTH - 20 - MENU_WIDTH) / \
-		(float)fdf->corner->real_w;
-	potential_zoom_y = (float)(WIN_HEIGHT - 20) / (float)fdf->corner->real_h;
+	find_map_edges(fdf);
+	potential_zoom_x = (float)(WIN_W - 20 - MENU_W) / \
+		(float)fdf->edge->real_w;
+	potential_zoom_y = (float)(WIN_H - 20) / (float)fdf->edge->real_h;
 	if (potential_zoom_x < potential_zoom_y)
 		fdf->zoom *= potential_zoom_x;
 	else
@@ -36,14 +36,14 @@ void	adjust_zoom(t_fdf *fdf)
 
 void	calc_offset(t_fdf *fdf)
 {
-	map_real_size(fdf);
-	fdf->offset_x = ((WIN_WIDTH - MENU_WIDTH) / 2) \
-		- ((fdf->corner->real_w - 1) / 2) + MENU_WIDTH;
-	fdf->offset_y = (WIN_HEIGHT / 2) - ((fdf->corner->real_h - 1) / 2);
-	if (fdf->corner->x_low < 0)
-		fdf->offset_x += ft_abs(fdf->corner->x_low);
-	if (fdf->corner->y_low < 0)
-		fdf->offset_y += ft_abs(fdf->corner->y_low);
+	find_map_edges(fdf);
+	fdf->offset_x = ((WIN_W - MENU_W) / 2) \
+		- ((fdf->edge->real_w - 1) / 2) + MENU_W;
+	fdf->offset_y = (WIN_H / 2) - ((fdf->edge->real_h - 1) / 2);
+	if (fdf->edge->x_low < 0)
+		fdf->offset_x += ft_abs(fdf->edge->x_low);
+	if (fdf->edge->y_low < 0)
+		fdf->offset_y += ft_abs(fdf->edge->y_low);
 }
 
 void	transform_map(t_fdf *fdf)
@@ -78,6 +78,7 @@ void	center_map(t_fdf *fdf)
 	int	j;
 
 	calc_offset(fdf);
+	// printf("z center: %d\n", (fdf->edge->z_high - fdf->edge->z_low) / 2);
 	i = -1;
 	while (++i < fdf->height)
 	{
@@ -85,5 +86,6 @@ void	center_map(t_fdf *fdf)
 		while (++j < fdf->width)
 			set_offset(&fdf->map[i][j], (fdf->offset_x + fdf->shift_x), \
 				(fdf->offset_y + fdf->shift_y));
+			// set_offset(&fdf->map[i][j], fdf->offset_x, fdf->offset_y);
 	}
 }

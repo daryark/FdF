@@ -26,10 +26,10 @@ void	menu_put(t_fdf *fdf)
 	p0.y = 0;
 	p0.color = 0x552f2f2f;
 	p0.val = 0;
-	fdf->menu->img = mlx_new_image(fdf->mlx, MENU_WIDTH, WIN_HEIGHT);
+	fdf->menu->img = mlx_new_image(fdf->mlx, MENU_W, WIN_H);
 	fdf->menu->addr = mlx_get_data_addr(fdf->menu->img, &fdf->menu->bpp, \
 	&fdf->menu->len, &fdf->menu->endian);
-	fill_bg(MENU_WIDTH, WIN_HEIGHT, p0, fdf->menu);
+	fill_bg(MENU_W, WIN_H, p0, fdf->menu);
 	img = mlx_xpm_file_to_image(fdf->mlx, relative_path, &img_width, &img_height);
 	mlx_put_image_to_window(fdf->mlx, fdf->window, fdf->menu->img, 0, 0);
 	mlx_put_image_to_window(fdf->mlx, fdf->window, img, 0, 0);
@@ -45,7 +45,7 @@ void	fill_bg(int width, int height, t_map start, t_img *img)
 	{
 		while (start.x < width)
 		{
-			if (start.y == (WIN_HEIGHT - 40))
+			if (start.y == (WIN_H - 40))
 				my_mlx_pixel_put(img, start.x++, start.y, 0xa1ffffff);
 			else
 				my_mlx_pixel_put(img, start.x++, start.y, start.color);

@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 18:52:24 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/19 22:16:58 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/20 01:01:16 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void    draw_line_algorithm(t_map a, t_map b, t_fdf *fdf)
         {
             d_value = interpolate_val(a.x, i, a.y, fdf->slope);
             cur_clr = interpolate_color(a.x, i, b.x, a.color, b.color);
-            if (((i >= 0 && i < WIN_WIDTH) && (d_value >= 0 && d_value < WIN_HEIGHT)))
+            if (((i >= 0 && i < WIN_W) && (d_value >= 0 && d_value < WIN_H)))
                 my_mlx_pixel_put(fdf->img, i, d_value, cur_clr);
             i++;
         }
@@ -90,7 +90,7 @@ void    draw_line_algorithm(t_map a, t_map b, t_fdf *fdf)
         {
             d_value = interpolate_val(a.y, i, a.x, fdf->slope);
             cur_clr = interpolate_color(a.y, i, b.y, a.color, b.color);
-            if ((d_value >= 0 && d_value < WIN_WIDTH) && (i >= 0 && i < WIN_HEIGHT))
+            if ((d_value >= 0 && d_value < WIN_W) && (i >= 0 && i < WIN_H))
                 my_mlx_pixel_put(fdf->img, d_value, i, cur_clr);
             i++;
         }

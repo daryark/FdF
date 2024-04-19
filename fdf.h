@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 22:19:15 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/19 22:28:33 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/20 01:43:31 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,21 +24,21 @@
 #  include "mlx-osx/mlx.h"
 # endif
 
-# define MENU_WIDTH 350
+# define MENU_W 350
 
-# ifndef WIN_WIDTH
+# ifndef WIN_W
 #  ifdef LINUX
-#	 define WIN_WIDTH 3000
+#	 define WIN_W 3000
 #  else
-#   define WIN_WIDTH 1920
+#   define WIN_W 1920
 #  endif
 # endif
 
-# ifndef WIN_HEIGHT
+# ifndef WIN_H
 #  ifdef LINUX
-#	 define WIN_HEIGHT 2080
+#	 define WIN_H 2080
 #  else
-#   define WIN_HEIGHT 1300
+#   define WIN_H 1300
 #  endif
 # endif
 
@@ -70,7 +70,7 @@ typedef struct s_img
 	int				endian;
 }					t_img;
 
-typedef struct s_corner
+typedef struct s_edge
 {
 	int				x_low;
 	int				x_high;
@@ -80,13 +80,13 @@ typedef struct s_corner
 	int				z_high;
 	int				real_w;
 	int				real_h;
-}					t_corner;
+}					t_edge;
 
 typedef struct s_fdf
 {
 	int				width;
 	int				height;
-	t_corner		*corner;
+	t_edge		*edge;
 	t_map			**map;
 	t_map			**map_orig;
 
@@ -113,7 +113,7 @@ typedef struct s_fdf
 
 void			print_map(t_fdf *fdf, int modificator); //!delete after finish the proj
 void			print_center_vector_helper(t_fdf *fdf); //!delete after finish the proj
-void			check_corners_green(t_fdf *fdf); //!delete after finish the proj
+void			check_edges_green(t_fdf *fdf); //!delete after finish the proj
 //process
 int				ft_process(char	*file);
 void			parse_file(char *file, t_fdf *fdf);
@@ -129,20 +129,23 @@ void			free_lines(char **line_arr);
 void			warning_put(t_fdf *fdf);
 //utils
 int				set_default_values(t_fdf *fdf);
-void			reset_corner(t_corner *p);
+void			reset_edge(t_edge *p);
 void			init_map(t_fdf *fdf);
+void			map_dup(t_fdf *fdf);
+void			reset_map(t_fdf *fdf);
 void			fill_point(char *str_point, t_fdf *fdf, int x, int y);
+int				map_out_of_win(t_fdf *fdf);
 void			swap_points(t_map *a, t_map *b);
 unsigned int	ft_set_color(char *str);
 unsigned int	interpolate_color(int i0, int i_curr, int i1, int clr0, int clr1);
-void			map_dup(t_fdf *fdf);
-void			reset_map(t_fdf *fdf);
 void			angle_normailze(int *angle);
 int				min(int a, int b);
 int				max(int a, int b);
+void			min_p(t_map *p, t_edge *edge);
+void			max_p(t_map *p, t_edge *edge);
 //screen math
 void			map_size(char *file, t_fdf *fdf);
-void			map_real_size(t_fdf *fdf);
+void			find_map_edges(t_fdf *fdf);
 void			adjust_zoom(t_fdf *fdf);
 void			make_zoom(t_map *point, float zoom);
 void			zoom_map_to_win_size(t_fdf *fdf);
@@ -154,7 +157,7 @@ void			transform_map(t_fdf *fdf);
 //window
 void			img_put(t_fdf *fdf);
 void			menu_put(t_fdf *fdf);
-void			menu_text_put(t_fdf *fdf);
+// void			menu_text_put(t_fdf *fdf);
 void			draw_line_algorithm(t_map a, t_map b, t_fdf *fdf);
 void			my_mlx_pixel_put(t_img *img, int x, int y, int color);
 void			fill_bg(int width, int height, t_map start, t_img *img);
@@ -170,7 +173,7 @@ void			hight_change_event(t_fdf *fdf, int keycode);
 void			rotate_event(t_fdf *fdf, int keycode);
 void			close_event(t_fdf*fdf);
 //event utils
-void			move_img(t_fdf *fdf, int keycode);
+void			do_shift(t_fdf *fdf, int keycode);
 void			rotate_x(t_fdf *fdf, int keycode);
 void			rotate_y(t_fdf *fdf, int keycode);
 void			rotate_z(t_fdf *fdf, int keycode);
