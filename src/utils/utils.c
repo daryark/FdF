@@ -6,71 +6,25 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 23:14:37 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/18 16:35:30 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/19 23:12:14 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../fdf.h"
 
-int	set_default_values(t_fdf *fdf)
+void angle_normailze(int *angle)
 {
-	fdf->height = 0;
-	fdf->width = 0;
-	fdf->zoom = 50.0;
-	fdf->offset_x = 0;
-	fdf->offset_y = 0;
-	fdf->shift_x = 0;
-	fdf->shift_y = 0;
-	fdf->slope = 0.0;
-	fdf->map = NULL;
-	fdf->map_orig = NULL;
-	fdf->corner = malloc(sizeof(t_corner));
-	if (is_alloc_err_cleaner(fdf->corner, fdf))
-		return (1);
-	fdf->img = NULL;
-	fdf->menu = NULL;
-	fdf->mlx = NULL;
-	fdf->window = NULL;
-	fdf->err = 0;
-	fdf->pre_event = 0;
-	fdf->z_coef = 1;
-	fdf->prev_mv = 0;
-	fdf->angle_x = 30;
-	fdf->angle_y = 330;
-	fdf->angle_z = 30;
-	return (0);
-}
-
-void	reset_corner(t_corner *p)
-{
-	p->x_low = INT_MAX;
-	p->y_low = INT_MAX;
-	p->x_high = INT_MIN;
-	p->y_high = INT_MIN;
-	p->real_w = 0;
-	p->real_h = 0;
-}
-
-void	reset_map(t_fdf *fdf)
-{
-	int		i;
-	int		j;
-
-	i = -1;
-	while (++i < fdf->height)
+	while (!(*angle <= 360 && *angle >= 0))
 	{
-		j = -1;
-		while (++j < fdf->width)
-		{
-			fdf->map[i][j].color = fdf->map_orig[i][j].color;
-			fdf->map[i][j].val = fdf->map_orig[i][j].val;
-			fdf->map[i][j].x = fdf->map_orig[i][j].x;
-			fdf->map[i][j].y = fdf->map_orig[i][j].y;
-		}
+		if (*angle < 0)
+			*angle += 360;
+		else
+			*angle -= 360;
 	}
+	printf("angle: %d\n", *angle);
 }
 
-unsigned int	ft_set_color(char *str)
+unsigned int ft_set_color(char *str)
 {
 	int		nb;
 
@@ -94,3 +48,17 @@ unsigned int	ft_set_color(char *str)
 	return (nb);
 }
 
+int	min(int a, int b)
+{
+	if (a < b)
+		return (a);
+	return (b);
+}
+
+int	max(int a, int b)
+{
+	if (a > b)
+		return (a);
+	return (b);
+}
+void	min_p()

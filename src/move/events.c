@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 15:05:09 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/18 17:20:46 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/19 18:19:58 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,13 @@
 
 void	rotate_event(t_fdf *fdf, int keycode)
 {
-	if (fdf->pre_event == HK_X && keycode == HK_MINUS)
-		fdf->angle_x += 10;
-	else if (fdf->pre_event == HK_X && keycode == HK_PLUS)
-		fdf->angle_x -= 10;
-	else if (fdf->pre_event == HK_Z && keycode == HK_MINUS)
-		fdf->angle_z += 10;
-	else if (fdf->pre_event == HK_Z && keycode == HK_PLUS)
-		fdf->angle_z -= 10;
-	else if (fdf->pre_event == HK_Y && keycode == HK_MINUS)
-		fdf->angle_y += 10;
-	else if (fdf->pre_event == HK_Y && keycode == HK_PLUS)
-		fdf->angle_y -= 10;
+	if (fdf->pre_event == HK_X)
+		rotate_x(fdf, keycode);
+	else if (fdf->pre_event == HK_Z)
+		rotate_z(fdf, keycode);
+	else if (fdf->pre_event == HK_Y)
+		rotate_y(fdf, keycode);
 	redraw_img(fdf);
-	// if (fdf->pre_event == HK_X)
-	// 	rotate_x(fdf, keycode);
-	// else if (fdf->pre_event == HK_Z)
-	// 	rotate_z(fdf, keycode);
 }
 
 void	hight_change_event(t_fdf *fdf, int keycode)

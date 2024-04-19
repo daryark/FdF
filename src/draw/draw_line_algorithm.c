@@ -6,11 +6,29 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 18:52:24 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/10 16:54:56 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/19 22:16:58 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../fdf.h"
+
+void	swap_points(t_map *a, t_map *b)
+{
+	t_map	tmp;
+
+	tmp.color = a->color;
+	tmp.val = a->val;
+	tmp.x = a->x;
+	tmp.y = a->y;
+	a->color = b->color;
+	a->val = b->val;
+	a->x = b->x;
+	a->y = b->y;
+	b->color = tmp.color;
+	b->val = tmp.val;
+	b->x = tmp.x;
+	b->y = tmp.y;
+}
 
 //return the dependent value for each independent value of the point
 static int  interpolate_val(int i0, int i_curr, int d0, float slope)
@@ -23,7 +41,6 @@ static void    calc_slope(int i0, int d0, int i1, int d1, float *slope)
     *slope = (float)(d1 - d0) / (float)(i1 - i0);
 }
 
-#include <stdio.h>
 unsigned int    interpolate_color(int i0, int i_curr, int i1, int clr0, int clr1)
 {
     float cur_clr_slope;

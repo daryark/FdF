@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 01:52:44 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/14 23:16:46 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/19 23:11:25 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,14 +93,12 @@ void	map_real_size(t_fdf *fdf)
 		j = 0;
 		while (j < fdf->width)
 		{
-			if (fdf->map[i][j].x < fdf->corner->x_low)
-				fdf->corner->x_low = fdf->map[i][j].x;
-			else if (fdf->map[i][j].x > fdf->corner->x_high)
-				fdf->corner->x_high = fdf->map[i][j].x;
-			if (fdf->map[i][j].y < fdf->corner->y_low)
-				fdf->corner->y_low = fdf->map[i][j].y;
-			else if (fdf->map[i][j].y > fdf->corner->y_high)
-				fdf->corner->y_high = fdf->map[i][j].y;
+			fdf->corner->x_low = min(fdf->map[i][j].x, fdf->corner->x_low);
+			fdf->corner->y_low = min(fdf->map[i][j].y, fdf->corner->y_low);
+			fdf->corner->z_low = min(fdf->map[i][j].val, fdf->corner->z_low);
+			fdf->corner->x_high = max(fdf->map[i][j].x, fdf->corner->x_high);
+			fdf->corner->y_high = max(fdf->map[i][j].y, fdf->corner->y_high);
+			fdf->corner->z_high = max(fdf->map[i][j].val, fdf->corner->z_high);
 			j++;
 		}
 		i++;

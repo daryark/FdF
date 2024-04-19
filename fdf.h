@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 22:19:15 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/18 17:01:13 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/19 22:28:33 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ typedef struct s_corner
 	int				x_high;
 	int				y_low;
 	int				y_high;
+	int				z_low;
+	int				z_high;
 	int				real_w;
 	int				real_h;
 }					t_corner;
@@ -101,9 +103,9 @@ typedef struct s_fdf
 	int				shift_x;
 	int				shift_y;
 	float			z_coef;
-	float			angle_x;
-	float			angle_y;
-	float			angle_z;
+	int				angle_x;
+	int				angle_y;
+	int				angle_z;
 
 	int				pre_event; //when event triggered with two buttons
 	int				prev_mv;
@@ -135,6 +137,9 @@ unsigned int	ft_set_color(char *str);
 unsigned int	interpolate_color(int i0, int i_curr, int i1, int clr0, int clr1);
 void			map_dup(t_fdf *fdf);
 void			reset_map(t_fdf *fdf);
+void			angle_normailze(int *angle);
+int				min(int a, int b);
+int				max(int a, int b);
 //screen math
 void			map_size(char *file, t_fdf *fdf);
 void			map_real_size(t_fdf *fdf);
@@ -166,5 +171,7 @@ void			rotate_event(t_fdf *fdf, int keycode);
 void			close_event(t_fdf*fdf);
 //event utils
 void			move_img(t_fdf *fdf, int keycode);
-
+void			rotate_x(t_fdf *fdf, int keycode);
+void			rotate_y(t_fdf *fdf, int keycode);
+void			rotate_z(t_fdf *fdf, int keycode);
 #endif
