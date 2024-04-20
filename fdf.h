@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 22:19:15 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/20 01:43:31 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/20 16:21:29 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,6 @@ void			init_map(t_fdf *fdf);
 void			map_dup(t_fdf *fdf);
 void			reset_map(t_fdf *fdf);
 void			fill_point(char *str_point, t_fdf *fdf, int x, int y);
-int				map_out_of_win(t_fdf *fdf);
 void			swap_points(t_map *a, t_map *b);
 unsigned int	ft_set_color(char *str);
 unsigned int	interpolate_color(int i0, int i_curr, int i1, int clr0, int clr1);
@@ -177,4 +176,6 @@ void			do_shift(t_fdf *fdf, int keycode);
 void			rotate_x(t_fdf *fdf, int keycode);
 void			rotate_y(t_fdf *fdf, int keycode);
 void			rotate_z(t_fdf *fdf, int keycode);
+int				map_out_of_win(t_fdf *fdf);
+int				is_relevant_shift(t_fdf *fdf, int keycode);
 #endif
