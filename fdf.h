@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 22:19:15 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/20 17:14:19 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/20 22:18:18 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,13 +186,14 @@ void			hight_change_event(t_fdf *fdf, int keycode);
 void			rotate_event(t_fdf *fdf, int keycode);
 void			close_event(t_fdf*fdf);
 //event utils
-void			do_shift(t_fdf *fdf, int keycode);
+void			do_shift(t_fdf *fdf);
 void			rotate_x(t_fdf *fdf, int keycode);
 void			rotate_y(t_fdf *fdf, int keycode);
 void			rotate_z(t_fdf *fdf, int keycode);
 int				map_out_of_win(t_fdf *fdf);
-int				is_relevant_shift(t_fdf *fdf, int keycode);
+int				is_relevant_shift(t_fdf *fdf);
 int				is_move_key(int keycode);
 int				is_plus_minus_key(int keycode);
-int 			is_xyz_key(int keycode);
+int 			is_xyz_key(t_pressed pressed);
+void			move_key_release(t_fdf *fdf, int keycode);
 #endif

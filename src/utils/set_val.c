@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 20:34:29 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/20 17:07:48 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/20 18:47:40 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ void	set_default_values(t_fdf *fdf)
 	fdf->angle_x = 30;
 	fdf->angle_y = 330;
 	fdf->angle_z = 30;
-	fdf->pre_event = 0;
-	// fdf->pressed = (t_pressed){.x = 0, .y = 0, .ctrl_l = 0, \
-	// 	.down = 0, .up = 0, .left = 0, .right = 0, .plus = 0, .minus = 0};
+	fdf->pre_event = 0; //!
+	fdf->pressed = (t_pressed){.x = 0, .y = 0, .ctrl_l = 0, \
+		.down = 0, .up = 0, .left = 0, .right = 0, .plus = 0, .minus = 0};
 }
 
 void	reset_edge(t_edge *p)

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   event_utils.c                                      :+:      :+:    :+:   */
+/*   event_act.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 16:43:50 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/20 16:22:47 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/20 22:13:52 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	rotate_y(t_fdf *fdf, int keycode)
 
 void	rotate_z(t_fdf *fdf, int keycode)
 {
+	printf("rotate z\n");
 	if (keycode == HK_MINUS)
 		fdf->angle_z -= 5;
 	else
@@ -39,14 +40,14 @@ void	rotate_z(t_fdf *fdf, int keycode)
 	angle_normailze(&fdf->angle_z);
 }
 
-void	do_shift(t_fdf *fdf, int keycode)
+void	do_shift(t_fdf *fdf)
 {
-	if (keycode == HK_UP)
-		fdf->shift_y -= 30;
-	else if (keycode == HK_DOWN)
-		fdf->shift_y += 30;
-	else if (keycode == HK_LEFT)
-		fdf->shift_x -= 30;
-	else if (keycode == HK_RIGHT)
-		fdf->shift_x += 30;
+	if (fdf->pressed.up)
+		fdf->shift_y -= 20;
+	if (fdf->pressed.down)
+		fdf->shift_y += 20;
+	if (fdf->pressed.left)
+		fdf->shift_x -= 20;
+	if (fdf->pressed.right)
+		fdf->shift_x += 20;
 }

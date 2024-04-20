@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 15:05:09 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/20 16:43:57 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/20 22:18:03 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 void	rotate_event(t_fdf *fdf, int keycode)
 {
-	if (fdf->pre_event == HK_X)
+	if (fdf->pressed.x)
 		rotate_x(fdf, keycode);
-	else if (fdf->pre_event == HK_Z)
+	if (fdf->pressed.z)
 		rotate_z(fdf, keycode);
-	else if (fdf->pre_event == HK_Y)
+	else if (fdf->pressed.y)
 		rotate_y(fdf, keycode);
 	redraw_img(fdf);
 }
@@ -50,12 +50,16 @@ void	zoom_event(t_fdf *fdf, int keycode)
 
 void	move_event(t_fdf *fdf, int keycode)
 {
-	if(is_relevant_shift(fdf, keycode))
-		do_shift(fdf, keycode);
-	if (is_move_key(fdf->pre_event) && is_relevant_shift(fdf, fdf->pre_event))
-		do_shift(fdf, fdf->pre_event);
-	else
-		fdf->pre_event = keycode;
+	if (keycode == HK_UP)
+		fdf->pressed.up = 1;
+	else if (keycode == HK_DOWN)
+		fdf->pressed.down = 1;
+	else if (keycode == HK_LEFT)
+		fdf->pressed.left = 1;
+	else if (keycode == HK_RIGHT)
+		fdf->pressed.right = 1;
+	if (is_relevant_shift(fdf))
+		do_shift(fdf);
 	redraw_img(fdf);
 }
 
