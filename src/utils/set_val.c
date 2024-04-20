@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 20:34:29 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/19 23:19:12 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/20 17:07:48 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	set_offset(t_map *point, int offset_x, int offset_y)
 	point->y += offset_y;
 }
 
-int	set_default_values(t_fdf *fdf)
+void	set_default_values(t_fdf *fdf)
 {
 	fdf->height = 0;
 	fdf->width = 0;
@@ -37,21 +37,21 @@ int	set_default_values(t_fdf *fdf)
 	fdf->slope = 0.0;
 	fdf->map = NULL;
 	fdf->map_orig = NULL;
-	fdf->edge = malloc(sizeof(t_edge));
-	if (is_alloc_err_cleaner(fdf->edge, fdf))
-		return (1);
+	fdf->edge = (t_edge){.real_h = 0, .real_w = 0, .x_high = INT_MIN, \
+		.x_low = INT_MAX, .y_high = INT_MIN, .y_low = INT_MAX, \
+		.z_high = INT_MIN, .z_low = INT_MAX};
 	fdf->img = NULL;
 	fdf->menu = NULL;
 	fdf->mlx = NULL;
 	fdf->window = NULL;
 	fdf->err = 0;
-	fdf->pre_event = 0;
 	fdf->z_coef = 1;
-	fdf->prev_mv = 0;
 	fdf->angle_x = 30;
 	fdf->angle_y = 330;
 	fdf->angle_z = 30;
-	return (0);
+	fdf->pre_event = 0;
+	// fdf->pressed = (t_pressed){.x = 0, .y = 0, .ctrl_l = 0, \
+	// 	.down = 0, .up = 0, .left = 0, .right = 0, .plus = 0, .minus = 0};
 }
 
 void	reset_edge(t_edge *p)

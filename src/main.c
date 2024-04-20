@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 22:12:42 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/14 23:07:31 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/20 17:14:44 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,7 @@ int	ft_process(char	*file)
 {
 	t_fdf	fdf;
 
-	if (set_default_values(&fdf))
-		return (1);
+	set_default_values(&fdf);
 	map_size(file, &fdf);
 	parse_file(file, &fdf);
 	if (!fdf.map)

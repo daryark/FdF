@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 12:15:04 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/20 01:09:32 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/20 17:12:54 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	adjust_zoom(t_fdf *fdf)
 
 	find_map_edges(fdf);
 	potential_zoom_x = (float)(WIN_W - 20 - MENU_W) / \
-		(float)fdf->edge->real_w;
-	potential_zoom_y = (float)(WIN_H - 20) / (float)fdf->edge->real_h;
+		(float)fdf->edge.real_w;
+	potential_zoom_y = (float)(WIN_H - 20) / (float)fdf->edge.real_h;
 	if (potential_zoom_x < potential_zoom_y)
 		fdf->zoom *= potential_zoom_x;
 	else
@@ -38,12 +38,12 @@ void	calc_offset(t_fdf *fdf)
 {
 	find_map_edges(fdf);
 	fdf->offset_x = ((WIN_W - MENU_W) / 2) \
-		- ((fdf->edge->real_w - 1) / 2) + MENU_W;
-	fdf->offset_y = (WIN_H / 2) - ((fdf->edge->real_h - 1) / 2);
-	if (fdf->edge->x_low < 0)
-		fdf->offset_x += ft_abs(fdf->edge->x_low);
-	if (fdf->edge->y_low < 0)
-		fdf->offset_y += ft_abs(fdf->edge->y_low);
+		- ((fdf->edge.real_w - 1) / 2) + MENU_W;
+	fdf->offset_y = (WIN_H / 2) - ((fdf->edge.real_h - 1) / 2);
+	if (fdf->edge.x_low < 0)
+		fdf->offset_x += ft_abs(fdf->edge.x_low);
+	if (fdf->edge.y_low < 0)
+		fdf->offset_y += ft_abs(fdf->edge.y_low);
 }
 
 void	transform_map(t_fdf *fdf)

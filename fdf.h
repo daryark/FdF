@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 22:19:15 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/20 16:21:29 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/20 17:14:19 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,19 +82,33 @@ typedef struct s_edge
 	int				real_h;
 }					t_edge;
 
+typedef struct s_pressed
+{
+	int				z;
+	int				y;
+	int				x;
+	int				ctrl_l;
+	int				minus;
+	int				plus;
+	int				up;
+	int				down;
+	int				left;
+	int				right;
+}					t_pressed;
+
 typedef struct s_fdf
 {
 	int				width;
 	int				height;
-	t_edge		*edge;
 	t_map			**map;
 	t_map			**map_orig;
+	t_edge			edge;
 
 	void			*mlx;
 	void			*window;
 	t_img			*img;
 	t_img			*menu;
-	int				err;
+	int				err; //! if i use it?
 
 	float			slope;
 	float			zoom;
@@ -107,8 +121,8 @@ typedef struct s_fdf
 	int				angle_y;
 	int				angle_z;
 
-	int				pre_event; //when event triggered with two buttons
-	int				prev_mv;
+	int				pre_event; //when event triggered with two buttons //!
+	t_pressed		pressed; //!
 }					t_fdf;
 
 void			print_map(t_fdf *fdf, int modificator); //!delete after finish the proj
@@ -128,7 +142,7 @@ void			clean_all(t_fdf *fdf);
 void			free_lines(char **line_arr);
 void			warning_put(t_fdf *fdf);
 //utils
-int				set_default_values(t_fdf *fdf);
+void			set_default_values(t_fdf *fdf);
 void			reset_edge(t_edge *p);
 void			init_map(t_fdf *fdf);
 void			map_dup(t_fdf *fdf);
@@ -178,4 +192,7 @@ void			rotate_y(t_fdf *fdf, int keycode);
 void			rotate_z(t_fdf *fdf, int keycode);
 int				map_out_of_win(t_fdf *fdf);
 int				is_relevant_shift(t_fdf *fdf, int keycode);
+int				is_move_key(int keycode);
+int				is_plus_minus_key(int keycode);
+int 			is_xyz_key(int keycode);
 #endif

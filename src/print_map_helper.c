@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 14:17:31 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/20 01:01:16 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/20 17:09:29 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,8 @@ void	check_edges_green(t_fdf *fdf)
 		j = -1;
 		while (++j < fdf->width)
 		{
-			if (fdf->map[i][j].x == fdf->edge->x_low || fdf->map[i][j].y == fdf->edge->y_low
-			|| fdf->map[i][j].x == fdf->edge->x_high || fdf->map[i][j].y == fdf->edge->y_high)
+			if (fdf->map[i][j].x == fdf->edge.x_low || fdf->map[i][j].y == fdf->edge.y_low
+			|| fdf->map[i][j].x == fdf->edge.x_high || fdf->map[i][j].y == fdf->edge.y_high)
 				fdf->map[i][j].color = 0x00ff00;
 		}
 	}

@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 15:05:09 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/20 16:24:22 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/20 16:43:57 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,10 @@ void	move_event(t_fdf *fdf, int keycode)
 {
 	if(is_relevant_shift(fdf, keycode))
 		do_shift(fdf, keycode);
-	if (fdf->prev_mv && is_relevant_shift(fdf, fdf->prev_mv))
-		do_shift(fdf, fdf->prev_mv);
+	if (is_move_key(fdf->pre_event) && is_relevant_shift(fdf, fdf->pre_event))
+		do_shift(fdf, fdf->pre_event);
 	else
-		fdf->prev_mv = keycode;
+		fdf->pre_event = keycode;
 	redraw_img(fdf);
 }
 

@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 17:26:35 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/20 00:12:31 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/20 17:10:42 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@ void	clean_all(t_fdf *fdf)
 		free_map(fdf->map, fdf->height);
 	if (fdf->map_orig != NULL)
 		free_map(fdf->map_orig, fdf->height);
-	if (fdf->edge != NULL)
-		free (fdf->edge);
 	destroy_img(fdf);
 	if (fdf->window != NULL)
 		mlx_destroy_window(fdf->mlx, fdf->window);
