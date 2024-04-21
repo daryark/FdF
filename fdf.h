@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 22:19:15 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/21 04:18:37 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/21 07:03:46 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,13 +149,11 @@ void			reset_map(t_fdf *fdf);
 void			fill_point(char *str_point, t_fdf *fdf, int x, int y);
 void			swap_points(t_map *a, t_map *b);
 unsigned int	ft_set_color(char *str);
-unsigned int	interpolate_color(int i0, int i_curr, int i1, int clr0, int clr1);
 void			angle_normailze(int *angle);
 int				min(int a, int b);
 int				max(int a, int b);
 void			min_p(t_map *p, t_edge *edge);
 void			max_p(t_map *p, t_edge *edge);
-float			radian_angle(float	angle);
 //screen math
 void			map_size(char *file, t_fdf *fdf);
 void			find_map_edges(t_fdf *fdf);

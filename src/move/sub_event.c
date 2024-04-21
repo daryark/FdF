@@ -6,16 +6,15 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/20 19:20:14 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/20 21:52:20 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/21 07:40:46 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../fdf.h"
 
-
-int is_xyz_key(t_pressed pr)
+int	is_xyz_key(t_pressed pr)
 {
-	if (pr.x || pr.z || pr.y )
+	if (pr.x || pr.z || pr.y)
 		return (1);
 	return (0);
 }

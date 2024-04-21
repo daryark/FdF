@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 01:52:44 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/20 17:11:48 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/21 05:00:06 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	init_map(t_fdf *fdf)
 {
 	int		i;
 	int		j;
-
 
 	fdf->map = malloc(sizeof(t_map *) * fdf->height);
 	if (!fdf->map)
@@ -88,19 +87,15 @@ void	find_map_edges(t_fdf *fdf)
 
 	i = -1;
 	reset_edge(&fdf->edge);
-	// printf("map real size\n");
 	while (++i < fdf->height)
 	{
 		j = -1;
 		while (++j < fdf->width)
 		{
-			// fdf->map[i][j].x += fdf->shift_x;
-			// fdf->map[i][j].y += fdf->shift_y;
 			min_p(&fdf->map[i][j], &fdf->edge);
 			max_p(&fdf->map[i][j], &fdf->edge);
 		}
 	}
-	// printf("xl: %d, xh: %d, yl: %d, yh: %d\n", fdf->edge->x_low, fdf->edge->x_high, fdf->edge->y_low, fdf->edge->y_high);
 	fdf->edge.real_w = fdf->edge.x_high - fdf->edge.x_low;
 	fdf->edge.real_h = fdf->edge.y_high - fdf->edge.y_low;
 }

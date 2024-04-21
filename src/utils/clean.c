@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 17:26:35 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/20 17:10:42 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/21 05:02:39 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	free_map(t_map **map, int height)
 	free(map);
 	map = NULL;
 }
+
 void	destroy_img(t_fdf *fdf)
 {
 	if (fdf->img != NULL && fdf->img->img != NULL)

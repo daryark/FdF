@@ -6,24 +6,13 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 23:14:37 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/21 04:14:27 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/21 07:41:37 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../fdf.h"
 
-void angle_normailze(int *angle)
-{
-	while (!(*angle <= 360 && *angle >= 0))
-	{
-		if (*angle < 0)
-			*angle += 360;
-		else
-			*angle -= 360;
-	}
-}
-
-unsigned int ft_set_color(char *str)
+unsigned int	ft_set_color(char *str)
 {
 	int		nb;
 
@@ -60,6 +49,7 @@ int	max(int a, int b)
 		return (a);
 	return (b);
 }
+
 void	min_p(t_map *p, t_edge *edge)
 {
 	edge->x_low = min(p->x, edge->x_low);
@@ -72,9 +62,4 @@ void	max_p(t_map *p, t_edge *edge)
 	edge->x_high = max(p->x, edge->x_high);
 	edge->y_high = max(p->y, edge->y_high);
 	edge->z_high = max(p->val, edge->z_high);
-}
-
-float  radian_angle(float angle)
-{
-    return (angle * M_PI / 180.0);
 }

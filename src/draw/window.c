@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 03:40:35 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/21 04:11:33 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/21 05:08:25 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,35 +32,37 @@ void	redraw_img(t_fdf *fdf)
 	img_put(fdf);
 }
 
-void	img_put(t_fdf *fdf)
+static void	draw_map(t_fdf *fdf)
 {
 	int	i;
 	int	j;
 
+	i = -1;
+	while (++i < fdf->height)
+	{
+		j = -1;
+		while (++j < fdf->width)
+		{
+			if (j + 1 < fdf->width
+				&& fdf->map[i][j].color != (unsigned int)(-1)
+				&& fdf->map[i][j + 1].color != (unsigned int)(-1))
+				draw_line_algorithm(fdf->map[i][j], \
+					fdf->map[i][j + 1], fdf);
+			if (i + 1 < fdf->height
+				&& fdf->map[i][j].color != (unsigned int)(-1)
+				&& fdf->map[i + 1][j].color != (unsigned int)(-1))
+				draw_line_algorithm(fdf->map[i][j], fdf->map[i + 1][j], fdf);
+		}
+	}
+}
+
+void	img_put(t_fdf *fdf)
+{
 	fdf->img->img = mlx_new_image(fdf->mlx, WIN_W, WIN_H);
 	fdf->img->addr = mlx_get_data_addr(fdf->img->img, &fdf->img->bpp, \
 	&fdf->img->len, &fdf->img->endian);
-	i = -1;
-	// print_center_vector_helper(fdf);
 	if (!map_out_of_win(fdf))
-	{
-		while (++i < fdf->height)
-		{
-			j = -1;
-			while (++j < fdf->width)
-			{
-				if (j + 1 < fdf->width
-					&& fdf->map[i][j].color != (unsigned int)(-1)
-					&& fdf->map[i][j + 1].color != (unsigned int)(-1))
-					draw_line_algorithm(fdf->map[i][j], \
-						fdf->map[i][j + 1], fdf);
-				if (i + 1 < fdf->height
-					&& fdf->map[i][j].color != (unsigned int)(-1)
-					&& fdf->map[i + 1][j].color != (unsigned int)(-1))
-					draw_line_algorithm(fdf->map[i][j], fdf->map[i + 1][j], fdf);
-			}
-		}
-	}
+		draw_map(fdf);
 	mlx_put_image_to_window(fdf->mlx, fdf->window, fdf->img->img, 0, 0);
 	menu_put(fdf);
 }

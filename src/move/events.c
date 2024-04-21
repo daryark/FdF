@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 15:05:09 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/21 04:17:19 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/21 07:30:21 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ void	hight_change_event(t_fdf *fdf, int keycode)
 void	zoom_event(t_fdf *fdf, int keycode)
 {
 	if (keycode == HK_MINUS)
-		fdf->zoom *= 0.75;
+		fdf->zoom *= 0.9;
 	else if (keycode == HK_PLUS)
-		fdf->zoom *= 1.25;
+		fdf->zoom *= 1.1;
 	if (fdf->zoom < 1)
 	{
 		fdf->err = 1;
@@ -65,8 +65,6 @@ void	move_event(t_fdf *fdf, int keycode)
 
 void	close_event(t_fdf *fdf)
 {
-	// destroy_img(fdf);
-	// mlx_destroy_window(fdf->mlx, fdf->window);
-	clean_all(fdf); //*check leaks that way, when commented line
+	clean_all(fdf);
 	exit(EXIT_SUCCESS);
 }
