@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 15:05:09 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/20 22:18:03 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/21 04:17:19 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 void	rotate_event(t_fdf *fdf, int keycode)
 {
 	if (fdf->pressed.x)
-		rotate_x(fdf, keycode);
+		angle_change(&fdf->angle_x, keycode);
 	if (fdf->pressed.z)
-		rotate_z(fdf, keycode);
+		angle_change(&fdf->angle_y, keycode);
 	else if (fdf->pressed.y)
-		rotate_y(fdf, keycode);
+		angle_change(&fdf->angle_z, keycode);
 	redraw_img(fdf);
 }
 

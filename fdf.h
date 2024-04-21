@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 22:19:15 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/20 22:18:18 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/21 04:18:37 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,8 +121,7 @@ typedef struct s_fdf
 	int				angle_y;
 	int				angle_z;
 
-	int				pre_event; //when event triggered with two buttons //!
-	t_pressed		pressed; //!
+	t_pressed		pressed; //when event triggered with multiple buttons
 }					t_fdf;
 
 void			print_map(t_fdf *fdf, int modificator); //!delete after finish the proj
@@ -156,6 +155,7 @@ int				min(int a, int b);
 int				max(int a, int b);
 void			min_p(t_map *p, t_edge *edge);
 void			max_p(t_map *p, t_edge *edge);
+float			radian_angle(float	angle);
 //screen math
 void			map_size(char *file, t_fdf *fdf);
 void			find_map_edges(t_fdf *fdf);
@@ -187,9 +187,7 @@ void			rotate_event(t_fdf *fdf, int keycode);
 void			close_event(t_fdf*fdf);
 //event utils
 void			do_shift(t_fdf *fdf);
-void			rotate_x(t_fdf *fdf, int keycode);
-void			rotate_y(t_fdf *fdf, int keycode);
-void			rotate_z(t_fdf *fdf, int keycode);
+void			angle_change(int *angle, int keycode);
 int				map_out_of_win(t_fdf *fdf);
 int				is_relevant_shift(t_fdf *fdf);
 int				is_move_key(int keycode);

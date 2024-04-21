@@ -6,75 +6,44 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 22:14:17 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/19 22:14:42 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/21 04:12:55 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../fdf.h"
 
+static void do_iso_one_axis(float *x, float *y, float *z, float mat[3][3])
+{
+    float   tmpx;
+    float   tmpy;
+    float   tmpz;
+
+    tmpx = *x;
+    tmpy = *y;
+    tmpz = *z;
+    *x = tmpx * mat[0][0] + tmpy * mat[0][1] + tmpz * mat[0][2];
+    *y = tmpx * mat[1][0] + tmpy * mat[1][1] + tmpz * mat[1][2];
+    *z = tmpx * mat[2][0] + tmpy * mat[2][1] + tmpz * mat[2][2];
+}
+
 void	do_isometric(int *x, int *y, int *z, t_fdf *fdf)
 {
-	// float	a;
+	float a_x;
+	float a_y;
+	float a_z;
+    float x1;
+    float y1;
+    float z1;
 
-	// a = *x;
-	// *x = (a - *y) * cos(0.53299);
-	// *y = (a + *y) * sin(0.53299) - z;
-	float angle_x = (float)fdf->angle_x;
-	float angle_y = (float)fdf->angle_y;
-	float angle_z = (float)fdf->angle_z;
-    // Convert angles from degrees to radians
-    angle_x = angle_x * M_PI / 180.0;
-    angle_y = angle_y * M_PI / 180.0;
-    angle_z = angle_z * M_PI / 180.0;
-
-    // Rotation around x-axis
-    float rotation_x[3][3] = {
-        {1, 0, 0},
-        {0, cos(angle_x), -sin(angle_x)},
-        {0, sin(angle_x), cos(angle_x)}
-    };
-
-    // Rotation around y-axis
-    float rotation_y[3][3] = {
-        {cos(angle_y), 0, sin(angle_y)},
-        {0, 1, 0},
-        {-sin(angle_y), 0, cos(angle_y)}
-    };
-
-    // Rotation around z-axis
-    float rotation_z[3][3] = {
-        {cos(angle_z), -sin(angle_z), 0},
-        {sin(angle_z), cos(angle_z), 0},
-        {0, 0, 1}
-    };
-
-    // Apply rotations
-	float x1 = (float)*x;
-	float y1 = (float)*y;
-	float z1 = (float)*z;
-    float tmp_x = x1;
-    float tmp_y = y1;
-    float tmp_z = z1;
-
-    x1 = tmp_x * rotation_x[0][0] + tmp_y * rotation_x[0][1] + tmp_z * rotation_x[0][2];
-    y1 = tmp_x * rotation_x[1][0] + tmp_y * rotation_x[1][1] + tmp_z * rotation_x[1][2];
-    z1 = tmp_x * rotation_x[2][0] + tmp_y * rotation_x[2][1] + tmp_z * rotation_x[2][2];
-
-    tmp_x = x1;
-    tmp_y = y1;
-    tmp_z = z1;
-
-    x1 = tmp_x * rotation_y[0][0] + tmp_y * rotation_y[0][1] + tmp_z * rotation_y[0][2];
-    y1 = tmp_x * rotation_y[1][0] + tmp_y * rotation_y[1][1] + tmp_z * rotation_y[1][2];
-    z1 = tmp_x * rotation_y[2][0] + tmp_y * rotation_y[2][1] + tmp_z * rotation_y[2][2];
-
-    tmp_x = x1;
-    tmp_y = y1;
-    tmp_z = z1;
-
-    x1 = tmp_x * rotation_z[0][0] + tmp_y * rotation_z[0][1] + tmp_z * rotation_z[0][2];
-    y1 = tmp_x * rotation_z[1][0] + tmp_y * rotation_z[1][1] + tmp_z * rotation_z[1][2];
-    z1 = tmp_x * rotation_z[2][0] + tmp_y * rotation_z[2][1] + tmp_z * rotation_z[2][2];
+    a_x = radian_angle(fdf->angle_x);
+    a_y = radian_angle(fdf->angle_y);
+    a_z = radian_angle(fdf->angle_z);
+    x1 = (float)*x;
+	y1 = (float)*y;
+	z1 = (float)*z;
+    do_iso_one_axis(&x1, &y1, &z1, (float[3][3]){{1, 0, 0}, {0, cos(a_x), -sin(a_x)}, {0, sin(a_x), cos(a_x)}});
+    do_iso_one_axis(&x1, &y1, &z1, (float[3][3]){{cos(a_y), 0, sin(a_y)}, {0, 1, 0}, {-sin(a_y), 0, cos(a_y)}});
+    do_iso_one_axis(&x1, &y1, &z1, (float[3][3]){{cos(a_z), -sin(a_z), 0}, {sin(a_z), cos(a_z), 0}, {0, 0, 1}});
 	*x = (int)x1;
 	*y = (int)y1;
 	*z = (int)z1;

@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 03:40:35 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/20 01:41:09 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/21 04:11:33 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,6 @@ void	img_put(t_fdf *fdf)
 			}
 		}
 	}
-	else
-		printf("%smap out of win%s\n", YELLOW, RE);
 	mlx_put_image_to_window(fdf->mlx, fdf->window, fdf->img->img, 0, 0);
 	menu_put(fdf);
 }

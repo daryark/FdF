@@ -6,38 +6,19 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 16:43:50 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/20 22:13:52 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/21 04:19:32 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../fdf.h"
 
-void	rotate_x(t_fdf *fdf, int keycode)
+void	angle_change(int *angle, int keycode)
 {
 	if (keycode == HK_MINUS)
-		fdf->angle_x -= 5;
+		*angle -= 5;
 	else
-		fdf->angle_x += 5;
-	angle_normailze(&fdf->angle_x);
-}
-
-void	rotate_y(t_fdf *fdf, int keycode)
-{
-	if (keycode == HK_MINUS)
-		fdf->angle_y -= 5;
-	else
-		fdf->angle_y += 5;
-	angle_normailze(&fdf->angle_y);
-}
-
-void	rotate_z(t_fdf *fdf, int keycode)
-{
-	printf("rotate z\n");
-	if (keycode == HK_MINUS)
-		fdf->angle_z -= 5;
-	else
-		fdf->angle_z += 5;
-	angle_normailze(&fdf->angle_z);
+		*angle += 5;
+	angle_normailze(angle);
 }
 
 void	do_shift(t_fdf *fdf)

@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 12:15:04 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/20 17:12:54 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/21 02:48:34 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,8 @@ void	adjust_zoom(t_fdf *fdf)
 	{
 		ft_putendl_fd("Error calculating zoom", 2);
 		clean_all(fdf);
-		return ;
+		exit(EXIT_FAILURE);
 	}
-	printf("new zoom %f\n", fdf->zoom);
 }
 
 void	calc_offset(t_fdf *fdf)
@@ -78,7 +77,6 @@ void	center_map(t_fdf *fdf)
 	int	j;
 
 	calc_offset(fdf);
-	// printf("z center: %d\n", (fdf->edge->z_high - fdf->edge->z_low) / 2);
 	i = -1;
 	while (++i < fdf->height)
 	{
@@ -86,6 +84,5 @@ void	center_map(t_fdf *fdf)
 		while (++j < fdf->width)
 			set_offset(&fdf->map[i][j], (fdf->offset_x + fdf->shift_x), \
 				(fdf->offset_y + fdf->shift_y));
-			// set_offset(&fdf->map[i][j], fdf->offset_x, fdf->offset_y);
 	}
 }
