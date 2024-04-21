@@ -28,6 +28,7 @@
 #  define HK_Z              6
 #  define HK_X              7
 #  define HK_Y              16
+#  define HK_R              15
 #  define HK_ARROW_L        43
 #  define HK_ARROW_R        47
 #  define HK_CTRL_L         256

@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 03:40:35 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/21 05:08:25 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/21 08:35:03 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 
 void	redraw_img(t_fdf *fdf)
 {
-	printf("%sredraw\n%s", GREEN, RE);
 	destroy_img(fdf);
 	reset_map(fdf);
 	transform_map(fdf);
@@ -84,7 +83,7 @@ int	show_in_window(t_fdf *fdf)
 	// mlx_mouse_hook(fdf->window, mouse_hook, fdf);
 	// mlx_hook(fdf->window, MOUSE_MOVE_UP | MOUSE_MOVE_DOWN, \
 		// MOUSE_WHEEL_MASK, mouse_hook, fdf);
-	mlx_hook(fdf->window, KEY_PRESS, KEY_PRESS_MASK, key_press_hook, fdf);
+	(mlx_hook(fdf->window, KEY_PRESS, KEY_PRESS_MASK, key_press_hook, fdf));
 	mlx_hook(fdf->window, KEY_RELEASE, KEY_RELEASE_MASK, key_release_hook, fdf);
 	mlx_loop(fdf->mlx);
 	return (1);

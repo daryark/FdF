@@ -6,37 +6,37 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 14:17:31 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/21 04:11:17 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/21 08:27:26 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../fdf.h"
 
 //just printing staff, remove after the whole function!!!
-// void	print_map(t_fdf *fdf, int modificator)
-// {
-// 	int	i;
-// 	int	j;
+void	print_map(t_fdf *fdf, int modificator)
+{
+	int	i;
+	int	j;
 
-// 	i = -1;
-// 	while (fdf->height > ++i)
-// 	{
-// 		j = -1;
-// 		while (fdf->width > ++j)
-// 		{
-// 			if (!modificator)
-// 			{
-// 				if (fdf->map[i][j].color == (unsigned int)(-1))
-// 					ft_printf(RED);
-// 				ft_printf(" %d,%x " RE, fdf->map[i][j].val, fdf->map[i][j].color);
-// 			}
-// 			else
-// 				ft_printf(" %d,%d ", fdf->map[i][j].x, fdf->map[i][j].y);
-// 		}
-// 		ft_printf("\n");
-// 	}
-// 	ft_printf("\n");
-// }
+	i = -1;
+	while (fdf->height > ++i)
+	{
+		j = -1;
+		while (fdf->width > ++j)
+		{
+			if (!modificator)
+			{
+				if (fdf->map[i][j].color == (unsigned int)(-1))
+					ft_printf(RED);
+				ft_printf(" %d,%x " RE, fdf->map[i][j].val, fdf->map[i][j].color);
+			}
+			else
+				ft_printf(" %d,%d ", fdf->map[i][j].x, fdf->map[i][j].y);
+		}
+		ft_printf("\n");
+	}
+	ft_printf("\n");
+}
 
 // void	print_center_vector_helper(t_fdf *fdf)
 // {

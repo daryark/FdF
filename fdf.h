@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 22:19:15 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/21 07:03:46 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/21 08:33:32 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,8 @@ void			free_lines(char **line_arr);
 void			warning_put(t_fdf *fdf);
 //utils
 void			set_default_values(t_fdf *fdf);
+void			initialize_pointers_null(t_fdf *fdf);
+void			reset_screen_values(t_fdf *fdf);
 void			reset_edge(t_edge *p);
 void			init_map(t_fdf *fdf);
 void			map_dup(t_fdf *fdf);
@@ -182,6 +184,7 @@ void			zoom_event(t_fdf *fdf, int keycode);
 void			move_event(t_fdf *fdf, int keycode);
 void			hight_change_event(t_fdf *fdf, int keycode);
 void			rotate_event(t_fdf *fdf, int keycode);
+void			reset_event(t_fdf *fdf);
 void			close_event(t_fdf*fdf);
 //event utils
 void			do_shift(t_fdf *fdf);
