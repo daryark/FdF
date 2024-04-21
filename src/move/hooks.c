@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 23:45:31 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/21 08:22:25 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/21 08:57:35 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,18 @@ int	key_release_hook(int keycode, t_fdf *fdf)
 		fdf->pressed.ctrl_l = 0;
 	else if (is_move_key(keycode))
 		move_key_release(fdf, keycode);
+	return (0);
+}
+
+int	mouse_click_hook(int keycode, int x, int y, t_fdf *fdf)
+{
+	(void)fdf;
+	if (keycode == HK_MOUSE_L)
+	{
+		if (x >= 100 && x <= 200 && y >= WIN_H - 200 && y <= WIN_H - 150) {
+            reset_event(fdf);
+            printf("Left-click event within the button area!\n");
+        }
+	}
 	return (0);
 }

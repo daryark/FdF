@@ -44,6 +44,7 @@
 
 #  define KEY_PRESS         2
 #  define KEY_RELEASE       3
+#  define HK_MOUSE_L        1
 // #  define MOUSE_MOVE_UP     5
 // #  define MOUSE_MOVE_DOWN   4
 // #  define BTN_PRESS         4

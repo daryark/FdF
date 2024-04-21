@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 22:19:15 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/21 08:33:32 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/21 08:56:09 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,7 +178,7 @@ void			redraw_img(t_fdf *fdf);
 //hooks
 int				key_press_hook(int keycode, t_fdf *fdf);
 int				key_release_hook(int keycode, t_fdf *fdf);
-// int				mouse_hook(int keycode, t_fdf *fdf);
+int				mouse_click_hook(int keycode, int x, int y, t_fdf *fdf);
 //events
 void			zoom_event(t_fdf *fdf, int keycode);
 void			move_event(t_fdf *fdf, int keycode);
@@ -193,6 +193,6 @@ int				map_out_of_win(t_fdf *fdf);
 int				is_relevant_shift(t_fdf *fdf);
 int				is_move_key(int keycode);
 int				is_plus_minus_key(int keycode);
-int 			is_xyz_key(t_pressed pressed);
+int				is_xyz_key(t_pressed pressed);
 void			move_key_release(t_fdf *fdf, int keycode);
 #endif
