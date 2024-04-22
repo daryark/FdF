@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 20:34:29 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/21 08:33:05 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/23 00:40:14 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,9 @@ void	reset_edge(t_edge *p)
 	p->x_high = INT_MIN;
 	p->y_high = INT_MIN;
 	p->z_high = INT_MIN;
+	p->cx = 0;
+	p->cy = 0;
+	p->cz = 0;
 	p->real_w = 0;
 	p->real_h = 0;
 }

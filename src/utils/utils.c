@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 23:14:37 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/21 07:41:37 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/23 00:30:27 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,14 @@ unsigned int	ft_set_color(char *str)
 	return (nb);
 }
 
-int	min(int a, int b)
+int	minf(float a, float b)
 {
 	if (a < b)
 		return (a);
 	return (b);
 }
 
-int	max(int a, int b)
+int	maxf(float a, float b)
 {
 	if (a > b)
 		return (a);
@@ -52,14 +52,14 @@ int	max(int a, int b)
 
 void	min_p(t_map *p, t_edge *edge)
 {
-	edge->x_low = min(p->x, edge->x_low);
-	edge->y_low = min(p->y, edge->y_low);
-	edge->z_low = min(p->val, edge->z_low);
+	edge->x_low = minf(p->x, edge->x_low);
+	edge->y_low = minf(p->y, edge->y_low);
+	edge->z_low = minf(p->val, edge->z_low);
 }
 
 void	max_p(t_map *p, t_edge *edge)
 {
-	edge->x_high = max(p->x, edge->x_high);
-	edge->y_high = max(p->y, edge->y_high);
-	edge->z_high = max(p->val, edge->z_high);
+	edge->x_high = maxf(p->x, edge->x_high);
+	edge->y_high = maxf(p->y, edge->y_high);
+	edge->z_high = maxf(p->val, edge->z_high);
 }

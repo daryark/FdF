@@ -6,22 +6,22 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 22:14:17 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/21 05:02:13 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/22 23:50:45 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../fdf.h"
 
-static float	radian_angle(float angle)
+float	radian_angle(float angle)
 {
 	return (angle * M_PI / 180.0);
 }
 
-static void	do_iso_one_axis(int *x, int *y, int *z, float mat[3][3])
+static void	do_iso_one_axis(float *x, float *y, float *z, float mat[3][3])
 {
-	int	tmpx;
-	int	tmpy;
-	int	tmpz;
+	float	tmpx;
+	float	tmpy;
+	float	tmpz;
 
 	tmpx = *x;
 	tmpy = *y;
@@ -31,7 +31,7 @@ static void	do_iso_one_axis(int *x, int *y, int *z, float mat[3][3])
 	*z = tmpx * mat[2][0] + tmpy * mat[2][1] + tmpz * mat[2][2];
 }
 
-void	do_isometric(int *x, int *y, int *z, t_fdf *fdf)
+void	do_isometric(float *x, float *y, float *z, t_fdf *fdf)
 {
 	float	a_x;
 	float	a_y;

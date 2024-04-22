@@ -57,7 +57,7 @@ all: $(NAME)
 
 run: $(NAME)
 # ./$(NAME) m maps/*
-	./$(NAME) extras/42.fdf
+	./$(NAME) extras/42copy.fdf
 
 jul: $(NAME)
 	./$(NAME) maps/julia.fdf

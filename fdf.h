@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 22:19:15 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/21 08:56:09 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/23 01:13:54 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # endif
 
 # define MENU_W 350
+# define PADDING	10
 
 # ifndef WIN_W
 #  ifdef LINUX
@@ -56,9 +57,9 @@
 typedef struct s_map
 {
 	unsigned int	color;
-	int				val;
-	int				x;
-	int				y;
+	float			val;
+	float			x;
+	float			y;
 }					t_map;
 
 typedef struct s_img
@@ -72,14 +73,17 @@ typedef struct s_img
 
 typedef struct s_edge
 {
-	int				x_low;
-	int				x_high;
-	int				y_low;
-	int				y_high;
-	int				z_low;
-	int				z_high;
-	int				real_w;
-	int				real_h;
+	float			x_low;
+	float			x_high;
+	float			y_low;
+	float			y_high;
+	float			z_low;
+	float			z_high;
+	float			cx;
+	float			cy;
+	float			cz;
+	float			real_w;
+	float			real_h;
 }					t_edge;
 
 typedef struct s_pressed
@@ -152,10 +156,13 @@ void			fill_point(char *str_point, t_fdf *fdf, int x, int y);
 void			swap_points(t_map *a, t_map *b);
 unsigned int	ft_set_color(char *str);
 void			angle_normailze(int *angle);
-int				min(int a, int b);
-int				max(int a, int b);
+int				minf(float a, float b);
+int				maxf(float a, float b);
 void			min_p(t_map *p, t_edge *edge);
 void			max_p(t_map *p, t_edge *edge);
+void			find_center(t_fdf *fdf);
+int				find_mid_z(t_fdf *fdf);
+float			radian_angle(float angle);
 //screen math
 void			map_size(char *file, t_fdf *fdf);
 void			find_map_edges(t_fdf *fdf);
@@ -165,7 +172,7 @@ void			zoom_map_to_win_size(t_fdf *fdf);
 void			calc_offset(t_fdf *fdf);
 void			set_offset(t_map *point, int offset_x, int offset_y);
 void			center_map(t_fdf *fdf);
-void			do_isometric(int *x, int *y, int *z, t_fdf *fdf);
+void			do_isometric(float *x, float *y, float *z, t_fdf *fdf);
 void			transform_map(t_fdf *fdf);
 //window
 void			img_put(t_fdf *fdf);

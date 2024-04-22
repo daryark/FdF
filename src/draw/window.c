@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 03:40:35 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/21 08:46:33 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/22 22:20:46 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-void	redraw_img(t_fdf *fdf)
+void	 redraw_img(t_fdf *fdf)
 {
 	destroy_img(fdf);
 	reset_map(fdf);
@@ -57,9 +57,23 @@ static void	draw_map(t_fdf *fdf)
 
 void	img_put(t_fdf *fdf)
 {
+	fdf->img = malloc(sizeof(t_img));
+	fdf->menu = malloc(sizeof(t_img));
+	if (is_alloc_err_cleaner(fdf->img, fdf)
+		|| is_alloc_err_cleaner(fdf->menu, fdf))
+	{
+		ft_putendl_fd("Alloc error in the process", 2);
+		exit(EXIT_FAILURE);
+	}
 	fdf->img->img = mlx_new_image(fdf->mlx, WIN_W, WIN_H);
 	fdf->img->addr = mlx_get_data_addr(fdf->img->img, &fdf->img->bpp, \
 	&fdf->img->len, &fdf->img->endian);
+	// find_center(fdf);//! find center
+	/*draw_line_algorithm(((t_map){.x = ((WIN_W + MENU_W)/2), .y = 0, .color = 0xff00ff, .val = 0}),\
+	 	((t_map){.x = ((WIN_W + MENU_W)/2), .y = WIN_H, .color = 0xff00ff, .val = 0}), fdf);
+	 draw_line_algorithm(((t_map){.y = (WIN_H/2), .x = 0, .color = 0xff00ff}),\
+		((t_map){.y = (WIN_H/2), .x = WIN_W, .color = 0xff00ff}), fdf);*/
+	print_center_vector_helper(fdf);
 	if (!map_out_of_win(fdf))
 		draw_map(fdf);
 	mlx_put_image_to_window(fdf->mlx, fdf->window, fdf->img->img, 0, 0);
@@ -68,11 +82,6 @@ void	img_put(t_fdf *fdf)
 
 int	show_in_window(t_fdf *fdf)
 {
-	t_img	img;
-	t_img	menu;
-
-	fdf->img = &img;
-	fdf->menu = &menu;
 	fdf->mlx = mlx_init();
 	if (is_alloc_err_cleaner(fdf->mlx, fdf))
 		return (0);

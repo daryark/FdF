@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 18:52:24 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/21 07:36:55 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/22 23:55:06 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,14 +74,22 @@ static void	draw_line_pixels(t_map a, t_map b, t_fdf *fdf, int swap)
 	}
 }
 
+void	ft_fswap(float *a, float *b)
+{
+    float tmp;
+
+    tmp = *a;
+    *a = *b;
+    *b = tmp;
+}
 //takes start and end points (a, b)
 // point is of struct t_map that has x and y coordinates
 void	draw_line_algorithm(t_map a, t_map b, t_fdf *fdf)
 {
 	if (ft_abs(b.x - a.x) < ft_abs(b.y - a.y))
 	{
-		ft_swap(&a.x, &a.y);
-		ft_swap(&b.x, &b.y);
+		ft_fswap(&a.x, &a.y);
+		ft_fswap(&b.x, &b.y);
 		draw_line_pixels(a, b, fdf, 1);
 	}
 	else

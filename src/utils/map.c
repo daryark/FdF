@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 01:52:44 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/21 05:00:06 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/23 00:43:28 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ void	find_map_edges(t_fdf *fdf)
 	}
 	fdf->edge.real_w = fdf->edge.x_high - fdf->edge.x_low;
 	fdf->edge.real_h = fdf->edge.y_high - fdf->edge.y_low;
+	printf("real_w: %f, real_h: %f\n", fdf->edge.real_h, fdf->edge.real_w);
 }
 
 void	map_dup(t_fdf *fdf)
