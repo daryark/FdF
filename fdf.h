@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 22:19:15 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/23 01:13:54 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/23 01:19:51 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,8 +129,7 @@ typedef struct s_fdf
 }					t_fdf;
 
 void			print_map(t_fdf *fdf, int modificator); //!delete after finish the proj
-void			print_center_vector_helper(t_fdf *fdf); //!delete after finish the proj
-void			check_edges_green(t_fdf *fdf); //!delete after finish the proj
+void			print_center_vector_helper(t_fdf *fdf);
 //process
 int				ft_process(char	*file);
 void			parse_file(char *file, t_fdf *fdf);

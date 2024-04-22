@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 14:17:31 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/23 00:15:44 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/23 01:19:43 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,58 +48,7 @@ void	print_center_vector_helper(t_fdf *fdf)
 	t_map px;
 	t_map py;
 	t_map pz;
-// 	t_map pe;
-// 	// t_map pps;
 
-// 	//x - vertical
-// 	ps = point((t_map){.x = ((float)fdf->width / 2), .y = ((float)fdf->height / 2), .val = 0, .color = 0xff0000});
-// 	pe = point((t_map){.x = ((float)fdf->width / 2), .y = ((float)fdf->height), .val = 0, .color = 0x0ff000});
-// 	// pps = point((t_map){.x = (fdf->width / 2), .y = 0, .val = 0, .color = 0x0ff000});
-// 	printf("point: x:%f, y:%f\n", ps.x, ps.y);
-// 	make_zoom(&ps, fdf->zoom);
-// 	make_zoom(&pe, fdf->zoom);
-// 	// make_zoom(&pps, fdf->zoom);
-// 	do_isometric(&ps.x, &ps.y, &ps.val, fdf);
-// 	do_isometric(&pe.x, &pe.y, &pe.val, fdf);
-// 	// do_isometric(&pps.x, &pe.y, &pe.val, fdf);
-// 	set_offset(&ps, fdf->offset_x, fdf->offset_y);
-// 	set_offset(&pe, fdf->offset_x, fdf->offset_y);
-// 	// set_offset(&ps, fdf->offset_x + fdf->shift_x, fdf->offset_y + fdf->shift_y);
-// 	// set_offset(&pe, fdf->offset_x + fdf->shift_x, fdf->offset_y + fdf->shift_y)
-// 	// set_offset(&pps, fdf->offset_x, fdf->offset_y);
-// 	draw_line_algorithm(ps, pe, fdf);
-// 	// draw_line_algorithm(ps, pps, fdf);
-// 	// fdf->edge.cx = ps.x;
-// 	// fdf->edge.cy = ps.y;
-// 	ps.x += 1;
-// 	pe.x += 1;
-// 	draw_line_algorithm(ps, pe, fdf); //******
-// 	ps.x -= 1;
-// 	// y - horizontal
-// 	// ps = point((t_map){.x = (fdf->width / 2), .y = (fdf->height / 2), .val = 0, .color = 0xff0000});
-// 	pe = point((t_map){.x = (fdf->width), .y = (fdf->height / 2), .val = 0, .color = 0x0ff000});
-// 	// make_zoom(&ps, fdf->zoom);
-// 	make_zoom(&pe, fdf->zoom);
-// 	// do_isometric(&ps.x, &ps.y, &ps.val, fdf);
-// 	do_isometric(&pe.x, &pe.y, &pe.val, fdf);
-// 	set_offset(&pe, fdf->offset_x, fdf->offset_y);
-// 	draw_line_algorithm(ps, pe, fdf);
-// 	ps.y += 1;
-// 	pe.y += 1;
-// 	draw_line_algorithm(ps, pe, fdf); //******
-// 	ps.y -= 1;
-// 	// ps = point((t_map){.x = (fdf->width / 2), .y = (fdf->height / 2), .val = 0, .color = 0xff0000});
-// 	pe = point((t_map){.x = (fdf->width / 2), .y = (fdf->height / 2), .val = find_highest_val(fdf), .color = 0x0ff000});
-// 	// make_zoom(&ps, fdf->zoom);
-// 	make_zoom(&pe, fdf->zoom);
-// 	// do_isometric(&ps.x, &ps.y, &ps.val, fdf);
-// 	do_isometric(&pe.x, &pe.y, &pe.val, fdf);
-// 	set_offset(&pe, fdf->offset_x, fdf->offset_y);
-// 	// fdf->edge.cy = (fdf->edge.cy - pe.y) / 2;
-// 	draw_line_algorithm(ps, pe, fdf);
-// 	ps.x += 1;
-// 	pe.x += 1;
-// 	draw_line_algorithm(ps, pe, fdf);
 ps = point((t_map){.x = (fdf->width / 2), .y = (fdf->height / 2), \
 	.val = find_mid_z(fdf), .color = 0xff0000});
 pz = point((t_map){.x = (fdf->width / 2), .y = (fdf->height / 2), \
@@ -132,21 +81,3 @@ draw_line_algorithm(ps, (t_map){.x = ps.x, .y = ps.y+10, .val = ps.val, .color =
 draw_line_algorithm(ps, (t_map){.x = ps.x-10, .y = ps.y, .val = ps.val, .color = ps.color}, fdf);
 draw_line_algorithm(ps, (t_map){.x = ps.x, .y = ps.y-10, .val = ps.val, .color = ps.color}, fdf);
 }
-
-// // void	check_edges_green(t_fdf *fdf)
-// // {
-// // 	int	i;
-// // 	int j;
-
-// // 	i = -1;
-// // 	while (++i < fdf->height)
-// // 	{
-// // 		j = -1;
-// // 		while (++j < fdf->width)
-// // 		{
-// // 			if (fdf->map[i][j].x == fdf->edge.x_low || fdf->map[i][j].y == fdf->edge.y_low
-// // 			|| fdf->map[i][j].x == fdf->edge.x_high || fdf->map[i][j].y == fdf->edge.y_high)
-// // 				fdf->map[i][j].color = 0x00ff00;
-// // 		}
-// // 	}
-// }

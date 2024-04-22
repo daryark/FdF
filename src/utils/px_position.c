@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 12:15:04 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/23 01:17:07 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/23 01:19:25 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ int	find_mid_z(t_fdf *fdf)
 	int	j;
 	int	max_val;
 	int	min_val;
-	// int	mid;
 
 	max_val = INT_MIN;
 	min_val = INT_MAX;
@@ -57,7 +56,7 @@ int	find_mid_z(t_fdf *fdf)
 		}
 	}
 	printf("minz: %d, maxz: %d\n", min_val, max_val);
-	return ((max_val + min_val)/2*fdf->z_coef);
+	return ((max_val + min_val) / 2 * fdf->z_coef);
 }
 static t_map point(t_map p)
 {
@@ -82,10 +81,7 @@ void	calc_offset(t_fdf *fdf)
 {
 	find_map_edges(fdf);
 	find_center(fdf);
-	//1420 - 20 - 350 / 2	- cx + 350 + 10
-	//525	- cx + 350 +  10;
 	fdf->offset_x = ((WIN_W - PADDING*2 - MENU_W) / 2) - fdf->edge.cx + MENU_W + PADDING;
-	// 640 - cy + 10;
 	fdf->offset_y = ((WIN_H - PADDING*2)/ 2) - fdf->edge.cy + PADDING;
 }
 
@@ -117,8 +113,6 @@ void	zoom_map_to_win_size(t_fdf *fdf)
 
 void	center_map(t_fdf *fdf)
 {
-	// (void)fdf;
-	// // find_center(fdf);
 	int	i;
 	int	j;
 
