@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 14:17:31 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/23 01:19:43 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/23 01:36:30 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,18 +61,14 @@ make_zoom(&ps, fdf->zoom);
 make_zoom(&px, fdf->zoom);
 make_zoom(&py, fdf->zoom);
 make_zoom(&pz, fdf->zoom);
-do_isometric(&ps.x, &ps.y, &ps.val, fdf);
-do_isometric(&px.x, &px.y, &px.val, fdf);
-do_isometric(&py.x, &py.y, &py.val, fdf);
-do_isometric(&pz.x, &pz.y, &pz.val, fdf);
-set_offset(&ps, (fdf->offset_x + fdf->shift_x), \
-				(fdf->offset_y + fdf->shift_y));
-set_offset(&px, (fdf->offset_x + fdf->shift_x), \
-				(fdf->offset_y + fdf->shift_y));
-set_offset(&py, (fdf->offset_x + fdf->shift_x), \
-				(fdf->offset_y + fdf->shift_y));
-set_offset(&pz, (fdf->offset_x + fdf->shift_x), \
-				(fdf->offset_y + fdf->shift_y));
+do_isometric(&ps, fdf);
+do_isometric(&px, fdf);
+do_isometric(&py, fdf);
+do_isometric(&pz, fdf);
+set_offset(&ps, fdf);
+set_offset(&px, fdf);
+set_offset(&py, fdf);
+set_offset(&pz, fdf);
 draw_line_algorithm(ps, px, fdf);
 draw_line_algorithm(ps, py, fdf);
 draw_line_algorithm(ps, pz, fdf);

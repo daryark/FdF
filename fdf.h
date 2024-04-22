@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 22:19:15 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/23 01:19:51 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/23 01:41:18 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,10 +169,11 @@ void			adjust_zoom(t_fdf *fdf);
 void			make_zoom(t_map *point, float zoom);
 void			zoom_map_to_win_size(t_fdf *fdf);
 void			calc_offset(t_fdf *fdf);
-void			set_offset(t_map *point, int offset_x, int offset_y);
+void			set_offset(t_map *point, t_fdf *fdf);
 void			center_map(t_fdf *fdf);
-void			do_isometric(float *x, float *y, float *z, t_fdf *fdf);
+void			do_isometric(t_map *p, t_fdf *fdf);
 void			transform_map(t_fdf *fdf);
+void    		transform_point(t_map *p, t_fdf *fdf);
 //window
 void			img_put(t_fdf *fdf);
 void			menu_put(t_fdf *fdf);

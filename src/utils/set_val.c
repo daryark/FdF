@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 20:34:29 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/23 00:40:14 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/23 01:31:15 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ void	make_zoom(t_map *point, float zoom)
 	point->val *= zoom;
 }
 
-void	set_offset(t_map *point, int offset_x, int offset_y)
+void	set_offset(t_map *point, t_fdf *fdf)
 {
-	point->x += offset_x;
-	point->y += offset_y;
+	point->x += (fdf->offset_x + fdf->shift_x);
+	point->y += (fdf->offset_y + fdf->shift_y);
 }
 
 void	initialize_pointers_null(t_fdf *fdf)
@@ -57,9 +57,9 @@ void	reset_screen_values(t_fdf *fdf)
 	fdf->shift_y = 0;
 	fdf->slope = 0.0;
 	fdf->z_coef = 1;
-	fdf->angle_x = 30;
-	fdf->angle_y = 330;
-	fdf->angle_z = 30;
+	fdf->angle_x = 0;
+	fdf->angle_y = 0;
+	fdf->angle_z = 0;
 }
 
 void	reset_edge(t_edge *p)
