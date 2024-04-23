@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 12:15:04 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/23 01:37:49 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/23 14:58:55 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,54 +34,11 @@ void	adjust_zoom(t_fdf *fdf)
 	}
 }
 
-int	find_mid_z(t_fdf *fdf)
+void	transform_point(t_map *p, t_fdf *fdf)
 {
-	int	i;
-	int	j;
-	int	max_val;
-	int	min_val;
-
-	max_val = INT_MIN;
-	min_val = INT_MAX;
-	i = -1;
-	while (++i < fdf->height)
-	{
-		j = -1;
-		while (++j < fdf->width)
-		{
-			if (max_val < fdf->map_orig[i][j].val)
-				max_val = fdf->map_orig[i][j].val;
-			if (min_val > fdf->map_orig[i][j].val)
-				min_val = fdf->map_orig[i][j].val;
-		}
-	}
-	return ((max_val + min_val) / 2 * fdf->z_coef);
-}
-static t_map point(t_map p)
-{
-	return (p);
-}
-
-void	find_center(t_fdf *fdf)
-{
-	t_map ps;
-
-	ps = point((t_map){.x = (fdf->width / 2), .y = (fdf->height / 2), \
-		.val = find_mid_z(fdf), .color = 0xff0000});
-	make_zoom(&ps, fdf->zoom);
-	do_isometric(&ps, fdf);
-	fdf->edge.cx = ps.x;
-	fdf->edge.cy = ps.y;
-}
-
-void	calc_offset(t_fdf *fdf)
-{
-	find_map_edges(fdf);
-	find_center(fdf);
-	fdf->offset_x = ((WIN_W - PADDING * 2 - MENU_W) / 2) \
-	- fdf->edge.cx + MENU_W + PADDING;
-	fdf->offset_y = ((WIN_H - PADDING * 2) / 2) - fdf->edge.cy \
-	+ PADDING;
+	p->val *= fdf->z_coef;
+	make_zoom(p, fdf->zoom);
+	do_isometric(p, fdf);
 }
 
 void	transform_map(t_fdf *fdf)
@@ -94,11 +51,7 @@ void	transform_map(t_fdf *fdf)
 	{
 		j = -1;
 		while (++j < fdf->width)
-		{
-			fdf->map[i][j].val *= fdf->z_coef;
-			make_zoom(&fdf->map[i][j], fdf->zoom);
-			do_isometric(&fdf->map[i][j], fdf);
-		}
+			transform_point(&fdf->map[i][j], fdf);
 	}
 }
 

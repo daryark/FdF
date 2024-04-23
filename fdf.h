@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 22:19:15 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/23 01:41:18 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/23 17:12:44 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,6 @@ typedef struct s_edge
 	float			x_high;
 	float			y_low;
 	float			y_high;
-	float			z_low;
-	float			z_high;
-	float			cx;
-	float			cy;
-	float			cz;
 	float			real_w;
 	float			real_h;
 }					t_edge;
@@ -104,9 +99,12 @@ typedef struct s_fdf
 {
 	int				width;
 	int				height;
+	float			zheight;
 	t_map			**map;
 	t_map			**map_orig;
 	t_edge			edge;
+	float			cx;
+	float			cy;
 
 	void			*mlx;
 	void			*window;
@@ -128,7 +126,7 @@ typedef struct s_fdf
 	t_pressed		pressed; //when event triggered with multiple buttons
 }					t_fdf;
 
-void			print_map(t_fdf *fdf, int modificator); //!delete after finish the proj
+void			print_map(t_fdf *fdf, int modificator);
 void			print_center_vector_helper(t_fdf *fdf);
 //process
 int				ft_process(char	*file);
@@ -152,7 +150,6 @@ void			init_map(t_fdf *fdf);
 void			map_dup(t_fdf *fdf);
 void			reset_map(t_fdf *fdf);
 void			fill_point(char *str_point, t_fdf *fdf, int x, int y);
-void			swap_points(t_map *a, t_map *b);
 unsigned int	ft_set_color(char *str);
 void			angle_normailze(int *angle);
 int				minf(float a, float b);
@@ -160,7 +157,7 @@ int				maxf(float a, float b);
 void			min_p(t_map *p, t_edge *edge);
 void			max_p(t_map *p, t_edge *edge);
 void			find_center(t_fdf *fdf);
-int				find_mid_z(t_fdf *fdf);
+void			map_z_height(t_fdf *fdf);
 float			radian_angle(float angle);
 //screen math
 void			map_size(char *file, t_fdf *fdf);

@@ -6,11 +6,37 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 23:14:37 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/23 00:30:27 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/23 17:11:04 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../fdf.h"
+
+int	minf(float a, float b)
+{
+	if (a < b)
+		return (a);
+	return (b);
+}
+
+int	maxf(float a, float b)
+{
+	if (a > b)
+		return (a);
+	return (b);
+}
+
+void	min_p(t_map *p, t_edge *edge)
+{
+	edge->x_low = minf(p->x, edge->x_low);
+	edge->y_low = minf(p->y, edge->y_low);
+}
+
+void	max_p(t_map *p, t_edge *edge)
+{
+	edge->x_high = maxf(p->x, edge->x_high);
+	edge->y_high = maxf(p->y, edge->y_high);
+}
 
 unsigned int	ft_set_color(char *str)
 {
@@ -34,32 +60,4 @@ unsigned int	ft_set_color(char *str)
 		str++;
 	}
 	return (nb);
-}
-
-int	minf(float a, float b)
-{
-	if (a < b)
-		return (a);
-	return (b);
-}
-
-int	maxf(float a, float b)
-{
-	if (a > b)
-		return (a);
-	return (b);
-}
-
-void	min_p(t_map *p, t_edge *edge)
-{
-	edge->x_low = minf(p->x, edge->x_low);
-	edge->y_low = minf(p->y, edge->y_low);
-	edge->z_low = minf(p->val, edge->z_low);
-}
-
-void	max_p(t_map *p, t_edge *edge)
-{
-	edge->x_high = maxf(p->x, edge->x_high);
-	edge->y_high = maxf(p->y, edge->y_high);
-	edge->z_high = maxf(p->val, edge->z_high);
 }

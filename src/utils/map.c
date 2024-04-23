@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 01:52:44 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/23 00:43:28 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/23 16:50:53 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,25 +80,23 @@ void	map_size(char *file, t_fdf *fdf)
 	close(fd);
 }
 
-void	find_map_edges(t_fdf *fdf)
+void	reset_map(t_fdf *fdf)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
 
 	i = -1;
-	reset_edge(&fdf->edge);
 	while (++i < fdf->height)
 	{
 		j = -1;
 		while (++j < fdf->width)
 		{
-			min_p(&fdf->map[i][j], &fdf->edge);
-			max_p(&fdf->map[i][j], &fdf->edge);
+			fdf->map[i][j].color = fdf->map_orig[i][j].color;
+			fdf->map[i][j].val = fdf->map_orig[i][j].val;
+			fdf->map[i][j].x = fdf->map_orig[i][j].x;
+			fdf->map[i][j].y = fdf->map_orig[i][j].y;
 		}
 	}
-	fdf->edge.real_w = fdf->edge.x_high - fdf->edge.x_low;
-	fdf->edge.real_h = fdf->edge.y_high - fdf->edge.y_low;
-	printf("real_w: %f, real_h: %f\n", fdf->edge.real_h, fdf->edge.real_w);
 }
 
 void	map_dup(t_fdf *fdf)

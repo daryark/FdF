@@ -6,29 +6,14 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 18:52:24 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/22 23:55:06 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/23 17:15:21 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../fdf.h"
 
-void	swap_points(t_map *a, t_map *b)
-{
-	t_map	tmp;
-
-	tmp.color = a->color;
-	tmp.val = a->val;
-	tmp.x = a->x;
-	tmp.y = a->y;
-	a->color = b->color;
-	a->val = b->val;
-	a->x = b->x;
-	a->y = b->y;
-	b->color = tmp.color;
-	b->val = tmp.val;
-	b->x = tmp.x;
-	b->y = tmp.y;
-}
+static void	ft_fswap(float *a, float *b);
+static void	swap_points(t_map *a, t_map *b);
 
 static unsigned int	interpolate_color(int i_curr, t_map p0, t_map p1)
 {
@@ -74,14 +59,6 @@ static void	draw_line_pixels(t_map a, t_map b, t_fdf *fdf, int swap)
 	}
 }
 
-void	ft_fswap(float *a, float *b)
-{
-    float tmp;
-
-    tmp = *a;
-    *a = *b;
-    *b = tmp;
-}
 //takes start and end points (a, b)
 // point is of struct t_map that has x and y coordinates
 void	draw_line_algorithm(t_map a, t_map b, t_fdf *fdf)
@@ -97,6 +74,37 @@ void	draw_line_algorithm(t_map a, t_map b, t_fdf *fdf)
 }
 //one coordinate is independent(i), other - dependent(d) on first coordinte
 // the coordinate which has more dots on the axis is independent.
-// if Y is independent, than calculate opposite.
+
+// if Y is independent, than calculate opposite. (swap coordinates in point 
+//(as it is point copy), after - in mlx_pixel_put the dependent value way still 
+//"y" by name, but it is actual "x" => so put them in - swaped places)
+
 // if the line goes from rigth to left (backwards on the screen),
 // swap start/end points
+
+static void	ft_fswap(float *a, float *b)
+{
+	float	tmp;
+
+	tmp = *a;
+	*a = *b;
+	*b = tmp;
+}
+
+static void	swap_points(t_map *a, t_map *b)
+{
+	t_map	tmp;
+
+	tmp.color = a->color;
+	tmp.val = a->val;
+	tmp.x = a->x;
+	tmp.y = a->y;
+	a->color = b->color;
+	a->val = b->val;
+	a->x = b->x;
+	a->y = b->y;
+	b->color = tmp.color;
+	b->val = tmp.val;
+	b->x = tmp.x;
+	b->y = tmp.y;
+}

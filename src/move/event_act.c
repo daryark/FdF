@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 16:43:50 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/23 00:03:09 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/23 12:45:29 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,17 @@ void	do_shift(t_fdf *fdf)
 		fdf->shift_x -= 30;
 	if (fdf->pressed.right)
 		fdf->shift_x += 30;
+}
+
+void	make_zoom(t_map *point, float zoom)
+{
+	point->x *= zoom;
+	point->y *= zoom;
+	point->val *= zoom;
+}
+
+void	set_offset(t_map *point, t_fdf *fdf)
+{
+	point->x += (fdf->offset_x + fdf->shift_x);
+	point->y += (fdf->offset_y + fdf->shift_y);
 }

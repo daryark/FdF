@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 22:12:42 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/22 19:50:53 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/23 16:53:02 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int	ft_process(char	*file)
 	map_dup(&fdf);
 	if (!fdf.map_orig)
 		return (1);
+	map_z_height(&fdf);
 	transform_map(&fdf);
 	zoom_map_to_win_size(&fdf);
 	center_map(&fdf);
@@ -72,7 +73,6 @@ int	main(int argc, char **argv)
 		if (check_map_format(argv[1]))
 		{
 			ft_putendl_fd(RED "Wrong format and/or permissions" RE, 2);
-			
 			return (1);
 		}
 		if (ft_process(argv[1]))
