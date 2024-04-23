@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 20:34:29 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/23 17:06:19 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/23 20:01:01 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	set_default_values(t_fdf *fdf)
 	fdf->cy = 0;
 	fdf->err = 0;
 	reset_edge(&fdf->edge);
-	fdf->pressed = (t_pressed){.x = 0, .y = 0, .ctrl_l = 0, \
+	fdf->pressed = (t_pressed){.x = 0, .y = 0, .ctrl_l = 0, .vector = 0, \
 		.down = 0, .up = 0, .left = 0, .right = 0, .plus = 0, .minus = 0};
 	reset_screen_values(fdf);
 }

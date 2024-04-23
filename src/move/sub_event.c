@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/20 19:20:14 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/23 13:58:52 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/23 20:25:14 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,12 @@ void	move_key_release(t_fdf *fdf, int keycode)
 		fdf->pressed.up = 0;
 	else if (keycode == HK_DOWN)
 		fdf->pressed.down = 0;
+}
+
+void	vector_show_event(t_fdf *fdf)
+{
+	fdf->pressed.vector = !fdf->pressed.vector;
+	redraw_img(fdf);
 }
 
 void	reset_event(t_fdf *fdf)

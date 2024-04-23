@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 14:17:31 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/23 16:56:41 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/23 17:34:39 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ static void	print_one_axis_helper(t_map s, t_map e, t_fdf *fdf)
 
 static void	draw_x_helper(t_map ps, t_fdf *fdf)
 {
+	transform_point(&ps, fdf);
+	set_offset(&ps, fdf);
 	draw_line_algorithm(ps, (t_map){.x = ps.x + 10, .y = ps.y, \
 	.val = ps.val, .color = ps.color}, fdf);
 	draw_line_algorithm(ps, (t_map){.x = ps.x, .y = ps.y + 10, \

@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 23:45:31 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/23 17:06:27 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/23 20:29:10 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ int	key_press_hook(int keycode, t_fdf *fdf)
 {
 	if (keycode == CLOSE_BTN || keycode == HK_ESC)
 		close_event(fdf);
-	if (keycode == HK_R)
-		reset_event(fdf);
 	if (keycode == HK_X)
 		fdf->pressed.x = 1;
 	else if (keycode == HK_Y)
@@ -58,14 +56,14 @@ int	key_release_hook(int keycode, t_fdf *fdf)
 //*connect the sizes to the position of actual button in menu
 int	mouse_click_hook(int keycode, int x, int y, t_fdf *fdf)
 {
+	printf("click: x:%d, y:%d\n", x, y);
 	(void)fdf;
 	if (keycode == HK_MOUSE_L)
 	{
-		if (x >= 100 && x <= 200 && y >= WIN_H - 200 && y <= WIN_H - 150)
-		{
+		if (x >= 11 && x <= 83 && y >= WIN_H - 134 && y <= WIN_H - 97)
 			reset_event(fdf);
-			printf("Left-click event within the button area!\n");
-		}
+		else if (x >= 218 && x <= 305 && y >= 430 && y <= 466)
+			vector_show_event(fdf);
 	}
 	return (0);
 }

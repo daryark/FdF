@@ -18,10 +18,10 @@ void	menu_put(t_fdf *fdf)
 {
 	// (void)fdf;
 	t_map	p0;
-	// void	*img;
-	// char	*relative_path = "./menu6.xpm";
-	// int		img_width;
-	// int		img_height;
+	void	*img;
+	char	*relative_path = "./menu (2)1713895915.xpm";
+	int		img_width;
+	int		img_height;
 
 	p0.x = 0;
 	p0.y = 0;
@@ -31,9 +31,9 @@ void	menu_put(t_fdf *fdf)
 	fdf->menu->addr = mlx_get_data_addr(fdf->menu->img, &fdf->menu->bpp, \
 	&fdf->menu->len, &fdf->menu->endian);
 	fill_bg(MENU_W, WIN_H, p0, fdf->menu);
-	// img = mlx_xpm_file_to_image(fdf->mlx, relative_path, &img_width, &img_height);
+	img = mlx_xpm_file_to_image(fdf->mlx, relative_path, &img_width, &img_height);
 	mlx_put_image_to_window(fdf->mlx, fdf->window, fdf->menu->img, 0, 0);
-	// mlx_put_image_to_window(fdf->mlx, fdf->window, img, 0, 0);
+	mlx_put_image_to_window(fdf->mlx, fdf->window, img, 0, 0);
 	warning_put(fdf);
 }
 

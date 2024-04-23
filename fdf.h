@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 22:19:15 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/23 17:12:44 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/23 20:20:36 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ typedef struct s_pressed
 	int				down;
 	int				left;
 	int				right;
+	int				vector;
 }					t_pressed;
 
 typedef struct s_fdf
@@ -189,6 +190,7 @@ void			move_event(t_fdf *fdf, int keycode);
 void			hight_change_event(t_fdf *fdf, int keycode);
 void			rotate_event(t_fdf *fdf, int keycode);
 void			reset_event(t_fdf *fdf);
+void			vector_show_event(t_fdf *fdf);
 void			close_event(t_fdf*fdf);
 //event utils
 void			do_shift(t_fdf *fdf);
