@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 22:19:15 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/23 20:20:36 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/24 22:07:20 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,7 +137,7 @@ int				show_in_window(t_fdf *fdf);
 int				check_map_format(char *file);
 int				open_error(int fd);
 int				is_alloc_err_cleaner(void *data, t_fdf *fdf);
-void			free_map(t_map **map, int height);
+void			free_map(t_map **map);
 void			destroy_img(t_fdf *fdf);
 void			clean_all(t_fdf *fdf);
 void			free_lines(char **line_arr);
@@ -191,7 +191,7 @@ void			hight_change_event(t_fdf *fdf, int keycode);
 void			rotate_event(t_fdf *fdf, int keycode);
 void			reset_event(t_fdf *fdf);
 void			vector_show_event(t_fdf *fdf);
-void			close_event(t_fdf*fdf);
+void			close_event(void);
 //event utils
 void			do_shift(t_fdf *fdf);
 void			angle_change(int *angle, int keycode);

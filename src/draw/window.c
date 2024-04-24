@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 03:40:35 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/23 20:12:45 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/24 21:14:04 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,7 @@ void	img_put(t_fdf *fdf)
 	fdf->menu = malloc(sizeof(t_img));
 	if (is_alloc_err_cleaner(fdf->img, fdf)
 		|| is_alloc_err_cleaner(fdf->menu, fdf))
-	{
-		ft_putendl_fd("Alloc error in the process", 2);
-		exit(EXIT_FAILURE);
-	}
+		exit(write(2, "Alloc error in the process\n", 27));
 	fdf->img->img = mlx_new_image(fdf->mlx, WIN_W, WIN_H);
 	fdf->img->addr = mlx_get_data_addr(fdf->img->img, &fdf->img->bpp, \
 	&fdf->img->len, &fdf->img->endian);

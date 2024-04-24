@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 15:05:09 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/23 13:58:44 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/24 22:07:41 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ void	move_event(t_fdf *fdf, int keycode)
 	redraw_img(fdf);
 }
 
-void	close_event(t_fdf *fdf)
+void	close_event(void)
 {
-	clean_all(fdf);
+	ft_putendl_fd(GREEN "Close the program" RE, 1);
 	exit(EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 20:34:29 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/23 20:01:01 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/24 02:22:46 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ void	reset_screen_values(t_fdf *fdf)
 	fdf->zoom = 50.0;
 	fdf->offset_x = 0;
 	fdf->offset_y = 0;
-	fdf->shift_x = -30;
-	fdf->shift_y = 30;
+	fdf->shift_x = 0;
+	fdf->shift_y = 0;
 	fdf->slope = 0.0;
 	fdf->z_coef = 1;
 	fdf->angle_x = 30;

@@ -71,10 +71,10 @@ $(NAME): $(OBJ) $(MLX_F) $(LIBFT_F) $(MAPS_F)
 		$(MAKE) -C $(MLX_F) > /dev/null 2>&1; \
 		echo "$(GREEN)\n$(MLX_F) compiled$(RE)"; \
 	fi
-	$(CC) -o $@ $(OBJ) $(MLX_LIBS) $(LIBFLAGS) 
+	$(CC) -o $@ $(OBJ) $(MLX_LIBS) $(LIBFLAGS)
 	@echo "$(GREEN)$$ASCII_ART\n\n———————————————✣ FDF COMPILED ✣————————————\n$(RE)"
 
-$(OBJ_F)%.o: %.c fdf.h keycode.h
+$(OBJ_F)%.o: %.c fdf.h keycode.h Makefile
 	mkdir -p $(@D)
 	$(CC) $(CC_FLAGS) -o $@ -c $<
 	@printf "$(GREEN). $(RE)"

@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 23:45:31 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/23 20:29:10 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/24 22:07:47 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	key_press_hook(int keycode, t_fdf *fdf)
 {
 	if (keycode == CLOSE_BTN || keycode == HK_ESC)
-		close_event(fdf);
+		close_event();
 	if (keycode == HK_X)
 		fdf->pressed.x = 1;
 	else if (keycode == HK_Y)
@@ -53,7 +53,6 @@ int	key_release_hook(int keycode, t_fdf *fdf)
 	return (0);
 }
 
-//*connect the sizes to the position of actual button in menu
 int	mouse_click_hook(int keycode, int x, int y, t_fdf *fdf)
 {
 	printf("click: x:%d, y:%d\n", x, y);
