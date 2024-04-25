@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 22:19:15 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/24 22:07:20 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/25 04:14:41 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,8 @@ typedef struct s_pressed
 	int				left;
 	int				right;
 	int				vector;
+	int				ortho;
+	int				iso;
 }					t_pressed;
 
 typedef struct s_fdf
@@ -111,7 +113,6 @@ typedef struct s_fdf
 	void			*window;
 	t_img			*img;
 	t_img			*menu;
-	int				err; //! if i use it?
 
 	float			slope;
 	float			zoom;
@@ -171,7 +172,7 @@ void			set_offset(t_map *point, t_fdf *fdf);
 void			center_map(t_fdf *fdf);
 void			do_isometric(t_map *p, t_fdf *fdf);
 void			transform_map(t_fdf *fdf);
-void    		transform_point(t_map *p, t_fdf *fdf);
+void			transform_point(t_map *p, t_fdf *fdf);
 //window
 void			img_put(t_fdf *fdf);
 void			menu_put(t_fdf *fdf);
@@ -191,6 +192,8 @@ void			hight_change_event(t_fdf *fdf, int keycode);
 void			rotate_event(t_fdf *fdf, int keycode);
 void			reset_event(t_fdf *fdf);
 void			vector_show_event(t_fdf *fdf);
+void			orthographic_view_event(t_fdf *fdf);
+void			isometric_view_event(t_fdf *fdf);
 void			close_event(void);
 //event utils
 void			do_shift(t_fdf *fdf);

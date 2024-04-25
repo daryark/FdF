@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 23:45:31 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/24 22:07:47 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/25 04:02:05 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,14 @@ int	mouse_click_hook(int keycode, int x, int y, t_fdf *fdf)
 	(void)fdf;
 	if (keycode == HK_MOUSE_L)
 	{
-		if (x >= 11 && x <= 83 && y >= WIN_H - 134 && y <= WIN_H - 97)
+		if (x >= 11 && x <= 105 && y >= WIN_H - 134 && y <= WIN_H - 97)
 			reset_event(fdf);
-		else if (x >= 218 && x <= 305 && y >= 430 && y <= 466)
+		else if (x >= 220 && x <= 306 && y >= 532 && y <= 566)
 			vector_show_event(fdf);
+		else if (x >= 33 && x <= 170 && y >= 693 && y <= 728)
+			orthographic_view_event(fdf);
+		else if (x >= 33 && x <= 130 && y >= 750 && y <= 781)
+			isometric_view_event(fdf);
 	}
 	return (0);
 }

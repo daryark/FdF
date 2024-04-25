@@ -19,13 +19,13 @@ void	menu_put(t_fdf *fdf)
 	// (void)fdf;
 	t_map	p0;
 	void	*img;
-	char	*relative_path = "./menu (2)1713895915.xpm";
+	char	*relative_path = "./extras/menu.xpm";
 	int		img_width;
 	int		img_height;
 
 	p0.x = 0;
 	p0.y = 0;
-	p0.color = 0x552f2f2f;
+	p0.color = 0x852f2f2f;
 	p0.val = 0;
 	fdf->menu->img = mlx_new_image(fdf->mlx, MENU_W, WIN_H);
 	fdf->menu->addr = mlx_get_data_addr(fdf->menu->img, &fdf->menu->bpp, \
@@ -45,12 +45,7 @@ void	fill_bg(int width, int height, t_map start, t_img *img)
 	while (start.y < height)
 	{
 		while (start.x < width)
-		{
-			if (start.y == (WIN_H - 40))
-				my_mlx_pixel_put(img, start.x++, start.y, 0xa1ffffff);
-			else
 				my_mlx_pixel_put(img, start.x++, start.y, start.color);
-		}
 		start.x = x;
 		start.y++;
 	}

@@ -1,9 +1,9 @@
 //overall: 
 ✅ Makefile, makefile for both ubuntu and macos
-- header and macros for LINUX, OSX
+✅ header and macros for LINUX, OSX
 ✅ objs into separate folder
 ✅ connect libft
-✅ run fancy @curl fdf compilation, or echo like Erwin did (done, differently, works).
+✅ run fancy fdf compilation.
 
 ❗️CHECK FOR LEAKS❗️
 //process
@@ -24,19 +24,23 @@ draw the map:
     ✅ move map to the center
     ✅ do the projection 
     ✅ add the color gradient 
-    🤓 - look in subject, what else to do in main part
-    - DIVIDE FUNCS AND CLEAN + SEPARATE THE CODE, NAMING, FUNCTIONS, FILES
-    -❗️CHECK FOR LEAKS❗️
-    -
 
 //moves and interraction
+    ✅ zoom
+    ✅ translate (move left/right/up/down)
+    ✅ rotate (x, y, z axixes)
+    ✅ z-axis scale
+//menu interractible
+    ✅ do the menu overlay as a separate layer with some opacity on top of the map
+    ✅ menu with clickable buttons
+        ✅ reset
+        ✅ vector helpers on/off
+        ✅ projection views (iso/ortho)
+
+-adapt keypress and key masks for ubuntu, mouse_hook also needs adaptation for mlx-linux
 -change btw maps with arrow
--move the image with the mouse translate and rotate
--zoom
 
 //features
-- do the menu overlay as a separate layer with some opacity on top of the map 
-    (but so it will not change when map movement is triggered)
 -change the bg and the main color of the map (like from white to some other)
 - compile multiple files at the same time, both with single file mod
 - animate, blur or some other motion effects
@@ -52,5 +56,5 @@ draw the map:
 
 - resize the window with the mouse on the corner ??
 
-❗️CHECK FOR LEAKS❗️
---check for leaks at the very and and during the process!
+ - DIVIDE FUNCS AND CLEAN + SEPARATE THE CODE, NAMING, FUNCTIONS, FILES
+ -❗️CHECK FOR LEAKS❗️
