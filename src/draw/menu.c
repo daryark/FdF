@@ -12,28 +12,44 @@
 
 #include "../../fdf.h"
 
+static void	menu_choose(t_fdf *fdf)
+{
+	void	*menu;
+	int		img_w;
+	int		img_h;
+
+	if (fdf->pressed.iso)
+	{
+		if (fdf->pressed.vector)
+			menu = mlx_xpm_file_to_image(fdf->mlx, \
+			"./extras/menu_iso_vecon.xpm", &img_w, &img_h);
+		else
+			menu = mlx_xpm_file_to_image(fdf->mlx, \
+			"./extras/menu_iso_vecoff.xpm", &img_w, &img_h);
+	}
+	else
+	{
+		if (fdf->pressed.vector)
+			menu = mlx_xpm_file_to_image(fdf->mlx, \
+			"./extras/menu_ortho_vecon.xpm", &img_w, &img_h);
+		else
+			menu = mlx_xpm_file_to_image(fdf->mlx, \
+			"./extras/menu_ortho_vecoff.xpm", &img_w, &img_h);
+	}
+	mlx_put_image_to_window(fdf->mlx, fdf->window, menu, 0, 0);
+}
+
 //*change the menu placement, when height > width
 // with portrait direction, put menu on top for full width, 1/4 height
 void	menu_put(t_fdf *fdf)
 {
-	// (void)fdf;
-	t_map	p0;
-	void	*img;
-	char	*relative_path = "./extras/menu.xpm";
-	int		img_width;
-	int		img_height;
-
-	p0.x = 0;
-	p0.y = 0;
-	p0.color = 0x852f2f2f;
-	p0.val = 0;
 	fdf->menu->img = mlx_new_image(fdf->mlx, MENU_W, WIN_H);
 	fdf->menu->addr = mlx_get_data_addr(fdf->menu->img, &fdf->menu->bpp, \
 	&fdf->menu->len, &fdf->menu->endian);
-	fill_bg(MENU_W, WIN_H, p0, fdf->menu);
-	img = mlx_xpm_file_to_image(fdf->mlx, relative_path, &img_width, &img_height);
+	fill_bg(MENU_W, WIN_H, (t_map){.x = 0, .y = 0, .val = 0, \
+		.color = 0x13191919}, fdf->menu);
 	mlx_put_image_to_window(fdf->mlx, fdf->window, fdf->menu->img, 0, 0);
-	mlx_put_image_to_window(fdf->mlx, fdf->window, img, 0, 0);
+	menu_choose(fdf);
 	warning_put(fdf);
 }
 
@@ -45,7 +61,7 @@ void	fill_bg(int width, int height, t_map start, t_img *img)
 	while (start.y < height)
 	{
 		while (start.x < width)
-				my_mlx_pixel_put(img, start.x++, start.y, start.color);
+			my_mlx_pixel_put(img, start.x++, start.y, start.color);
 		start.x = x;
 		start.y++;
 	}
