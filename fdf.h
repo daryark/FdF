@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 22:19:15 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/25 04:14:41 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/25 04:21:39 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,7 +160,6 @@ void			min_p(t_map *p, t_edge *edge);
 void			max_p(t_map *p, t_edge *edge);
 void			find_center(t_fdf *fdf);
 void			map_z_height(t_fdf *fdf);
-float			radian_angle(float angle);
 //screen math
 void			map_size(char *file, t_fdf *fdf);
 void			find_map_edges(t_fdf *fdf);

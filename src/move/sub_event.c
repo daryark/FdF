@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/20 19:20:14 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/25 04:03:21 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/25 04:38:21 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ void	move_key_release(t_fdf *fdf, int keycode)
 
 void	reset_event(t_fdf *fdf)
 {
+	fdf->pressed.ortho = 0;
+	fdf->pressed.iso = 1;
 	reset_screen_values(fdf);
 	destroy_img(fdf);
 	reset_map(fdf);

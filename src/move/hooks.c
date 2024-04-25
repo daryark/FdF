@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 23:45:31 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/25 04:02:05 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/25 04:31:11 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	key_press_hook(int keycode, t_fdf *fdf)
 	else if (keycode == HK_CTRL_L)
 		fdf->pressed.ctrl_l = 1;
 	if (is_plus_minus_key(keycode) && is_xyz_key(fdf->pressed)
-		&& !fdf->pressed.ctrl_l)
+		&& !fdf->pressed.ctrl_l && fdf->pressed.iso)
 		rotate_event(fdf, keycode);
 	if (is_plus_minus_key(keycode) && fdf->pressed.ctrl_l
 		&& !is_xyz_key(fdf->pressed))
