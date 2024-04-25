@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/20 16:22:31 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/21 07:41:57 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/25 18:03:59 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	is_plus_minus_key(int keycode)
 	return (0);
 }
 
-void	angle_normailze(int *angle)
+void	angle_normailze(float *angle)
 {
 	while (!(*angle <= 360 && *angle >= 0))
 	{

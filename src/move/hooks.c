@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 23:45:31 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/25 12:49:20 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/25 23:56:50 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	key_press_hook(int keycode, t_fdf *fdf)
 		fdf->pressed.r = !fdf->pressed.r;
 	if (is_plus_minus_key(keycode) && is_xyz_key(fdf->pressed)
 		&& !fdf->pressed.ctrl_l && fdf->pressed.iso && !fdf->pressed.r)
-		rotate_event(fdf, keycode);
+		rotate_event(fdf, keycode, 5);
 	if (is_plus_minus_key(keycode) && fdf->pressed.ctrl_l
 		&& !is_xyz_key(fdf->pressed))
 		hight_change_event(fdf, keycode);
@@ -62,13 +62,13 @@ int	mouse_click_hook(int keycode, int x, int y, t_fdf *fdf)
 	(void)fdf;
 	if (keycode == HK_MOUSE_L)
 	{
-		if (x >= 11 && x <= 105 && y >= WIN_H - 134 && y <= WIN_H - 97)
+		if (x >= 34 && x <= 105 && y >= WIN_H - 134 && y <= WIN_H - 97)
 			reset_event(fdf);
-		else if (x >= 220 && x <= 306 && y >= 532 && y <= 566)
+		else if (x >= 220 && x <= 306 && y >= 580 && y <= 613)
 			vector_show_event(fdf);
-		else if (x >= 33 && x <= 170 && y >= 693 && y <= 728)
+		else if (x >= 33 && x <= 170 && y >= 742 && y <= 775)
 			orthographic_view_event(fdf);
-		else if (x >= 33 && x <= 130 && y >= 750 && y <= 781)
+		else if (x >= 33 && x <= 130 && y >= 796 && y <= 827)
 			isometric_view_event(fdf);
 	}
 	return (0);

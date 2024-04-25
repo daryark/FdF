@@ -6,14 +6,13 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 17:29:15 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/25 04:13:52 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/25 22:40:23 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../fdf.h"
 
-//if map is valid - return opened fd num
-// else return -1, fd still open
+
 int	check_map_format(char *file)
 {
 	int		len;

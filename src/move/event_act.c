@@ -6,18 +6,18 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 16:43:50 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/23 12:45:29 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/25 19:20:56 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../fdf.h"
 
-void	angle_change(int *angle, int keycode)
+void	angle_change(float *angle, int keycode, float rot_num)
 {
 	if (keycode == HK_MINUS)
-		*angle -= 5;
+		*angle -= rot_num;
 	else
-		*angle += 5;
+		*angle += rot_num;
 	angle_normailze(angle);
 }
 

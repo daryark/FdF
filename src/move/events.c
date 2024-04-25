@@ -6,20 +6,20 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 15:05:09 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/25 12:49:12 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/25 18:56:36 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../fdf.h"
 
-void	rotate_event(t_fdf *fdf, int keycode)
+void	rotate_event(t_fdf *fdf, int keycode, float rot_num)
 {
 	if (fdf->pressed.x)
-		angle_change(&fdf->angle_x, keycode);
+		angle_change(&fdf->angle_x, keycode, rot_num);
+	if (fdf->pressed.y)
+		angle_change(&fdf->angle_y, keycode, rot_num);
 	if (fdf->pressed.z)
-		angle_change(&fdf->angle_y, keycode);
-	else if (fdf->pressed.y)
-		angle_change(&fdf->angle_z, keycode);
+		angle_change(&fdf->angle_z, keycode, rot_num);
 	redraw_img(fdf);
 }
 

@@ -39,8 +39,6 @@ static void	menu_choose(t_fdf *fdf)
 	mlx_put_image_to_window(fdf->mlx, fdf->window, menu, 0, 0);
 }
 
-//*change the menu placement, when height > width
-// with portrait direction, put menu on top for full width, 1/4 height
 void	menu_put(t_fdf *fdf)
 {
 	fdf->menu->img = mlx_new_image(fdf->mlx, MENU_W, WIN_H);

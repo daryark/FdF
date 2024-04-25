@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 03:40:35 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/25 12:36:02 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/25 19:19:51 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void	img_put(t_fdf *fdf)
 		draw_map(fdf);
 	mlx_put_image_to_window(fdf->mlx, fdf->window, fdf->img->img, 0, 0);
 	menu_put(fdf);
+	mlx_do_sync(fdf->mlx);
 }
 
 int	show_in_window(t_fdf *fdf)

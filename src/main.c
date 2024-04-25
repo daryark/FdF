@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 22:12:42 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/24 22:03:30 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/25 22:40:52 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ int	ft_process(char	*file)
 	t_fdf	fdf;
 
 	set_default_values(&fdf);
-	initialize_pointers_null(&fdf);
 	map_size(file, &fdf);
 	parse_file(file, &fdf);
 	if (!fdf.map)
@@ -71,17 +70,11 @@ int	main(int argc, char **argv)
 	if (argc == 2)
 	{
 		if (check_map_format(argv[1]))
-		{
-			ft_putendl_fd(RED "Wrong format and/or permissions" RE, 2);
-			return (1);
-		}
+			exit(ft_printf(RED "Wrong format and/or permissions\n" RE));
 		if (ft_process(argv[1]))
-		{
-			ft_putendl_fd(RED "Error in process" RE, 2);
-			return (1);
-		}
+			exit(ft_printf(RED "Error in process\n" RE));
 	}
 	else
-		ft_putendl_fd(YELLOW "Add exactly one file to read from!" RE, 2);
+		exit(ft_printf(YELLOW "Add file to read from!" RE, 2));
 	return (0);
 }

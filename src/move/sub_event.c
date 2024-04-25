@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/20 19:20:14 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/25 12:16:45 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/25 22:46:45 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,13 @@ void	reset_event(t_fdf *fdf)
 
 int	autorotate_event(t_fdf *fdf)
 {
-	if (fdf->pressed.r)
+	if (fdf->pressed.r && fdf->pressed.iso)
 	{
 		if (is_xyz_key(fdf->pressed))
-			rotate_event(fdf, HK_PLUS);
+			rotate_event(fdf, HK_PLUS, 1);
 		else
 		{
-			fdf->angle_x += 1;
+			fdf->angle_z += 1;
 			redraw_img(fdf);
 		}
 	}
