@@ -66,17 +66,3 @@ void	fill_bg(int width, int height, t_map start, t_img *img)
 		start.y++;
 	}
 }
-
-//*if screen sizes less then the height of text put into it, adjust line gaps
-// void	menu_text_put(t_fdf *fdf)
-// {
-// 	int	line_y;
-// 	int	clr;
-
-// 	line_y = 300;
-// 	clr = 0xdcdcdc;
-// 	mlx_string_put(fdf->mlx, fdf->window, 30, line_y, clr, "MENU BAR");
-// 	mlx_string_put(fdf->mlx, fdf->window, 30, line_y += 50, clr, "< /\\ \\/ >");
-// 	mlx_string_put(fdf->mlx, fdf->window, 30, line_y += 30, clr, "second rule");
-// 	mlx_string_put(fdf->mlx, fdf->window, 30, line_y += 30, clr, "third rule");
-// }

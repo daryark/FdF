@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/20 19:20:14 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/25 09:31:18 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/25 12:16:45 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,19 @@ void	reset_event(t_fdf *fdf)
 	zoom_map_to_win_size(fdf);
 	center_map(fdf);
 	img_put(fdf);
+}
+
+int	autorotate_event(t_fdf *fdf)
+{
+	if (fdf->pressed.r)
+	{
+		if (is_xyz_key(fdf->pressed))
+			rotate_event(fdf, HK_PLUS);
+		else
+		{
+			fdf->angle_x += 1;
+			redraw_img(fdf);
+		}
+	}
+	return (0);
 }

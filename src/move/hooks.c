@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 23:45:31 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/25 04:31:11 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/25 12:49:20 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	key_press_hook(int keycode, t_fdf *fdf)
 {
 	if (keycode == CLOSE_BTN || keycode == HK_ESC)
-		close_event();
+		close_event(fdf);
 	if (keycode == HK_X)
 		fdf->pressed.x = 1;
 	else if (keycode == HK_Y)
@@ -24,8 +24,11 @@ int	key_press_hook(int keycode, t_fdf *fdf)
 		fdf->pressed.z = 1;
 	else if (keycode == HK_CTRL_L)
 		fdf->pressed.ctrl_l = 1;
+	if (keycode == HK_R && !fdf->pressed.ctrl_l
+		&& fdf->pressed.iso && !is_plus_minus_key(keycode))
+		fdf->pressed.r = !fdf->pressed.r;
 	if (is_plus_minus_key(keycode) && is_xyz_key(fdf->pressed)
-		&& !fdf->pressed.ctrl_l && fdf->pressed.iso)
+		&& !fdf->pressed.ctrl_l && fdf->pressed.iso && !fdf->pressed.r)
 		rotate_event(fdf, keycode);
 	if (is_plus_minus_key(keycode) && fdf->pressed.ctrl_l
 		&& !is_xyz_key(fdf->pressed))
@@ -70,3 +73,4 @@ int	mouse_click_hook(int keycode, int x, int y, t_fdf *fdf)
 	}
 	return (0);
 }
+

@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 03:40:35 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/24 21:14:04 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/25 12:36:02 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,11 +82,10 @@ int	show_in_window(t_fdf *fdf)
 	if (is_alloc_err_cleaner(fdf->window, fdf))
 		return (0);
 	img_put(fdf);
-	// mlx_hook(fdf->window, MOUSE_MOVE_UP | MOUSE_MOVE_DOWN, \
-		// MOUSE_WHEEL_MASK, mouse_hook, fdf);
 	mlx_mouse_hook(fdf->window, mouse_click_hook, fdf);
-	(mlx_hook(fdf->window, KEY_PRESS, KEY_PRESS_MASK, key_press_hook, fdf));
+	mlx_hook(fdf->window, KEY_PRESS, KEY_PRESS_MASK, key_press_hook, fdf);
 	mlx_hook(fdf->window, KEY_RELEASE, KEY_RELEASE_MASK, key_release_hook, fdf);
+	mlx_loop_hook(fdf->mlx, autorotate_event, fdf);
 	mlx_loop(fdf->mlx);
 	return (1);
 }
