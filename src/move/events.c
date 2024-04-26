@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 15:05:09 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/25 18:56:36 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/26 13:50:39 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ void	zoom_event(t_fdf *fdf, int keycode)
 		fdf->zoom *= 1.1;
 	if (fdf->zoom < 1)
 		fdf->zoom = 1;
+	else if (fdf->zoom > 1000)
+		fdf->zoom = 1000;
 	redraw_img(fdf);
 }
 

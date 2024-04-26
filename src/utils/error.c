@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 17:29:15 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/26 01:59:41 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/26 13:51:17 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,7 @@ void	warning_put(t_fdf *fdf)
 	if (fdf->zoom == 1)
 		mlx_string_put(fdf->mlx, fdf->window, 30, WIN_H - 30, 0x928686, \
 			"Map smallest size, zoom = 1.0");
+	else if (fdf->zoom == 1000)
+		mlx_string_put(fdf->mlx, fdf->window, 30, WIN_H - 30, 0x928686, \
+			"Map biggest size, zoom = 1000.0");
 }
