@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 22:19:15 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/25 22:40:26 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/26 01:54:33 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 #  ifdef LINUX
 #	 define WIN_W 3000
 #  else
-#   define WIN_W 1920
+#   define WIN_W 2600
 #  endif
 # endif
 
@@ -47,7 +47,6 @@
 # include <stdlib.h>
 # include <math.h>
 # include <limits.h>
-# include <stdio.h> //!delete later
 
 # include "./keycode.h"
 # include "libft/libft.h"
@@ -115,7 +114,7 @@ typedef struct s_fdf
 	t_img			*img;
 	t_img			*menu;
 
-	float			slope;//! where is it used, why is it in main struct
+	float			slope;
 	float			zoom;
 	int				offset_x;
 	int				offset_y;

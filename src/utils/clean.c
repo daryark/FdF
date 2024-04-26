@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 17:26:35 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/25 18:47:03 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/26 01:54:26 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	free_map(t_map **map)
 	int	i;
 
 	i = -1;
-	printf("map: %p\n", map[i]);
 	while (map && map[++i] && i < 19)
 		free(map[i]);
 	free(map);

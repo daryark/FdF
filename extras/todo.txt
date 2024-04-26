@@ -30,6 +30,7 @@ draw the map:
     ✅ translate (move left/right/up/down)
     ✅ rotate (x, y, z axixes)
     ✅ z-axis scale
+    ✅ autorotation
 //menu interractible
     ✅ do the menu overlay as a separate layer with some opacity on top of the map
     ✅ menu with clickable buttons

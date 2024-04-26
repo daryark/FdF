@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 23:45:31 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/25 23:56:50 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/26 01:07:59 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,10 @@ int	key_release_hook(int keycode, t_fdf *fdf)
 
 int	mouse_click_hook(int keycode, int x, int y, t_fdf *fdf)
 {
-	printf("click: x:%d, y:%d\n", x, y);
 	(void)fdf;
 	if (keycode == HK_MOUSE_L)
 	{
-		if (x >= 34 && x <= 105 && y >= WIN_H - 134 && y <= WIN_H - 97)
+		if (x >= 34 && x <= 105 && y >= 1166 && y <= 1203)
 			reset_event(fdf);
 		else if (x >= 220 && x <= 306 && y >= 580 && y <= 613)
 			vector_show_event(fdf);
@@ -73,4 +72,3 @@ int	mouse_click_hook(int keycode, int x, int y, t_fdf *fdf)
 	}
 	return (0);
 }
-

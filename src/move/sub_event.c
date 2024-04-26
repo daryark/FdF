@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/20 19:20:14 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/25 22:46:45 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/26 01:42:52 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	autorotate_event(t_fdf *fdf)
 			rotate_event(fdf, HK_PLUS, 1);
 		else
 		{
-			fdf->angle_z += 1;
+			fdf->angle_y += 1;
 			redraw_img(fdf);
 		}
 	}
