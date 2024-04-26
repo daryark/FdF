@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 22:12:42 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/26 01:42:33 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/26 14:50:23 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	parse_file(char *file, t_fdf *fdf)
 	int		fd;
 
 	fd = open(file, O_RDONLY);
-	if (open_error(fd))
+	if (open_err(fd))
 		return ;
 	init_map(fdf);
 	if (!fdf->map)

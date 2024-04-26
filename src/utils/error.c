@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 17:29:15 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/26 13:51:17 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/26 14:26:34 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	check_map_format(char *file)
 	int		fd;
 
 	fd = open(file, O_RDONLY);
-	if (open_error(fd))
+	if (open_err(fd))
 		return (1);
 	format = ".fdf";
 	i = ft_strlen(format);
@@ -38,7 +38,7 @@ int	check_map_format(char *file)
 	return (0);
 }
 
-int	open_error(int fd)
+int	open_err(int fd)
 {
 	if (fd < 0)
 	{

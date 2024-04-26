@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 22:19:15 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/26 01:54:33 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/26 14:26:41 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,7 @@ void			parse_file(char *file, t_fdf *fdf);
 int				show_in_window(t_fdf *fdf);
 //checkers, cleaners
 int				check_map_format(char *file);
-int				open_error(int fd);
+int				open_err(int fd);
 int				is_alloc_err_cleaner(void *data, t_fdf *fdf);
 void			free_map(t_map **map);
 void			destroy_img(t_fdf *fdf);

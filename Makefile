@@ -56,8 +56,7 @@ OBJ_F = obj/
 all: $(NAME)
 
 run: $(NAME)
-# ./$(NAME) m maps/*
-	./$(NAME) extras/42copy.fdf
+	./$(NAME) maps/10-2.fdf
 
 jul: $(NAME)
 	./$(NAME) maps/julia.fdf

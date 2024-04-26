@@ -22,19 +22,19 @@ static void	menu_choose(t_fdf *fdf)
 	{
 		if (fdf->pressed.vector)
 			menu = mlx_xpm_file_to_image(fdf->mlx, \
-			"./extras/menu_iso_vecon.xpm", &img_w, &img_h);
+			"./extras/iso_von.xpm", &img_w, &img_h);
 		else
 			menu = mlx_xpm_file_to_image(fdf->mlx, \
-			"./extras/menu_iso_vecoff.xpm", &img_w, &img_h);
+			"./extras/iso_voff.xpm", &img_w, &img_h);
 	}
 	else
 	{
 		if (fdf->pressed.vector)
 			menu = mlx_xpm_file_to_image(fdf->mlx, \
-			"./extras/menu_ortho_vecon.xpm", &img_w, &img_h);
+			"./extras/ort_von.xpm", &img_w, &img_h);
 		else
 			menu = mlx_xpm_file_to_image(fdf->mlx, \
-			"./extras/menu_ortho_vecoff.xpm", &img_w, &img_h);
+			"./extras/ort_voff.xpm", &img_w, &img_h);
 	}
 	mlx_put_image_to_window(fdf->mlx, fdf->window, menu, 0, 0);
 }
