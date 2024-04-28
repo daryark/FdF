@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   keycode.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/28 15:49:30 by dyarkovs          #+#    #+#             */
+/*   Updated: 2024/04/28 16:15:17 by dyarkovs         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef KEYCODE_H
 # define KEYCODE_H
 
 //keycodes HK_***
 //events and event masks
 # ifdef LINUX
-# include <X11/X.h>
+#  include <X11/X.h>
 #  define HK_Z              0//define value
 #  define HK_ESC            65307
 #  define HK_PLUS           61
@@ -18,10 +30,11 @@
 #  define KEY_RELEASE       KeyRelease
 // #  define MOUSE_MOVE_UP     MouseMove //?what number on linux
 // #  define MOUSE_MOVE_DOWN   MouseMove //? what number on linux
-#  define CLOSE_BTN         DestroyNotify
+#  define DESTROY_NOTIFY        DestroyNotify
 
 #  define KEY_PRESS_MASK	KeyPressMask
 #  define KEY_RELEASE_MASK	KeyReleaseMask
+#  define NOEVENT_MASK      NoEventMask
 // #  define MOUSE_WHEEL_MASK  Button3MotionMask
 // #  define MOUSE_MOVE_MASK   MouseMoveMask
 # else
@@ -40,7 +53,7 @@
 #  define HK_DOWN           125
 #  define HK_LEFT           123
 #  define HK_RIGHT          124
-#  define CLOSE_BTN         51 //backspace
+#  define DESTROY_NOTIFY    17
 
 #  define KEY_PRESS         2
 #  define KEY_RELEASE       3
@@ -51,6 +64,7 @@
 
 #  define KEY_PRESS_MASK	1
 #  define KEY_RELEASE_MASK	2
+#  define NOEVENT_MASK      0
 // #  define MOUSE_WHEEL_MASK  10
 // #  define MOUSE_MOVE_MASK   3
 # endif

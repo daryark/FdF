@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 22:19:15 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/26 14:26:41 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/28 16:15:05 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 
 # ifndef WIN_W
 #  ifdef LINUX
-#	 define WIN_W 3000
+#   define WIN_W 3000
 #  else
 #   define WIN_W 2600
 #  endif
@@ -37,7 +37,7 @@
 
 # ifndef WIN_H
 #  ifdef LINUX
-#	 define WIN_H 2080
+#   define WIN_H 2080
 #  else
 #   define WIN_H 1300
 #  endif
@@ -194,7 +194,7 @@ void			reset_event(t_fdf *fdf);
 void			vector_show_event(t_fdf *fdf);
 void			orthographic_view_event(t_fdf *fdf);
 void			isometric_view_event(t_fdf *fdf);
-void			close_event(t_fdf *fdf);
+int				close_event(t_fdf *fdf);
 //event utils
 void			do_shift(t_fdf *fdf);
 void			angle_change(float *angle, int keycode, float rot_num);

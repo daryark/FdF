@@ -38,24 +38,20 @@ draw the map:
         ✅ vector helpers on/off
         ✅ projection views (iso/ortho)
 
+⭐️
+TODO UPGRADE:
 -adapt keypress and key masks for ubuntu, mouse_hook also needs adaptation for mlx-linux
--change btw maps with arrow
+-change btw maps with arrow (draw arrow on mouse hold on left right 50px), on click - change map
+- add color variants
+- add colors animations
+- modify menu (more explanation, multi move and other presses)
+- add fullscreen mode
 
-//features
--change the bg and the main color of the map (like from white to some other)
-- compile multiple files at the same time, both with single file mod
+//suggestions about some features
 - animate, blur or some other motion effects
-
-//window size
--choose the size from terminal (in make run 1000 1200) or in make or in some settings...
--change the window size with the mouse hold of the corner and/or keyboard shortcut (kinda Super+/Super-)
+-change the window size with the mouse hold of the corner or F keypress
 -choose the size of window before open (with optional argv and macros set up),
     if there is an opportunity to make "fullscreen" mode and back, or resize with mouse holding
     the corner of the window? And how to remember the state of the map before and put it to the new-opened window then?
     Or there is an opportunity to resize the same window without close and reopen it momentally ?
-
-
-- resize the window with the mouse on the corner ??
-
- - DIVIDE FUNCS AND CLEAN + SEPARATE THE CODE, NAMING, FUNCTIONS, FILES
  -❗️CHECK FOR LEAKS❗️

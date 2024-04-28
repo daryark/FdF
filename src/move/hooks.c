@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 23:45:31 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/26 01:07:59 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/28 16:16:51 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	key_press_hook(int keycode, t_fdf *fdf)
 {
-	if (keycode == CLOSE_BTN || keycode == HK_ESC)
+	if (keycode == DESTROY_NOTIFY || keycode == HK_ESC)
 		close_event(fdf);
 	if (keycode == HK_X)
 		fdf->pressed.x = 1;
