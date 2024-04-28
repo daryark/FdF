@@ -22,3 +22,5 @@ Run:
 - Isometric / Orthographic  Click in menu (Projection types)
 
 - Esc / CloseWin button     Exit the program
+
+![ezgif com-video-to-gif-converter](https://github.com/daryark/FdF/assets/81414858/dd63fb24-b7a3-4789-9446-c4f17aac27cb)
