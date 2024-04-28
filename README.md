@@ -23,7 +23,8 @@ Run:
 
 - Esc / CloseWin button     Exit the program
 
-![Screen Recording 2024-04-28 at 7 59 36 PM](https://github.com/daryark/FdF/assets/81414858/63f19001-0457-4f85-bf4b-8969f83e9d7c)
+![Uploading oksize (online-video-cutter.com).gif…]()
+
 
 
 
