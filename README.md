@@ -23,7 +23,7 @@ Run:
 
 - Esc / CloseWin button     Exit the program
 
-![ezgif com-video-to-gif-converter](https://github.com/daryark/FdF/assets/81414858/d5140fec-13bc-473e-8889-762b55d00bae)
+![fdf]([https://github.com/daryark/FdF/assets/81414858/d5140fec-13bc-473e-8889-762b55d00bae](https://github.com/daryark/FdF/blob/master/extras/fdf.gif))
 
 
 
