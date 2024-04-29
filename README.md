@@ -22,3 +22,11 @@ Run:
 - Isometric / Orthographic  Click in menu (Projection types)
 
 - Esc / CloseWin button     Exit the program
+
+![fdf](https://github.com/daryark/FdF/blob/master/extras/fdf.gif)
+
+
+
+
+
+
