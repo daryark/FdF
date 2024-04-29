@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 14:17:31 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/25 22:46:47 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/04/28 21:21:07 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	print_center_vector_helper(t_fdf *fdf)
 	py = (t_map){.x = (fdf->width / 2), \
 	.y = 0, .val = fdf->zheight / 2, .color = 0x0000ff};
 	pz = (t_map){.x = (fdf->width / 2), \
-	.y = (fdf->height / 2), .val = fdf->zheight * 1.5, .color = 0xff00ff};
+	.y = (fdf->height / 2), .val = fdf->zheight, .color = 0xff00ff};
 	print_one_axis_helper(ps, px, fdf);
 	print_one_axis_helper(ps, py, fdf);
 	print_one_axis_helper(ps, pz, fdf);
