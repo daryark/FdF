@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 03:40:35 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/05/03 02:37:09 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/05/03 04:09:57 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 void	redraw_img(t_fdf *fdf)
 {
 	destroy_img(fdf);
-	// mlx_clear_window(fdf->mlx, fdf->window);
 	reset_map(fdf);
 	transform_map(fdf);
 	center_map(fdf);

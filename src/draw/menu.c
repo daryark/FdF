@@ -41,20 +41,30 @@ static void	menu_choose(t_fdf *fdf)
 	mlx_put_image_to_window(fdf->mlx, fdf->window, fdf->m, 0, 0);
 }
 
+#ifdef OSX
+
 void	menu_put(t_fdf *fdf)
 {
 	fdf->menu->img = mlx_new_image(fdf->mlx, MENU_W, WIN_H);
 	fdf->menu->addr = mlx_get_data_addr(fdf->menu->img, &fdf->menu->bpp, \
 	&fdf->menu->len, &fdf->menu->endian);
-	if (!LINUX)
-	{
-		fill_bg(MENU_W, WIN_H, (t_map){.x = 0, .y = 0, .val = 0, \
-		.color = 0x13191919}, fdf->menu);
-		mlx_put_image_to_window(fdf->mlx, fdf->window, fdf->menu->img, 0, 0);
-	}
+	fill_bg(MENU_W, WIN_H, (t_map){.x = 0, .y = 0, .val = 0, \
+	.color = 0x13191919}, fdf->menu);
+	mlx_put_image_to_window(fdf->mlx, fdf->window, fdf->menu->img, 0, 0);
 	menu_choose(fdf);
 	warning_put(fdf);
 }
+#else
+
+void	menu_put(t_fdf *fdf)
+{
+	fdf->menu->img = mlx_new_image(fdf->mlx, MENU_W, WIN_H);
+	fdf->menu->addr = mlx_get_data_addr(fdf->menu->img, &fdf->menu->bpp, \
+	&fdf->menu->len, &fdf->menu->endian);
+	menu_choose(fdf);
+	warning_put(fdf);
+}
+#endif
 
 void	fill_bg(int width, int height, t_map start, t_img *img)
 {
