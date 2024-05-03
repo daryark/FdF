@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 03:40:35 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/28 16:16:15 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/05/03 02:37:09 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 void	redraw_img(t_fdf *fdf)
 {
 	destroy_img(fdf);
+	// mlx_clear_window(fdf->mlx, fdf->window);
 	reset_map(fdf);
 	transform_map(fdf);
 	center_map(fdf);
@@ -59,6 +60,8 @@ void	img_put(t_fdf *fdf)
 {
 	fdf->img = malloc(sizeof(t_img));
 	fdf->menu = malloc(sizeof(t_img));
+	fdf->img->img = NULL;
+	fdf->menu->img = NULL;
 	if (is_alloc_err_cleaner(fdf->img, fdf)
 		|| is_alloc_err_cleaner(fdf->menu, fdf))
 		exit(write(2, "Alloc error in the process\n", 27));

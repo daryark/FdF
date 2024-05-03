@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 15:49:30 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/28 16:15:17 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/05/03 01:41:17 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,12 @@
 //events and event masks
 # ifdef LINUX
 #  include <X11/X.h>
-#  define HK_Z              0//define value
+#  define HK_Z              122
+#  define HK_X              120
+#  define HK_Y              121
+#  define HK_CTRL_L         65507
+#  define HK_R              114
+#  define HK_MOUSE_L        1//?define value
 #  define HK_ESC            65307
 #  define HK_PLUS           61
 #  define HK_MINUS          45
@@ -28,9 +33,9 @@
 
 #  define KEY_PRESS         KeyPress
 #  define KEY_RELEASE       KeyRelease
-// #  define MOUSE_MOVE_UP     MouseMove //?what number on linux
-// #  define MOUSE_MOVE_DOWN   MouseMove //? what number on linux
 #  define DESTROY_NOTIFY        DestroyNotify
+// #  define MOUSE_MOVE_UP     MouseMove
+// #  define MOUSE_MOVE_DOWN   MouseMove
 
 #  define KEY_PRESS_MASK	KeyPressMask
 #  define KEY_RELEASE_MASK	KeyReleaseMask

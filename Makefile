@@ -9,7 +9,7 @@ MLX_LINUX = https://cdn.intra.42.fr/document/document/21665/minilibx-linux.tgz
 LIBFT_GIT = https://github.com/daryark/libft.git
 #* flags
 MLX_LIBS_OSX =  -L$(MLX_F) -lmlx -I$(MLX_F)/mlx.h -framework OpenGL -framework AppKit
-MLX_LIBS_LINUX = -L$(MLX_F) -lmlx_Linux -I$(MLX_F)/mlx.h -lXext -lX11
+MLX_LIBS_LINUX = -L$(MLX_F) -lmlx_Linux -I$(MLX_F)/mlx.h -lXext -lX11 -lm
 LIBFLAGS = -L$(LIBFT_F) -lft -I$(LIBFT_F) -I$(LIBFT_F)/src/ft_printf/ -I$(LIBFT_F)/src/get_next_line/
 CC_FLAGS = -Wall -Wextra -Werror -O3 -g $(DEPFLAGS)
 DEPFLAGS = -MP -MMD

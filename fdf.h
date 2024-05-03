@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 22:19:15 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/28 16:15:05 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/05/03 03:37:30 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 
 # ifndef WIN_W
 #  ifdef LINUX
-#   define WIN_W 3000
+#   define WIN_W 2600
 #  else
 #   define WIN_W 2600
 #  endif
@@ -37,7 +37,7 @@
 
 # ifndef WIN_H
 #  ifdef LINUX
-#   define WIN_H 2080
+#   define WIN_H 1300
 #  else
 #   define WIN_H 1300
 #  endif
@@ -113,6 +113,7 @@ typedef struct s_fdf
 	void			*window;
 	t_img			*img;
 	t_img			*menu;
+	void			*m;
 
 	float			slope;
 	float			zoom;
@@ -138,7 +139,7 @@ int				show_in_window(t_fdf *fdf);
 int				check_map_format(char *file);
 int				open_err(int fd);
 int				is_alloc_err_cleaner(void *data, t_fdf *fdf);
-void			free_map(t_map **map);
+void			free_map(t_map **map, int height);
 void			destroy_img(t_fdf *fdf);
 void			clean_all(t_fdf *fdf);
 void			free_lines(char **line_arr);

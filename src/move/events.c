@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 15:05:09 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/04/28 16:17:47 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/05/03 03:41:09 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ void	move_event(t_fdf *fdf, int keycode)
 int	close_event(t_fdf *fdf)
 {
 	fdf->pressed.r = 0;
+	clean_all(fdf);
 	ft_putendl_fd(GREEN "Close the program" RE, 1);
 	exit(EXIT_SUCCESS);
 	return (0);
