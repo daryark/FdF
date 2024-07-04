@@ -1,5 +1,7 @@
 Wireframe model of the map transferred intro 3D object.
 
+![fdf](https://github.com/daryark/FdF/blob/master/extras/fdf.gif)
+
 Works for both OS : Linux and MacOS
 
 Install:
@@ -24,8 +26,6 @@ Run:
 - Isometric / Orthographic  Click in menu (Projection types)
 
 - Esc / CloseWin button     Exit the program
-
-![fdf](https://github.com/daryark/FdF/blob/master/extras/fdf.gif)
 
 
 
