@@ -2,10 +2,10 @@ include extras/ascii_art.sh
 include extras/colors.sh
 
 #*-------------links for downloads-------------
-MAPS_URL = https://cdn.intra.42.fr/document/document/21662/maps.zip
+MAPS_URL = https://cdn.intra.42.fr/document/document/26195/maps.zip
 MLX_OSX = https://cdn.intra.42.fr/document/document/21666/minilibx_macos_sierra_20161017.tgz
 # MLX_OSX = https://cdn.intra.42.fr/document/document/21664/minilibx_mms_20191025_beta.tgz;
-MLX_LINUX = https://cdn.intra.42.fr/document/document/21665/minilibx-linux.tgz
+MLX_LINUX = https://cdn.intra.42.fr/document/document/26198/minilibx-linux.tgz
 LIBFT_GIT = https://github.com/daryark/libft.git
 #* flags
 MLX_LIBS_OSX =  -L$(MLX_F) -lmlx -I$(MLX_F)/mlx.h -framework OpenGL -framework AppKit
