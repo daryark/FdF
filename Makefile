@@ -56,7 +56,7 @@ OBJ_F = obj/
 .SILENT:
 all: $(NAME)
 
-$(NAME): $(OBJ) $(MLX_F) $(LIBFT_F) $(MAPS_F)
+$(NAME): $(MLX_F) $(LIBFT_F) $(MAPS_F) $(OBJ)
 	make mlx;
 	$(MAKE) -C $(LIBFT_F)
 	$(CC) -o $@ $(OBJ) $(MLX_LIBS) $(LIBFLAGS)
@@ -85,7 +85,7 @@ re:	fclean all
 
 
 #*-------------extra functional-------------
-install: $(MLX_F) $(MAPS_F) $(LIBFT_F)
+install: $(LIBFT_F) $(MAPS_F) $(MLX_F)
 
 run: $(NAME)
 	./$(NAME) extras/pyramide.fdf
@@ -99,32 +99,34 @@ mlx:
 	@if [ ! -d "$(MLX_F)" ] || [ ! -f "$(MLX_F)/libmlx.a" ]; then \
 		echo "$(GREEN)\nCompiling $(MLX_F) ...$(RE)"; \
 		$(MAKE) -C $(MLX_F) > /dev/null 2>&1; \
-		echo "$(GREEN)\n$(MLX_F) compiled$(RE)"; \
+		echo "$(GREEN)\n$(MLX_F) compiled successfully$(RE)"; \
 	fi
 
 #*-------------install (libft from git link, mlx and maps from intra)-------------
 $(LIBFT_F):
-	echo "$(GREEN)\nDownloading $(LIBFT_F) ...$(RE)"
-	git clone $(LIBFT_GIT) $(LIBFT_F)
+	if [ ! -d $(LIBFT_F) ]; then \
+		echo "$(YELLOW)\nDownloading $(LIBFT_F) ...$(RE)"; \
+		git clone $(LIBFT_GIT) $(LIBFT_F); \
+	fi
 
 $(MLX_F):
-	echo "$(GREEN)\n\nDownloading $(MLX_F) ...$(RE)"
-	@curl -sS -o $(MLX_ARCH) $(MLX_URL)
-	@tar -xvf $(MLX_ARCH) -C ./ > /dev/null
-	rm $(MLX_ARCH)
-	mv minilibx* $(MLX_F)
+	if [ ! -d $(MLX_F) ]; then \
+		echo "$(YELLOW)\n\nDownloading $(MLX_F) ...$(RE)"; \
+		curl -sS -o $(MLX_ARCH) $(MLX_URL); \
+		tar -xvf $(MLX_ARCH) -C ./ > /dev/null; \
+		rm $(MLX_ARCH); \
+		mv minilibx* $(MLX_F); \
+	fi
 
 $(MAPS_F):
 	if	[ ! -d "$(MAPS_F)" ]; then \
-			echo "$(GREEN)\nDownloading $(MAPS_F) ...$(RE)"; \
+			echo "$(YELLOW)\nDownloading $(MAPS_F) ...$(RE)"; \
 			curl -sS -o $(MAPS_ARCH) $(MAPS_URL); \
 			unzip -qq $(MAPS_ARCH); \
 			rm $(MAPS_ARCH); \
 			rm -r __MACOSX; \
 			mv test_maps $@; \
 		fi
-	rm -rf mlx*/
-	rm -rf $(LIBFT_F)
 
 .PHONY:	all clean fclean re run uninstall instal mlx
 

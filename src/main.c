@@ -6,7 +6,7 @@
 /*   By: dyarkovs <dyarkovs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 22:12:42 by dyarkovs          #+#    #+#             */
-/*   Updated: 2024/05/03 02:36:26 by dyarkovs         ###   ########.fr       */
+/*   Updated: 2024/11/13 23:16:07 by dyarkovs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,6 @@ int	main(int argc, char **argv)
 			exit(ft_printf(RED "Error in process\n" RE));
 	}
 	else
-		exit(ft_printf(YELLOW "Add file to read from!" RE, 2));
+		exit(ft_printf(YELLOW "Add file to read from!\n" RE, 2));
 	return (0);
 }
